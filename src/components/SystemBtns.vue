@@ -15,15 +15,22 @@
 <script>
 export default {
     name: 'SystemBtns',
+    emits: [
+        'handleUndoBtn',
+        'handleHomeBtn',
+        'handeOpenedAppsBtn'
+    ],
     methods: {
         tabsBlock(){
             console.log(`скрываю/ разворачиваю вкладки`)
+            this.$emit('handeOpenedAppsBtn')
         },
         undo(){
             console.log(`назад`)
+            this.$emit('handleUndoBtn')
         },
         home(){
-            console.log(`домашняя страница`)
+            this.$emit('handleHomeBtn')
         },
     }
 }

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div v-if="appIsOpen" class="openedApp"></div>
     <div class="desktop" ref="desktop" @click="dragDesktop($event)"></div>
     <div class="appRow">
       <div @click="openApp()" class="app">
@@ -61,9 +60,12 @@ export default {
   name: 'AppsList',
   data(){
     return {
-      appIsOpen: false
+      
     }
   },
+  emits: [
+    'openApp'
+  ],
   methods: {
     dragDesktop(event){
       // this.$refs.desktop.style = `
@@ -74,8 +76,7 @@ export default {
       this.$refs.desktop.scrollLeft = 15
     },
     openApp(){
-      console.log("открываю приложение")
-      this.appIsOpen = true
+      this.$emit('openApp', { processId: Math.floor(Math.random() * 5000), })
     }
   }
 }

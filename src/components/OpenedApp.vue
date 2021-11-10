@@ -1,15 +1,11 @@
 <template>
-  <div class="desktop">
+  <div class="openedApp">
 
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'OpenedApp'
 }
 </script>
-
-<style>
-
-</style>
