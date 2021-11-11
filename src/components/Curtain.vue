@@ -32,7 +32,10 @@
         </div>
         <div class="curtainBodyHeader">
             <div class="curtainItem">
-                <span class="material-icons curtainItemIcon">
+                <span class="material-icons curtainItemIcon" @click="$emit('openApp', {
+                    processId: Math.floor(Math.random() * 5000),
+                    name: 'Settings'
+                })">
                     settings
                 </span>
                 <span class="material-icons curtainItemIcon">
@@ -63,6 +66,9 @@ export default {
             batteryLevel: 1
         }
     },
+    emits: [
+        'openApp'
+    ],
     mounted() {
         navigator.getBattery().then(battery => {
             this.batteryLevel = battery.level

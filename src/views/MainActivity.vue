@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')"></div>
-    <Curtain />
+    <Curtain @openApp="openAppHandler" />
     <OpenedApp v-if="appIsOpen" />
     <div v-if="!isAppsList">
       <div class="appRow">
@@ -61,7 +61,7 @@
     <Lock v-if="!isUnlock" @unlock="unlockHandler" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" />
     <SleepMode v-if="isSleep" />
-    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" @resetSpeakers="resetSpeakersHandler" />
+    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" @resetSpeakers="resetSpeakersHandler" />
   </div>
   
 </template>
@@ -97,7 +97,8 @@ export default {
       isSleep: true,
       activeSound: '',
       isStartPlay: false,
-      activeSoundCommand: ''
+      activeSoundCommand: '',
+      isSpeakersDialog: false
     }
   },
   mounted() {
@@ -121,10 +122,12 @@ export default {
         this.activeSoundCommand = 'volume turn up'
         this.activeSound = '../../sounds/volumeturn.wav'
         this.isStartPlay = true
+        this.isSpeakersDialog = true
       } else if(event.key === '-') {
         this.activeSoundCommand = 'volume turn down'
         this.activeSound = '../../sounds/volumeturn.wav'
         this.isStartPlay = true
+        this.isSpeakersDialog = true
       }
       this.activeKey = ''
     })
@@ -134,6 +137,7 @@ export default {
       this.activeSound = ''
       this.isStartPlay = false
       this.activeSoundCommand = ''
+      this.isSpeakersDialog = false
     },
     unlockHandler() {
       this.isUnlock = true
@@ -142,7 +146,6 @@ export default {
       this.isPowerDialog = false
     },
     handleGesture(event, gesture){
-      console.log(`walpapers: ${gesture}`)
       if(gesture === 'down') {
         this.handleWallpapers = true
       } else if(gesture === 'move') {
