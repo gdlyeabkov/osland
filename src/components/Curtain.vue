@@ -30,6 +30,27 @@
                 </span>
             </div>
         </div>
+        <div class="curtainBodyHeader">
+            <div class="curtainItem">
+                <span class="material-icons curtainItemIcon">
+                    settings
+                </span>
+                <span class="material-icons curtainItemIcon">
+                    search
+                </span>
+            </div>
+            <div class="curtainItem">
+                <span class="material-icons curtainItemIcon">
+                    power_settings_new
+                </span>
+                <span class="material-icons curtainItemIcon">
+                    settings
+                </span>
+            </div>
+        </div>
+        <div class="curtainBody">
+        
+        </div>
     </div>
 </template>
 
@@ -46,6 +67,15 @@ export default {
         navigator.getBattery().then(battery => {
             this.batteryLevel = battery.level
         })
+        setInterval(() => {
+            let time = new Date().toLocaleTimeString()
+            let timeSeparator = ':'
+            let timesParts = time.split(timeSeparator)
+            let hours = timesParts[0]
+            let minutes = timesParts[1]
+            let currentTime = `${hours}:${minutes}`
+            this.currentTime = currentTime
+        }, 60000)
     },
     methods: {
         handleGeture(event, gesture){
