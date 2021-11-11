@@ -1,6 +1,6 @@
 <template>
     <div class="powerDialog" @click="closePowerDialog($event)" id="powerDialogId">
-        <span class="btn btn-danger material-icons powerDialogBtn">
+        <span @click="powerOn()" class="btn btn-danger material-icons powerDialogBtn">
             power_settings_new
         </span>
         <span class="btn btn-success material-icons powerDialogBtn">
@@ -19,6 +19,10 @@ export default {
         'closepowerDialog'
     ],
     methods: {
+        powerOn() {
+            // window.close()
+            document.close()
+        },
         closePowerDialog(event) {
             if(event.target.id === 'powerDialogId') {
                 this.$emit('closePowerDialog')

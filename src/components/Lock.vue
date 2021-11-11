@@ -26,9 +26,10 @@ export default {
         'unlock'
     ],
     mounted() {
-        this.context = this.$refs.graphicKey.getContext('2d')
-        this.drawPossibleKeys()
-        console.log(`graphicKey: ${this.$refs.graphicKey}; ctx: ${this.context};`)
+        if(this.lockType === 'graphicKey') {
+            this.context = this.$refs.graphicKey.getContext('2d')
+            this.drawPossibleKeys()
+        }
     },
     methods: {
         drawPossibleKeys() {

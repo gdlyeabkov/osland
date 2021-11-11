@@ -5,7 +5,7 @@
     <OpenedApp v-if="appIsOpen" />
     <div v-if="!isAppsList">
       <div class="appRow">
-        <div @click="openApp({ processId: Math.floor(Math.random() * 5000), })" class="app">
+        <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down')" @mouseup="holdApp($event, 'up')" class="app">
         </div>
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000), })" class="app">
         </div>
@@ -57,6 +57,7 @@
     </div>
     <AppsList v-if="isAppsList" @openApp="openAppHandler" />
     <OpenedApps v-if="isOpenedApps" :openedAppItems="openedApps" @openApp="openAppHandler" @closeApp="closeAppHandler" />
+    <ContextMenu v-if="isContextMenu"/>
     <SystemBtns @handleUndoBtn="handleUndoBtnHandler" @handleHomeBtn="handleHomeBtnHandler" @handeOpenedAppsBtn="handeOpenedAppsBtnHandler" />
     <Lock v-if="!isUnlock" @unlock="unlockHandler" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" />
@@ -76,6 +77,7 @@ import PowerDialog from '@/components/PowerDialog.vue'
 import Lock from '@/components/Lock.vue'
 import SleepMode from '@/components/SleepMode.vue'
 import Speakers from '@/components/Speakers.vue'
+import ContextMenu from '@/components/ContextMenu.vue'
 
 export default {
   name: 'MainActivity',
@@ -98,7 +100,9 @@ export default {
       activeSound: '',
       isStartPlay: false,
       activeSoundCommand: '',
-      isSpeakersDialog: false
+      isSpeakersDialog: false,
+      isContextMenu: false,
+      appSelected: false
     }
   },
   mounted() {
@@ -133,6 +137,19 @@ export default {
     })
   },
   methods: {
+    holdApp(event, gesture) {
+      console.log(`holdApp: gesture: ${gesture}`)
+      if(gesture === 'down') {
+        setTimeout(() => {
+          this.appSelected = true
+          if(this.appSelected) {
+            this.isContextMenu = true
+          }
+        }, 2000)
+      } else if(gesture === 'up') {
+        this.appSelected = false
+      }
+    },
     resetSpeakersHandler() {
       this.activeSound = ''
       this.isStartPlay = false
@@ -203,7 +220,8 @@ export default {
     PowerDialog,
     Lock,
     SleepMode,
-    Speakers
+    Speakers,
+    ContextMenu
   }
 }
 </script>
