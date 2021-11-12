@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')"></div>
-    <Curtain @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" />
+    <Curtain @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" />
     <OpenedApp v-if="appIsOpen" :appInfo="appInfo" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
@@ -176,12 +176,14 @@ export default {
         this.isUnlock = false
       } else if(event.key === '+') {
         this.activeSoundCommand = 'volume turn up'
-        this.activeSound = '../../sounds/volumeturn.wav'
+        // this.activeSound = '../../sounds/volumeturn.wav'
+        this.activeSound = '../../sounds/krik.mp3'
         this.isStartPlay = true
         this.isSpeakersDialog = true
       } else if(event.key === '-') {
         this.activeSoundCommand = 'volume turn down'
-        this.activeSound = '../../sounds/volumeturn.wav'
+        // this.activeSound = '../../sounds/volumeturn.wav'
+        this.activeSound = '../../sounds/krik.mp3'
         this.isStartPlay = true
         this.isSpeakersDialog = true
       }
@@ -189,6 +191,10 @@ export default {
     })
   },
   methods: {
+    openSearchHandler(){
+      console.log(`isAppsList`)
+      this.isAppsList = true
+    },
     closeContextMenuHandler() {
       this.isContextMenu = false
     },
@@ -248,6 +254,7 @@ export default {
       }
     },
     openApp(appInfo){
+      this.isAppsList = false
       this.isContextMenu = false
       let  openedAppsIds = []
       if(this.openedApps.length >= 1) {
@@ -277,6 +284,7 @@ export default {
       this.isOpenedApps = false
     },
     handeOpenedAppsBtnHandler() {
+      // this.appIsOpen = false
       this.isContextMenu = false
       this.isOpenedApps = !this.isOpenedApps
     },

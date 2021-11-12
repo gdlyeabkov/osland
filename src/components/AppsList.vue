@@ -162,8 +162,8 @@
             return appsRowIdx < countAppsRows && (appsColumn !== (Math.floor(apps.length / (countAppsPerRow * countAppsRows))) || (appsColumn === (Math.floor(apps.length / (countAppsPerRow * countAppsRows)))) && (apps.length - (apps.length - countAppsPerRow * countAppsRows) * (Math.floor(apps.length / (countAppsPerRow * countAppsRows)))) + appsRowIdx * countAppsPerRow < apps.length)
           })" :key="appsRow" class="appRow">
             <div v-for="app in apps.filter((app, appIdx) => {
-              return appIdx >= (appsRow - 1) * countAppsPerRow && appIdx < appsRow * countAppsPerRow
-            })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', { processId: app.processId, name: app.name })" @mouseup="holdApp($event, 'up', { processId: app.processId, name: app.name })" class="app">
+              return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
+            }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 12) + countAppsPerRow) : 0)])" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', { processId: app.processId, name: app.name })" @mouseup="holdApp($event, 'up', { processId: app.processId, name: app.name })" class="app">
             </div>
           </div>
         </div>

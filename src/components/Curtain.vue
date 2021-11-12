@@ -38,7 +38,7 @@
                 })" id="curtainBtn">
                     settings
                 </span>
-                <span class="material-icons curtainItemIcon">
+                <span @click="openSearch()" class="material-icons curtainItemIcon" id="curtainBtn">
                     search
                 </span>
             </div>
@@ -90,6 +90,22 @@ export default {
         }, 60000)
     },
     methods: {
+        openSearch() {
+            this.$refs.curtain.style = `
+                height: 50px;
+                z-index: 10;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.4);
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                padding: 0px 15px;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+            `
+            this.$emit('openSearch')
+        },
         openPowerDialog() {
             this.$refs.curtain.style = `
                 height: 50px;
