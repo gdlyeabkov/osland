@@ -2,7 +2,7 @@
   <div>
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')"></div>
     <Curtain @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" />
-    <OpenedApp v-if="appIsOpen" />
+    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" @mouseup="holdApp($event, 'up', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" class="app">
@@ -122,7 +122,8 @@ export default {
         processId: '1'
       },
       countAppsRows: 4,
-      countAppsPerRow: 4
+      countAppsPerRow: 4,
+      appInfo: {}
     }
   },
   mounted() {
@@ -247,34 +248,36 @@ export default {
       }
     },
     openApp(appInfo){
+      this.isContextMenu = false
       let  openedAppsIds = []
       if(this.openedApps.length >= 1) {
         openedAppsIds = this.openedApps.flatMap(openedApp => openedApp.processId)
       }
       let appAlreadyRunning = openedAppsIds.includes(appInfo.processId)
       this.appIsOpen = true
+      this.appInfo = appInfo
       this.isOpenedApps = false
       if(!appAlreadyRunning || this.openedApps.length <= 0) {
         this.openedApps.push({
           processId: appInfo.processId,
           name: appInfo.name
         })
-        // this.openedApps.map(openedApp => {
-        //   console.log(`openedApp: ${openedApp.name}; ${openedApp.processId}`)
-        // })
       }
     },
     handleUndoBtnHandler(){
       if(!this.appIsOpen)
+      this.isContextMenu = false
       this.isAppsList = false
       this.isOpenedApps = false
     },
     handleHomeBtnHandler(){
+      this.isContextMenu = false
       this.isAppsList = false
       this.appIsOpen = false
       this.isOpenedApps = false
     },
     handeOpenedAppsBtnHandler() {
+      this.isContextMenu = false
       this.isOpenedApps = !this.isOpenedApps
     },
     openAppHandler(appInfo) {

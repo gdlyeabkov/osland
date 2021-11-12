@@ -1,5 +1,5 @@
 <template>
-    <div class="curtain" ref="curtain" @mousedown="handleGeture($event, 'down')" @mousemove="handleGeture($event, 'move')" @mouseup="handleGeture($event, 'up')">
+    <div class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
         <div class="curtainHeader" @click="handleCurtain = false">
             <div class="curtainItem">
                 <span class="curtainItemIcon">
@@ -67,7 +67,8 @@ export default {
         }
     },
     emits: [
-        'openApp'
+        'openApp',
+        'closeContextMenu'
     ],
     mounted() {
         navigator.getBattery().then(battery => {
@@ -122,7 +123,8 @@ export default {
             this.handleCurtain = false
             this.$emit('openApp', appInfo)
         },
-        handleGeture(event, gesture){
+        handleGesture(event, gesture){
+            this.$emit('closeContextMenu')
             if(event.target.id !== 'curtainBtn') {
                 if (gesture === 'down') {
                     this.handleCurtain = true
