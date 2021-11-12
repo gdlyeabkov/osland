@@ -22,11 +22,9 @@ export default {
     ],
     methods: {
         tabsBlock(){
-            console.log(`скрываю/ разворачиваю вкладки`)
             this.$emit('handeOpenedAppsBtn')
         },
         undo(){
-            console.log(`назад`)
             this.$emit('handleUndoBtn')
         },
         home(){

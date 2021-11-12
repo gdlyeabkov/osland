@@ -1,165 +1,182 @@
 <template>
   <div>
     <div class="desktop" ref="desktop" @click="dragDesktop($event)"></div>
-    <div class="appsList">
-      <div class="appColumn">
-        <div class="appRow">
-          <div @click="openApp()" class="app">
+    <div class="appListWithSearch">
+      <input placeholder="Поиск" type="text" class="form-control search" />
+      <div class="appsList">
+        <!-- <div class="appColumn">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="appColumn">
-        <div class="appRow">
-          <div @click="openApp()" class="app">
+        <div class="appColumn">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-      </div>
-      <div class="appColumn">
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
         </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
+        <div class="appColumn">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+          </div>
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+          </div>
+        </div> -->
+        <div v-for="appsColumn in apps.flatMap((app, appIndex) => appIndex).filter((appsColumn, appsColumnIdx) => {
+            return appsColumnIdx <= Math.floor(apps.length / (countAppsPerRow * countAppsRows))
+          })" :key="appsColumn" class="appColumn">
+          <div v-for="appsRow in apps.flatMap((app, appIndex) => appIndex).filter((appsRow, appsRowIdx) => {
+            return (appsColumn === (Math.floor(apps.length / (countAppsPerRow * countAppsRows))) && appsRowIdx >= (apps.length - (apps.length - countAppsPerRow * countAppsRows) * (Math.floor(apps.length / (countAppsPerRow * countAppsRows))))) || (appsRowIdx <= countAppsRows - 1 && appsRowIdx < (Math.floor(apps.length / (countAppsPerRow * countAppsRows))))
+          })" :key="appsRow" class="appRow">
+            <div v-for="app in apps.filter((app, appIdx) => {
+              return appIdx >= appsRow * countAppsPerRow && appIdx < countAppsPerRow * (appsRow + 1)
+            })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', { processId: app.processId, name: app.name })" @mouseup="holdApp($event, 'up', { processId: app.processId, name: app.name })" class="app">
+            </div>
           </div>
         </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
+        <!-- <div class="appColumn">
+          <div class="appRow">
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
+            <div @click="openApp()" class="app">
+            </div>
           </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
-        <div class="appRow">
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-          <div @click="openApp()" class="app">
-          </div>
-        </div>
+        </div> -->
+
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -168,13 +185,26 @@ export default {
   name: 'AppsList',
   data(){
     return {
-      
     }
   },
-  emits: [
-    'openApp'
+  props: [
+    'apps',
+    'countAppsRows',
+    'countAppsPerRow'
   ],
+  emits: [
+    'openApp',
+    'holdApp'
+  ],
+  mounted() {
+    // console.log(`debug: ${this.apps.length - (this.apps.length - this.countAppsPerRow * this.countAppsRows) * (Math.floor(this.apps.length / (this.countAppsPerRow * this.countAppsRows)))}`)
+    console.log(`debug1: ${((Math.floor(this.apps.length / (this.countAppsPerRow * this.countAppsRows))))}`)
+    console.log(`debug2: ${(this.apps.length - (this.apps.length - this.countAppsPerRow * this.countAppsRows) * (Math.floor(this.apps.length / (this.countAppsPerRow * this.countAppsRows))))}`)
+  },
   methods: {
+    holdApp(event, gesture, appInfo) {
+      this.$emit('holdApp', event, gesture, appInfo)
+    },
     dragDesktop(event){
       // this.$refs.desktop.style = `
       //   top: ${event.y}px;
@@ -186,6 +216,9 @@ export default {
     openApp(){
       this.$emit('openApp', { processId: Math.floor(Math.random() * 5000), })
     }
+  },
+  components: {
+    
   }
 }
 </script>

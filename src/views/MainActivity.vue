@@ -1,11 +1,11 @@
 <template>
   <div>
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')"></div>
-    <Curtain @openApp="openAppHandler" />
+    <Curtain @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" />
     <OpenedApp v-if="appIsOpen" />
     <div v-if="!isAppsList">
-      <div class="appRow">
-        <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down')" @mouseup="holdApp($event, 'up')" class="app">
+      <!-- <div class="appRow">
+        <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" @mouseup="holdApp($event, 'up', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" class="app">
         </div>
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000), })" class="app">
         </div>
@@ -53,11 +53,21 @@
         </div>
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000), })" class="app">
         </div>
+      </div> -->
+      
+      <div v-for="appsRow in apps.flatMap((app, appIndex) => appIndex).filter((appsRow, appsRowIdx) => {
+        return appsRowIdx <= countAppsRows - 1
+      })" :key="appsRow" class="appRow">
+        <div v-for="app in apps.filter((app, appIdx) => {
+          return appIdx >= appsRow * countAppsPerRow && appIdx < countAppsPerRow * (appsRow + 1)
+        })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', { processId: app.processId, name: app.name })" @mouseup="holdApp($event, 'up', { processId: app.processId, name: app.name })" class="app">
+        </div>
       </div>
+
     </div>
-    <AppsList v-if="isAppsList" @openApp="openAppHandler" />
+    <AppsList v-if="isAppsList" :apps="apps" :countAppsRows="countAppsRows" :countAppsPerRow="countAppsPerRow" @openApp="openAppHandler" @holdApp="holdApp" />
     <OpenedApps v-if="isOpenedApps" :openedAppItems="openedApps" @openApp="openAppHandler" @closeApp="closeAppHandler" />
-    <ContextMenu v-if="isContextMenu"/>
+    <ContextMenu v-if="isContextMenu" :origin="originContextMenu" :appInfo="appInfoContextMenu" @closeContextMenu="closeContextMenuHandler" />
     <SystemBtns @handleUndoBtn="handleUndoBtnHandler" @handleHomeBtn="handleHomeBtnHandler" @handeOpenedAppsBtn="handeOpenedAppsBtnHandler" />
     <Lock v-if="!isUnlock" @unlock="unlockHandler" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" />
@@ -102,10 +112,51 @@ export default {
       activeSoundCommand: '',
       isSpeakersDialog: false,
       isContextMenu: false,
-      appSelected: false
+      appSelected: false,
+      originContextMenu: {
+        x: 0,
+        y: 0
+      },
+      appInfoContextMenu: {
+        name: 'XXXX',
+        processId: '1'
+      },
+      countAppsRows: 4,
+      countAppsPerRow: 4
     }
   },
   mounted() {
+    
+    fetch(`http://localhost:4000/api/apps/all/get/`, {
+      mode: 'cors',
+      method: 'GET'
+    }).then(response => response.body).then(rb  => {
+      const reader = rb.getReader()
+      return new ReadableStream({
+        start(controller) {
+          function push() {
+            reader.read().then( ({done, value}) => {
+              if (done) {
+                console.log('done', done);
+                controller.close();
+                return;
+              }
+              controller.enqueue(value);
+              console.log(done, value);
+              push();
+            })
+          }
+          push();
+        }
+      });
+    }).then(stream => {
+      return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+    })
+    .then(result => {
+      this.apps = JSON.parse(result).apps
+      console.log('json: ', JSON.parse(result).apps)
+    });
+
     window.addEventListener('keydown', (event) => {
       let tempActiveKey = event.key
       this.activeKey = event.key
@@ -137,12 +188,23 @@ export default {
     })
   },
   methods: {
-    holdApp(event, gesture) {
+    closeContextMenuHandler() {
+      this.isContextMenu = false
+    },
+    openPowerDialogHandler() {
+      this.isPowerDialog = true
+    },
+    holdApp(event, gesture, appInfo) {
       console.log(`holdApp: gesture: ${gesture}`)
       if(gesture === 'down') {
         setTimeout(() => {
           this.appSelected = true
           if(this.appSelected) {
+            this.appInfoContextMenu = appInfo
+            this.originContextMenu = {
+              x: event.x - 35,
+              y: event.y - 35
+            }
             this.isContextMenu = true
           }
         }, 2000)
@@ -171,6 +233,7 @@ export default {
         }
       } else if(gesture === 'up') {
         this.handleWallpapers = false
+        this.isContextMenu = false
       }
     },
     closeAppHandler(appInfo){
@@ -178,6 +241,10 @@ export default {
       this.openedApps = this.openedApps.filter(openedApp => {
         return openedApp.processId !== appInfo.processId
       })
+      if(this.openedApps.length === 0) {
+        this.isOpenedApps = false
+        this.appIsOpen = false
+      }
     },
     openApp(appInfo){
       let  openedAppsIds = []
@@ -190,8 +257,11 @@ export default {
       if(!appAlreadyRunning || this.openedApps.length <= 0) {
         this.openedApps.push({
           processId: appInfo.processId,
-          name: 'XXXX'
+          name: appInfo.name
         })
+        // this.openedApps.map(openedApp => {
+        //   console.log(`openedApp: ${openedApp.name}; ${openedApp.processId}`)
+        // })
       }
     },
     handleUndoBtnHandler(){

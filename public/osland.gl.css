@@ -2,7 +2,7 @@
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/1200px-Internet_Explorer_10%2B11_logo.svg.png');
     background-color: rgb(215, 215, 215);
     height: 75px;
-    width: 75px;
+    min-width: 75px;
     border-radius: 25px;
     background-size: 100% 100%;
     margin: 25px 75px;
@@ -214,4 +214,27 @@
     position: relative;
     top: -7.5px;
     left: -7.5px;
+}
+
+.appListWithSearch {
+    position: relative;
+    top: 100px;
+}
+
+.search {
+    position: fixed;
+    width: 85%;
+    height: 35px;
+    left: calc((100% - 85%) / 2);
+    top: 50px;
+    background-color: transparent;
+    border: 1px solid rgb(50, 50, 50);
+    font-weight: bolder;
+    color: rgb(175, 175, 175);
+}
+
+.search:focus {
+    background-color: transparent;
+    border: 1px solid rgb(50, 50, 50);
+    color: rgb(175, 175, 175);
 }

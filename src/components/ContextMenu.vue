@@ -1,9 +1,9 @@
 <template>
-    <div class="contextMenu">
-        <span>
+    <div class="contextMenu" :style="`top: ${origin.y}px; left: ${origin.x}px;`" ref="contextMenu">
+        <span class="contextMenuItem">
             Удалить
         </span>
-        <span @click="aboutApp(appInfo)">
+        <span @click="aboutApp()" class="contextMenuItem">
             О приложении
         </span>
     </div>
@@ -12,17 +12,17 @@
 <script>
 export default {
     name: 'ContextMenu',
-    data() {
-        return {
-            appInfo: {}
-        }
-    },
     props: [
-        'origin'
+        'origin',
+        'appInfo'
+    ],
+    emits: [
+        'closeContextMenu'
     ],
     methods: {
-        aboutApp(appInfo) {
-            console.log(`appInfo: ${appInfo}`)
+        aboutApp() {
+            alert(`Приложение: ${this.appInfo.name}`)
+            this.$emit('closeContextMenu')
         }
     }
 }
@@ -30,8 +30,8 @@ export default {
 
 <style scoped>
     .contextMenu {
-        width: 250px;
-        height: 325px;
+        width: 200px;
+        height: 225px;
         border-radius: 8px;
         background-color: rgb(255, 255, 255);
         box-sizing: border-box;
@@ -42,5 +42,9 @@ export default {
         top: 0px;
         left: 0px;
         font-weight: bolder;
+    }
+
+    .contextMenuItem {
+        margin: 5px 0px;
     }
 </style>
