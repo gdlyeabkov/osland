@@ -162,10 +162,17 @@
             return appsRowIdx < countAppsRows && (appsColumn !== (Math.ceil(apps.length / (countAppsPerRow * countAppsRows))) || (appsColumn === (Math.floor(apps.length / (countAppsPerRow * countAppsRows)))) && (apps.length - (apps.length - countAppsPerRow * countAppsRows) * (Math.floor(apps.length / (countAppsPerRow * countAppsRows)))) + appsRowIdx * countAppsPerRow < apps.length)
           })" :key="appsRow" class="appRow" :style="`width: calc(25% * ${4});`">
             <div v-for="app in apps.filter((app, appIdx) => {
-              return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
-            }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 12) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords))" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mousemove="holdApp($event, 'move', app)" @mouseup="holdApp($event, 'up', app)" class="app">
+                return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
+              }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 12) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords))" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mousemove="holdApp($event, 'move', app)" @mouseup="holdApp($event, 'up', app)" class="app">
             </div>
           </div>
+        </div>
+        <div v-if="apps.filter((app, appIdx) => {
+          return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
+        }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 12) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords)).length <= 0">
+          <span class="notFoundApps">
+            Нет таких приложений
+          </span>
         </div>
         <!-- <div class="appColumn">
           <div class="appRow">
@@ -243,4 +250,5 @@ export default {
   .appRow:first-child:nth-last-child(4) {
     width: 100%;
   }
+
 </style>

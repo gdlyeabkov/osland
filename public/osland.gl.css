@@ -221,6 +221,11 @@
     top: 100px;
 }
 
+.notFoundApps {
+    color: rgb(175, 175, 175);
+    font-size: 36px;
+}
+
 .search {
     background-color: rgb(65, 65, 65);
     border: 1px solid rgb(50, 50, 50);
