@@ -1,6 +1,8 @@
 <template>
     <div v-if="lockType === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" >
-
+        <span class="timeOnLock">
+            {{ currentTime }}
+        </span>
     </div>
     <div v-else class="lock graphicKeyWrap">
         <canvas @mousedown="drawGraphicKey($event, 'down')" @mousemove="drawGraphicKey($event, 'move')" @mouseup="drawGraphicKey($event, 'up')" width="500px" height="500px" ref="graphicKey"></canvas>
@@ -22,6 +24,9 @@ export default {
             password: '123456'
         }
     },
+    props: [
+        'currentTime'
+    ],
     emits: [
         'unlock'
     ],
@@ -295,16 +300,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-    .lock {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
-        background-image: url('https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg');
-        z-index: 15;
-        background-size: cover;
-    }
-</style>

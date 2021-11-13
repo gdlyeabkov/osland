@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')"></div>
-    <Curtain @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" />
+    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel"  @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" />
     <OpenedApp v-if="appIsOpen" :appInfo="appInfo" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
@@ -59,17 +59,17 @@
         return appsRowIdx <= countAppsRows - 1
       })" :key="appsRow" class="appRow">
         <div v-for="app in apps.filter((app, appIdx) => {
-          return appIdx >= appsRow * countAppsPerRow && appIdx < countAppsPerRow * (appsRow + 1)
-        })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', { processId: app.processId, name: app.name })" @mouseup="holdApp($event, 'up', { processId: app.processId, name: app.name })" class="app">
+          return appIdx >= appsRow * countAppsPerRow && appIdx < countAppsPerRow * (appsRow + 1) && app.shortcut
+        })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mouseup="holdApp($event, 'up', app)" class="app" :style="`background-image: url('http://localhost:4000/api/apps/favicons/get/?appname=${app.name}.png');`">
         </div>
       </div>
 
     </div>
-    <AppsList v-if="isAppsList" :apps="apps" :countAppsRows="countAppsRows" :countAppsPerRow="countAppsPerRow" @openApp="openAppHandler" @holdApp="holdApp" />
+    <AppsList v-if="isAppsList" :apps="apps" :countAppsRows="countAppsRows" :countAppsPerRow="countAppsPerRow" @openApp="openAppHandler" @holdApp="holdApp" @isSearch="isSearchHandler" />
     <OpenedApps v-if="isOpenedApps" :openedAppItems="openedApps" @openApp="openAppHandler" @closeApp="closeAppHandler" />
-    <ContextMenu v-if="isContextMenu" :origin="originContextMenu" :appInfo="appInfoContextMenu" @closeContextMenu="closeContextMenuHandler" />
+    <ContextMenu v-if="isContextMenu" :origin="originContextMenu" :appInfo="appInfoContextMenu" :isAppsList="isAppsList" @closeContextMenu="closeContextMenuHandler" @changeAppShortcut="changeAppShortcutHandler" />
     <SystemBtns @handleUndoBtn="handleUndoBtnHandler" @handleHomeBtn="handleHomeBtnHandler" @handeOpenedAppsBtn="handeOpenedAppsBtnHandler" />
-    <Lock v-if="!isUnlock" @unlock="unlockHandler" />
+    <Lock v-if="!isUnlock" :currentTime="currentTime" @unlock="unlockHandler" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" />
     <SleepMode v-if="isSleep" />
     <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" @resetSpeakers="resetSpeakersHandler" />
@@ -123,47 +123,22 @@ export default {
       },
       countAppsRows: 4,
       countAppsPerRow: 4,
-      appInfo: {}
+      appInfo: {},
+      currentTime: `${new Date().toLocaleTimeString().split(':')[0]}:${new Date().toLocaleTimeString().split(':')[1]}`,
+      batteryLevel: 1,
+      isSearch: false
     }
   },
   mounted() {
     
-    fetch(`http://localhost:4000/api/apps/all/get/`, {
-      mode: 'cors',
-      method: 'GET'
-    }).then(response => response.body).then(rb  => {
-      const reader = rb.getReader()
-      return new ReadableStream({
-        start(controller) {
-          function push() {
-            reader.read().then( ({done, value}) => {
-              if (done) {
-                console.log('done', done);
-                controller.close();
-                return;
-              }
-              controller.enqueue(value);
-              console.log(done, value);
-              push();
-            })
-          }
-          push();
-        }
-      });
-    }).then(stream => {
-      return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-    })
-    .then(result => {
-      this.apps = JSON.parse(result).apps
-      console.log('json: ', JSON.parse(result).apps)
-    });
+    this.uploadApps()
 
     window.addEventListener('keydown', (event) => {
       let tempActiveKey = event.key
       this.activeKey = event.key
       setTimeout(() => {
         if(this.activeKey === tempActiveKey) {
-          if(this.activeKey === 'q') {
+          if(this.activeKey === 'q' && !this.isSearch) {
             this.isPowerDialog = true
           }
           return
@@ -189,9 +164,100 @@ export default {
       }
       this.activeKey = ''
     })
+
+    navigator.getBattery().then(battery => {
+      this.batteryLevel = battery.level
+    })
+    setInterval(() => {
+      // обновление время
+      let time = new Date().toLocaleTimeString()
+      let timeSeparator = ':'
+      let timesParts = time.split(timeSeparator)
+      let hours = timesParts[0]
+      let minutes = timesParts[1]
+      let currentTime = `${hours}:${minutes}`
+      this.currentTime = currentTime
+      // обновление заряда
+      navigator.getBattery().then(battery => {
+          this.batteryLevel = battery.level
+      })  
+    }, 60000)
+
   },
   methods: {
-    openSearchHandler(){
+    uploadApps() {
+      fetch(`http://localhost:4000/api/apps/all/get/`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        this.apps = JSON.parse(result).apps
+      });
+    },
+    changeAppShortcutHandler(app, isShortcut) {
+      fetch(`http://localhost:4000/api/apps/shortcut/set/?appname=${app.name}&appshortcut=${isShortcut}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        this.isContextMenu = false
+        if(JSON.parse(result).status === 'OK') {
+          this.uploadApps()
+        }
+      });
+    },
+    isSearchHandler(isSearch) {
+      this.isSearch = isSearch
+      console.log(`isSearchHandler: ${this.isSearch}`)
+    },
+    changeBrightnessHandler(brightnessPercent) {
+      this.$refs.wallpapers.style = `
+        -webkit-filter: brightness(${brightnessPercent / 100});
+      `
+    },
+    openSearchHandler() {
       console.log(`isAppsList`)
       this.isAppsList = true
     },
@@ -203,9 +269,10 @@ export default {
     },
     holdApp(event, gesture, appInfo) {
       console.log(`holdApp: gesture: ${gesture}`)
+      this.contextMenuDelayer = null
       if(gesture === 'down') {
-        setTimeout(() => {
-          this.appSelected = true
+        this.appSelected = true
+        this.contextMenuDelayer = setTimeout(() => {
           if(this.appSelected) {
             this.appInfoContextMenu = appInfo
             this.originContextMenu = {
@@ -254,6 +321,7 @@ export default {
       }
     },
     openApp(appInfo){
+      this.activeKey = ''
       this.isAppsList = false
       this.isContextMenu = false
       let  openedAppsIds = []

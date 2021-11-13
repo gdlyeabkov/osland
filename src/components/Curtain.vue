@@ -16,16 +16,16 @@
                 </span>
             </div>
             <div class="curtainItem">
-                <span class="material-icons curtainItemIcon">
+                <span class="material-icons curtainItemIcon curtainBtn">
                     wifi
                 </span>
-                <span class="material-icons curtainItemIcon">
+                <span class="material-icons curtainItemIcon curtainBtn">
                     lte_mobiledata
                 </span>
-                <span class="material-icons curtainItemIcon">
+                <span class="material-icons curtainItemIcon curtainBtn">
                     signal_cellular_alt
                 </span>
-                <span class="material-icons curtainItemIcon">
+                <span class="material-icons curtainItemIcon curtainBtn">
                     battery_full
                 </span>
             </div>
@@ -46,13 +46,84 @@
                 <span class="material-icons curtainItemIcon" @click="openPowerDialog()" id="curtainBtn">
                     power_settings_new
                 </span>
-                <span class="material-icons curtainItemIcon">
-                    settings
+                <span class="material-icons curtainItemIcon" id="curtainBtn">
+                    more_vert
                 </span>
             </div>
         </div>
         <div class="curtainBody" @click="handleCurtain = false">
-        
+            <div class="curtainBodyRow">
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    wifi
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    volume_up
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    bluetooth
+                </span>
+                <span @click="orientation = !orientation" class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    {{
+                        orientation ?
+                        'crop_portrait'
+                        :
+                        'crop_landscape'
+                    }}
+                </span>
+            </div>
+            <div class="curtainBodyRow">
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    flight
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    {{
+                        true ?
+                            'flashlight_on'
+                        :
+                            'flashlight_on'
+                    }}
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    battery_full
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    swap_vert
+                </span>
+            </div>
+            <div class="curtainBodyRow">
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    palette
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    tap_and_play
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    location_on
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    qr_code
+                </span>
+            </div>
+            <div class="curtainBodyRow">
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    play_circle_outline
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    do_not_disturb_on
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    wifi_calling
+                </span>
+                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                    sync
+                </span>
+            </div>
+        </div>
+        <div class="curtainFooter">
+            <div @click="changeBrightness($event)" class="brightnessControl progress" id="curtainBtn">
+                <div  @click="changeBrightness($event)" ref="brightnessControlFiller" class="brightnessControlFiller progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="50" aria-valuemax="100"  id="curtainBtn">
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -61,35 +132,45 @@
 export default {
     data(){
         return {
-            currentTime: `${new Date().toLocaleTimeString().split(':')[0]}:${new Date().toLocaleTimeString().split(':')[1]}`,
             handleCurtain: false,
-            batteryLevel: 1
+            orientation: true
         }
     },
+    props: [
+        'currentTime',
+        'batteryLevel'
+    ],
     emits: [
         'openApp',
-        'closeContextMenu'
+        'closeContextMenu',
+        'changeBrightness'
     ],
     mounted() {
-        navigator.getBattery().then(battery => {
-            this.batteryLevel = battery.level
-        })
-        setInterval(() => {
-            // обновление время
-            let time = new Date().toLocaleTimeString()
-            let timeSeparator = ':'
-            let timesParts = time.split(timeSeparator)
-            let hours = timesParts[0]
-            let minutes = timesParts[1]
-            let currentTime = `${hours}:${minutes}`
-            this.currentTime = currentTime
-            // обновление заряда
-            navigator.getBattery().then(battery => {
-                this.batteryLevel = battery.level
-            })  
-        }, 60000)
+        
     },
     methods: {
+        changeBrightness(event) {
+            let brightnessPercent = event.x / 14
+            this.$refs.brightnessControlFiller.style = `
+                background-color: rgb(100, 150, 255);
+                width: ${brightnessPercent}%;
+            `
+            this.$refs.curtain.style = `
+                height: 100%;
+                z-index: 10;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 1);
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                padding: 0px 15px;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                -webkit-filter: brightness(${brightnessPercent / 100});
+            `
+            this.$emit('changeBrightness', brightnessPercent)
+        },
         openSearch() {
             this.$refs.curtain.style = `
                 height: 50px;
@@ -213,3 +294,33 @@ export default {
     }
 }
 </script>
+<style scoped>
+    
+    .curtainBodyRow {
+        margin: 25px 0px;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 0px 150px;
+    }
+
+    .curtainBodyItem {
+        /* margin: 0px 15px; */
+        border-radius: 100%;
+        width: 75px;
+        height: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brightnessControl {
+        background-color: rgb(255, 215, 255);
+    }
+
+    .brightnessControlFiller {
+        background-color: rgb(100, 150, 255);
+        width: 50%;
+    }
+
+</style>

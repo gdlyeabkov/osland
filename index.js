@@ -29,7 +29,11 @@ mongoose.connect(url, connectionParams)
 
 const AppSchema = new mongoose.Schema({
     name: String,
-    processId: Number
+    processId: Number,
+    shortcut: {
+        type: Boolean,
+        default: false
+    }
 }, { collection : 'myapps' });
 
 const AppModel = mongoose.model('AppModel', AppSchema);
@@ -66,6 +70,32 @@ app.get('/api/apps/create',(req, res)=>{
         }
     })
 
+})
+
+app.get('/api/apps/favicons/get', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    return res.sendFile(__dirname + `/favicons/${req.query.appname}`)
+})
+
+app.get('/api/apps/shortcut/set', (req, res) => {
+     
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    AppModel.updateOne({ name: req.query.appname }, { shortcut: req.query.appshortcut }, (err, app) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+    
 })
 
 app.get('**', (req, res) => { 
