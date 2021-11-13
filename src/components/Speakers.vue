@@ -84,6 +84,9 @@ export default {
             }
         }
     },
+    mounted() {
+        this.$emit('transferSoundMode', this.$refs.speakers.volume)
+    },
     methods: {
         handleGestures(event, gesture){
             console.log(`gesture: ${gesture}; ${event.x}; ${event.y}`)

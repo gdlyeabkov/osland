@@ -53,13 +53,25 @@
         </div>
         <div class="curtainBody">
             <div class="curtainBodyRow">
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isWifi, 'btn-light': !isWifi }" id="curtainBtn" @click="isWifi = !isWifi">
                     wifi
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
-                    volume_up
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': currentSoundMode !== 0, 'btn-light': currentSoundMode === 0 }" id="curtainBtn" @click="currentSoundMode = currentSoundMode > 0.1 ?
+                            0.1
+                        : currentSoundMode === 0.1 ?
+                            0
+                        :
+                            1">
+                    {{
+                        currentSoundMode > 0.1 ?
+                            'volume_up'
+                        : currentSoundMode === 0.1 ?
+                            'volume_down'
+                        :
+                            'volume_off'
+                    }}
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isBluetooth, 'btn-light': !isBluetooth }" id="curtainBtn" @click="isBluetooth = !isBluetooth">
                     bluetooth
                 </span>
                 <span @click="orientation = !orientation" class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
@@ -72,32 +84,37 @@
                 </span>
             </div>
             <div class="curtainBodyRow">
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': flightMode, 'btn-light': !flightMode }" id="curtainBtn" @click="flightMode = !flightMode">
                     flight
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isFlash, 'btn-light': !isFlash }" id="curtainBtn" @click="isFlash = !isFlash">
                     {{
-                        true ?
+                        isFlash ?
                             'flashlight_on'
                         :
-                            'flashlight_on'
+                            'flashlight_off'
                     }}
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
-                    battery_full
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, 'btn': true, 'btn-primary': !isBatterySaverMode, 'btn-light': isBatterySaverMode }" id="curtainBtn" @click="isBatterySaverMode = !isBatterySaverMode">
+                    {{
+                        !isBatterySaverMode ?
+                            'battery_full'
+                        :
+                            'battery_saver'
+                    }}
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': mobileData, 'btn-light': !mobileData }" id="curtainBtn" @click="mobileData = !mobileData">
                     swap_vert
                 </span>
             </div>
             <div class="curtainBodyRow">
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': blueColorFilter, 'btn-light': !blueColorFilter }" id="curtainBtn" @click="blueColorFilter = !blueColorFilter">
                     palette
                 </span>
                 <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
                     tap_and_play
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn" @click="getLocation()">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': geolocationId !== null && geolocationId !== undefined, 'btn-light': geolocationId === null || geolocationId === undefined }" id="curtainBtn" @click="setGeolocation()">
                     location_on
                 </span>
                 <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
@@ -105,16 +122,16 @@
                 </span>
             </div>
             <div class="curtainBodyRow">
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isVideoMode, 'btn-light': !isVideoMode }" id="curtainBtn" @click="isVideoMode = !isVideoMode">
                     play_circle_outline
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isDontDisturb, 'btn-light': !isDontDisturb }" id="curtainBtn" @click="isDontDisturb = !isDontDisturb">
                     do_not_disturb_on
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isWifiCalling, 'btn-light': !isWifiCalling }" id="curtainBtn" @click="isWifiCalling = !isWifiCalling">
                     wifi_calling
                 </span>
-                <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isSync, 'btn-light': !isSync }" id="curtainBtn" @click="isSync = !isSync">
                     sync
                 </span>
             </div>
@@ -129,28 +146,122 @@
 </template>
 
 <script>
+
 const openGeocoder = require('node-open-geocoder')
+
+// const wifi = require('node-wifi')
+const si = require('systeminformation')
+// const wifi = require('wifi.js')
+// const Wifi = require('wifi')
+// const scanner = require('node-wifi-scanner')
+// const bluetooth = require('bluetooth')
 
 export default {
     data(){
         return {
             handleCurtain: false,
-            orientation: true
+            orientation: true,
+            currentSoundMode: 1,
+            flightMode: false,
+            isFlash: false,
+            isBatterySaverMode: false,
+            blueColorFilter: false,
+            geolocationId: null,
+            mobileData: false,
+            isWifi: false,
+            isBluetooth: false,
+            isScanQRcode: true,
+            isSync: true,
+            isAccessPoint: false,
+            isWifiCalling: true,
+            isDontDisturb: false,
+            isVideoMode: true
         }
     },
     props: [
         'currentTime',
-        'batteryLevel'
+        'batteryLevel',
+        'soundMode'
     ],
     emits: [
         'openApp',
         'closeContextMenu',
         'changeBrightness'
     ],
+    watch: {
+        soundMode(newSoundMode) {
+            this.currentSoundMode = newSoundMode
+        }
+    },
     mounted() {
+        // wifi.init();
+        // wifi.getCurrentConnections((error, currentConnections) => {
+        //     if (error) {
+        //         console.log(`ошибка`)
+        //     } else {
+        //         console.log(`currentConnections: ${currentConnections}`)
+        //     }
+        // })
         
+        // si.wifiNetworks((err, connections) => {
+        //     if(err) {
+        //         console.log(`Не могу получить подключения`)
+        //         return null
+        //     } else {
+
+        //     }
+        // })
+
+        // wifi.init({
+        //     iface: null
+        // });
+        // wifi.getCurrentConnections((error, currentConnections) => {
+        //     if (error) {
+        //         console.log(`ошибка`)
+        //     } else {
+        //         console.log(`currentConnections: ${currentConnections}`)
+        //     }
+        // })
+
+        // scanner.scan((err, networks) => {
+        //     if (err) {
+        //         console.error(err)
+        //         return
+        //     }
+        //     console.log(networks)
+        // })
+
+        // si.bluetoothDevices((err, connections, a) => {
+            // if(err) {
+            //     console.log(`Не могу получить подключения`)
+            //     return null
+            // } else {
+                // console.log(`connections: ${err}; ${connections}; ${a}`)
+            // }
+        // })
+
+        // bluetooth.isOn().then(state => {
+        //     console.log(state);
+        // });
+
+        this.currentSoundMode = this.soundMode
+
     },
     methods: {
+        setGeolocation() {
+            if(navigator.geolocation !== null && navigator.geolocation !== undefined) {
+                if(this.geolocationId === null || this.geolocationId === undefined) {
+                    this.geolocationId = navigator.geolocation.watchPosition((updatedPosition) => {
+                        console.log(`updatedPosition: ${updatedPosition}`)
+                    })
+                    console.log(`подключаю gps`)
+                } else {
+                    navigator.geolocation.clearWatch(this.geolocationId)
+                    this.geolocationId = null
+                    console.log('отключаю геолокацию')
+                }
+            }
+        },
         getLocation(){
             let destination = 'Неизветно'
             if (navigator.geolocation) {

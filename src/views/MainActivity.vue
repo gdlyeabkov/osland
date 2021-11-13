@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')"></div>
-    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel"  @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" />
+    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" />
     <OpenedApp v-if="appIsOpen" :appInfo="appInfo" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
@@ -72,7 +72,7 @@
     <Lock v-if="!isUnlock" :currentTime="currentTime" @unlock="unlockHandler" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" />
     <SleepMode v-if="isSleep" />
-    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" @resetSpeakers="resetSpeakersHandler" />
+    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" @resetSpeakers="resetSpeakersHandler" @transferSoundMode="transferSoundModeHandler" />
   </div>
   
 </template>
@@ -126,7 +126,8 @@ export default {
       appInfo: {},
       currentTime: `${new Date().toLocaleTimeString().split(':')[0]}:${new Date().toLocaleTimeString().split(':')[1]}`,
       batteryLevel: 1,
-      isSearch: false
+      isSearch: false,
+      currentSoundMode: 0
     }
   },
   mounted() {
@@ -185,6 +186,10 @@ export default {
 
   },
   methods: {
+    transferSoundModeHandler(soundMode) {
+      console.log(`получаю звуковый профиль: ${soundMode}`)
+      this.currentSoundMode = soundMode
+    },
     uploadApps() {
       fetch(`http://localhost:4000/api/apps/all/get/`, {
         mode: 'cors',
