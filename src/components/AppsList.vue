@@ -1,14 +1,15 @@
 <template>
   <div>
-    <div class="desktop" ref="desktop" @click="dragDesktop($event)"></div>
-    <div class="appListWithSearch">
-      <div class="input-group searchWrap">
+    <div class="desktop" ref="desktop" @click="dragDesktop($event); $emit('closeContextMenu')" :style="`${orientation ? 'width: 50%;' : ''}`">
+    </div>
+    <div class="appListWithSearch" :style="`${orientation ? 'width: 200%;' : ''}`" @click="$emit('closeContextMenu')">
+      <div class="input-group searchWrap" :style="`${orientation ? 'width: 35%;' : ''}`">
         <input @focus="$emit('isSearch', true)" @blur="$emit('isSearch', false)" v-model="keywords" placeholder="Поиск" type="text" class="form-control search" />
         <span @click="keywords = ''" class="input-group-text material-icons searchCloseBtn">
           close
         </span>
       </div>
-      <div class="appsList">
+      <div class="appsList" :style="`${orientation ? 'width: 100%; overflow-x: scroll;' : ''}`">
         <!-- <div class="appColumn">
           <div class="appRow">
             <div @click="openApp()" class="app">
@@ -157,17 +158,19 @@
         </div> -->
         <div v-for="appsColumn in apps.flatMap((app, appIndex) => appIndex).filter((appsColumn, appsColumnIdx) => {
             return appsColumnIdx <= Math.floor(apps.length / (countAppsPerRow * countAppsRows))
-          })" :key="appsColumn" class="appColumn">
+          })" :key="appsColumn" class="appColumn" :style="`width: 100%;`">
           <div v-for="appsRow in apps.flatMap((app, appIndex) => appIndex).filter((appsRow, appsRowIdx) => {
             return appsRowIdx < countAppsRows && (appsColumn !== (Math.ceil(apps.length / (countAppsPerRow * countAppsRows))) || (appsColumn === (Math.floor(apps.length / (countAppsPerRow * countAppsRows)))) && (apps.length - (apps.length - countAppsPerRow * countAppsRows) * (Math.floor(apps.length / (countAppsPerRow * countAppsRows)))) + appsRowIdx * countAppsPerRow < apps.length)
-          })" :key="appsRow" class="appRow" :style="`width: calc(25% * ${4});`">
+          })" :key="appsRow" class="appRow" :style="`width: calc(25% * ${apps.filter((app, appIdx) => {
+                return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
+              }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 12) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords)).length});`">
             <div v-for="app in apps.filter((app, appIdx) => {
                 return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
               }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 12) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords))" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mousemove="holdApp($event, 'move', app)" @mouseup="holdApp($event, 'up', app)" class="app">
             </div>
-            <div class="notFoundAppsContainer" v-if="apps.filter((app, appIdx) => {
-              return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
-            }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - 4) + (appsColumn !== 0 ? (((appsColumn) * 12) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords)).length <= 0 && appsColumn === 0 && appsRow === 0">
+            <div class="notFoundAppsContainer" v-if="apps.every((app, appIdx) => {
+              return !app.name.includes(keywords)
+            })">
               <span class="notFoundApps">
                 Нет таких приложений
               </span>
@@ -203,7 +206,8 @@ export default {
   props: [
     'apps',
     'countAppsRows',
-    'countAppsPerRow'
+    'countAppsPerRow',
+    'orientation'
   ],
   emits: [
     'openApp',

@@ -1,5 +1,5 @@
 <template>
-    <div class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
+    <div :style="`width: ${orientation ? '50%' : '100%'};`" class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
         <div class="curtainHeader" @click="handleCurtain = false">
             <div class="curtainItem">
                 <span class="curtainItemIcon">
@@ -74,7 +74,7 @@
                 <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isBluetooth, 'btn-light': !isBluetooth }" id="curtainBtn" @click="isBluetooth = !isBluetooth">
                     bluetooth
                 </span>
-                <span @click="orientation = !orientation" class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
+                <span @click="orientation = !orientation; $emit('changeOrientation', orientation)" class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
                     {{
                         orientation ?
                         'crop_portrait'
@@ -108,7 +108,7 @@
                 </span>
             </div>
             <div class="curtainBodyRow">
-                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': blueColorFilter, 'btn-light': !blueColorFilter }" id="curtainBtn" @click="blueColorFilter = !blueColorFilter">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': blueColorFilter, 'btn-light': !blueColorFilter }" id="curtainBtn" @click="blueColorFilter = !blueColorFilter; $emit('filterBlueColor', blueColorFilter)">
                     palette
                 </span>
                 <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
@@ -160,7 +160,7 @@ export default {
     data(){
         return {
             handleCurtain: false,
-            orientation: true,
+            orientation: false,
             currentSoundMode: 1,
             flightMode: false,
             isFlash: false,
@@ -186,7 +186,9 @@ export default {
     emits: [
         'openApp',
         'closeContextMenu',
-        'changeBrightness'
+        'changeBrightness',
+        'changeOrientation',
+        'filterBlueColor'
     ],
     watch: {
         soundMode(newSoundMode) {
@@ -288,7 +290,7 @@ export default {
             this.$refs.curtain.style = `
                 height: 100%;
                 z-index: 10;
-                width: 100%;
+                width: ${this.orientation ? '50%' : '100%'};
                 background-color: rgba(0, 0, 0, 1);
                 display: flex;
                 flex-direction: column;
@@ -305,7 +307,7 @@ export default {
             this.$refs.curtain.style = `
                 height: 50px;
                 z-index: 10;
-                width: 100%;
+                width: ${this.orientation ? '50%' : '100%'};
                 background-color: rgba(0, 0, 0, 0.4);
                 display: flex;
                 flex-direction: column;
@@ -321,7 +323,7 @@ export default {
             this.$refs.curtain.style = `
                 height: 50px;
                 z-index: 10;
-                width: 100%;
+                width: ${this.orientation ? '50%' : '100%'};
                 background-color: rgba(0, 0, 0, 0.4);
                 display: flex;
                 flex-direction: column;
@@ -337,7 +339,7 @@ export default {
             this.$refs.curtain.style = `
                 height: 50px;
                 z-index: 10;
-                width: 100%;
+                width: ${this.orientation ? '50%' : '100%'};
                 background-color: rgba(0, 0, 0, 0.4);
                 display: flex;
                 flex-direction: column;
@@ -365,7 +367,7 @@ export default {
                     this.$refs.curtain.style = `
                         height: 50px;
                         z-index: 10;
-                        width: 100%;
+                        width: ${this.orientation ? '50%' : '100%'};
                         background-color: rgba(0, 0, 0, 0.4);
                         display: flex;
                         flex-direction: column;
@@ -380,7 +382,7 @@ export default {
                         this.$refs.curtain.style = `
                         z-index: 10;
                         height: 50px;
-                        width: 100%;
+                        width: ${this.orientation ? '50%' : '100%'};
                         background-color: rgba(0, 0, 0, 1);
                         display: flex;
                         flex-direction: column;
@@ -397,7 +399,7 @@ export default {
                     this.$refs.curtain.style = `
                         z-index: 10;
                         height: ${50 + event.y}px;
-                        width: 100%;
+                        width: ${this.orientation ? '50%' : '100%'};
                         background-color: rgba(0, 0, 0, ${opacityAnimation});
                         display: flex;
                         flex-direction: column;
@@ -417,7 +419,7 @@ export default {
                     this.$refs.curtain.style = `
                         height: 100%;
                         z-index: 10;
-                        width: 100%;
+                        width: ${this.orientation ? '50%' : '100%'};
                         background-color: rgba(0, 0, 0, 1);
                         display: flex;
                         flex-direction: column;
@@ -431,7 +433,7 @@ export default {
                     this.$refs.curtain.style = `
                         height: 50px;
                         z-index: 10;
-                        width: 100%;
+                        width: ${this.orientation ? '50%' : '100%'};
                         background-color: rgba(0, 0, 0, 0.4);
                         display: flex;
                         flex-direction: column;

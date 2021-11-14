@@ -1,10 +1,13 @@
 <template>
-    <div v-if="lockType === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" >
+    <div v-if="settings.lockScreen.mode === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" >
         <span class="timeOnLock">
             {{ currentTime }}
         </span>
+        <span class="unlockLabel">
+            Для разблокировки проведите пальцем по экрану
+        </span>
     </div>
-    <div v-else class="lock graphicKeyWrap">
+    <div v-else-if="settings.lockScreen.mode === 'graphicKey'" class="lock graphicKeyWrap">
         <canvas @mousedown="drawGraphicKey($event, 'down')" @mousemove="drawGraphicKey($event, 'move')" @mouseup="drawGraphicKey($event, 'up')" width="500px" height="500px" ref="graphicKey"></canvas>
     </div>
 </template>
@@ -16,25 +19,76 @@ export default {
         return {
             lastGesture: 0,
             handleGesture: false,
-            lockType: 'moveSlide',
             context: null,
             originX: 100,
             originY: 150,
             gestures: [],
-            password: '123456'
+            password: '123456',
+            settings: {
+                lockScreen: {
+                    mode: 'moveSlide'
+                }
+            }
         }
     },
-    props: [
-        'currentTime'
-    ],
+    props: {
+        currentTime: {
+            default: '00:00'
+        },
+        // settings: {
+        //     default: {
+        //         lockScreen: {
+        //             mode: 'moveSlide'
+        //         }
+        //     }
+        // }
+    },
     emits: [
         'unlock'
     ],
+    // watch: {
+    //     settings(asd) {
+    //         if(this.settings.lockScreen.mode === 'graphicKey') {
+    //             this.context = this.$refs.graphicKey.getContext('2d')
+    //             this.drawPossibleKeys()
+    //         }
+    //     }
+    // },
     mounted() {
-        if(this.lockType === 'graphicKey') {
+      fetch(`http://localhost:4000/api/apps/all/get/`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        this.apps = JSON.parse(result).apps
+        this.settings = JSON.parse(result).settings
+        let isGraphicKey = this.settings.lockScreen.mode === 'graphicKey'
+        if(isGraphicKey) {
             this.context = this.$refs.graphicKey.getContext('2d')
             this.drawPossibleKeys()
         }
+      })
     },
     methods: {
         drawPossibleKeys() {
@@ -300,3 +354,14 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .unlockLabel {
+        position: absolute;
+        top: calc(100% - 100px);
+        left: 40%;
+        color: rgb(255, 255, 255);
+        font-weight: bolder;
+        width: 250px;
+        text-align: center;
+    }
+</style>

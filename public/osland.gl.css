@@ -55,7 +55,7 @@
 
 .wallpapers {
     overflow-x: scroll;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     z-index: -1;
@@ -173,7 +173,7 @@
     left: 0px;
     background-color: rgb(0, 0, 0);
     position: absolute;
-    z-index: 25;
+    z-index: 30;
 }
 
 .graphicKeyWrap {
@@ -280,4 +280,24 @@
     background-image: url('https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg');
     z-index: 15;
     background-size: cover;
+}
+
+.contextMenu {
+    width: 200px;
+    height: 225px;
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    font-weight: bolder;
+    z-index: 25;
+}
+
+.contextMenuItem {
+    margin: 5px 0px;
 }

@@ -4,7 +4,6 @@ const saltRounds = 10;
 const mongoose = require('mongoose')
 const express = require('express')
 const path = require('path')
-const { isError } = require('util')
 const serveStatic = require('serve-static')
 
 const app = express()
@@ -38,6 +37,16 @@ const AppSchema = new mongoose.Schema({
 
 const AppModel = mongoose.model('AppModel', AppSchema);
 
+const SettingsSchema = new mongoose.Schema({
+    lockScreen: {
+        type: mongoose.Schema.Types.Object,
+        default: {
+            mode: 'moveSlide'
+        }
+    }
+}, { collection : 'mysettings' });
+
+const SettingsModel = mongoose.model('SettingsModel', SettingsSchema);
 app.get('/api/apps/all/get',(req, res)=>{
     
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -48,9 +57,15 @@ app.get('/api/apps/all/get',(req, res)=>{
     let query = AppModel.find({  })
     query.exec((err, apps) => {
         if (err) {
-            return res.json({ status: "Error", apps: [] })
+            return res.json({ status: "Error", apps: [], settings: [] })
         }
-        return res.json({ apps: apps, status: 'OK' })
+        let query = SettingsModel.find({  })
+        query.exec((err, settings) => {
+            if (err) {
+                return res.json({ status: "Error", apps: [], settings: [] })
+            }
+            return res.json({ apps: apps, settings: settings[0], status: 'OK' })
+        })
     })
 
 })
@@ -96,6 +111,33 @@ app.get('/api/apps/shortcut/set', (req, res) => {
         return res.json({ status: 'OK' })    
     })
     
+})
+
+app.get('/api/apps/delete', async (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    await AppModel.deleteOne({ name: req.query.appname  })
+
+})
+
+app.get('/api/settings/lockscreen/mode/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { lockScreen: { mode: req.query.lockscreenmode } }, (err, app) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
 })
 
 app.get('**', (req, res) => { 
