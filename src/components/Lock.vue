@@ -54,41 +54,47 @@ export default {
     //         }
     //     }
     // },
-    mounted() {
-      fetch(`http://localhost:4000/api/apps/all/get/`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
-                }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
-              })
-            }
-            push();
-          }
-        });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        this.apps = JSON.parse(result).apps
-        this.settings = JSON.parse(result).settings
-        let isGraphicKey = this.settings.lockScreen.mode === 'graphicKey'
+    async mounted() {
+    //   fetch(`http://localhost:4000/api/apps/all/get/`, {
+    //     mode: 'cors',
+    //     method: 'GET'
+    //   }).then(response => response.body).then(rb  => {
+    //     const reader = rb.getReader()
+    //     return new ReadableStream({
+    //       start(controller) {
+    //         function push() {
+    //           reader.read().then( ({done, value}) => {
+    //             if (done) {
+    //               console.log('done', done);
+    //               controller.close();
+    //               return;
+    //             }
+    //             controller.enqueue(value);
+    //             console.log(done, value);
+    //             push();
+    //           })
+    //         }
+    //         push();
+    //       }
+    //     });
+    //   }).then(stream => {
+    //     return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+    //   })
+    //   .then(result => {
+    //     this.apps = JSON.parse(result).apps
+    //     this.settings = JSON.parse(result).settings
+    //     let isGraphicKey = this.settings.lockScreen.mode === 'graphicKey'
+    //     if(isGraphicKey) {
+    //         this.context = this.$refs.graphicKey.getContext('2d')
+    //         this.drawPossibleKeys()
+    //     }
+    //   })
+        this.settings = await JSON.parse(localStorage.getItem('osland_settings'))
+        let isGraphicKey = await this.settings.lockScreen.mode === 'graphicKey'
         if(isGraphicKey) {
             this.context = this.$refs.graphicKey.getContext('2d')
             this.drawPossibleKeys()
         }
-      })
     },
     methods: {
         drawPossibleKeys() {

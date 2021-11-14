@@ -136,6 +136,15 @@ export default {
   },
   mounted() {
     
+    if(localStorage.getItem('osland_settings') === null) {
+      localStorage.setItem('osland_settings', JSON.stringify({
+        'lockScreen': {
+          'mode': 'moveSlide'
+        }
+      }))
+    }
+    this.settings = JSON.parse(localStorage.getItem('osland_settings'))
+    console.log(`settings: ${Object.keys(this.settings)}; ${Object.values(this.settings)}`)
     this.uploadApps()
 
     window.addEventListener('keydown', (event) => {
@@ -264,10 +273,10 @@ export default {
       })
       .then(result => {
         this.apps = JSON.parse(result).apps
-        this.settings = JSON.parse(result).settings
-        console.log(`settings: ${Object.keys(this.settings)}; ${Object.values(this.settings)}`)
-        console.log(`settings: ${JSON.stringify(this.settings)}`)
-        console.log(`settingsLockScreenMode: ${this.settings.lockScreen.mode}`)
+        // this.settings = JSON.parse(result).settings
+        // console.log(`settings: ${Object.keys(this.settings)}; ${Object.values(this.settings)}`)
+        // console.log(`settings: ${JSON.stringify(this.settings)}`)
+        // console.log(`settingsLockScreenMode: ${this.settings.lockScreen.mode}`)
       });
     },
     changeAppShortcutHandler(app, isShortcut) {

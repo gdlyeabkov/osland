@@ -288,10 +288,18 @@
 <script>
 export default {
   name: 'OpenedApp',
+  data() {
+    return {
+      settings: {}
+    }
+  },
   props: [
     'appInfo',
-    'settings'
+    // 'settings'
   ],
+  mounted() {
+    this.settings = JSON.parse(localStorage.getItem('osland_settings'))
+  },
   methods: {
     setLockScreenMode() {
       let lockScreenMode = this.settings.lockScreen.mode === 'moveSlide' ?
@@ -300,6 +308,8 @@ export default {
         'moveSlide'
       :
         'graphicKey'
+      this.settings.lockScreen.mode = lockScreenMode
+      localStorage.setItem('osland_settings', JSON.stringify(this.settings))
       fetch(`http://localhost:4000/api/settings/lockscreen/mode/set/?lockscreenmode=${lockScreenMode}`, {
         mode: 'cors',
         method: 'GET'
