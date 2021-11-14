@@ -1,5 +1,5 @@
 <template>
-    <div :style="`width: ${orientation ? '50%' : '100%'};`" class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
+    <div :style="`width: ${orientation ? '50%' : '100%'}; background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};`" class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
         <div class="curtainHeader" @click="handleCurtain = false">
             <div class="curtainItem">
                 <span class="curtainItemIcon">
@@ -125,7 +125,7 @@
                 <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isVideoMode, 'btn-light': !isVideoMode }" id="curtainBtn" @click="isVideoMode = !isVideoMode">
                     play_circle_outline
                 </span>
-                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isDontDisturb, 'btn-light': !isDontDisturb }" id="curtainBtn" @click="isDontDisturb = !isDontDisturb">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isDontDisturb, 'btn-light': !isDontDisturb }" id="curtainBtn" @click="isDontDisturb = !isDontDisturb; $emit('changeVolume', 0)">
                     do_not_disturb_on
                 </span>
                 <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isWifiCalling, 'btn-light': !isWifiCalling }" id="curtainBtn" @click="isWifiCalling = !isWifiCalling">
@@ -155,6 +155,12 @@ const si = require('systeminformation')
 // const Wifi = require('wifi')
 // const scanner = require('node-wifi-scanner')
 // const bluetooth = require('bluetooth')
+// const fs = require('fs')
+// const wifiscanner = require('node-simplerwifiscanner')
+// var wifi = require("windowswifi");
+// const hotspot = require('node-hotspot')
+// const WiFiControl = require('wifi-control')
+// const wifiList = require('wifi-list-windows')
 
 export default {
     data(){
@@ -181,14 +187,16 @@ export default {
     props: [
         'currentTime',
         'batteryLevel',
-        'soundMode'
+        'soundMode',
+        'settings'
     ],
     emits: [
         'openApp',
         'closeContextMenu',
         'changeBrightness',
         'changeOrientation',
-        'filterBlueColor'
+        'filterBlueColor',
+        'changeVolume',
     ],
     watch: {
         soundMode(newSoundMode) {
@@ -230,6 +238,57 @@ export default {
         //         console.error(err)
         //         return
         //     }
+        //     console.log(networks)
+        // })
+
+        // wifiscanner.scan(function(err, data){
+        //     if (err) {
+        //         console.log("Error : " + err)
+        //         return
+        //     }
+        //     console.log(data)
+        // })
+
+        // wifi.getNetworks(function (err, networks) {
+        //     if (err) throw err;
+        //     console.log(networks);
+        // });
+        
+        // var opts = {
+        //     ssid: 'marshrutizator', 
+        //     password: 'Joy26Beauty54'
+        // }
+        // hotspot.enable(opts)
+        //     .then(function() {
+        //         console.log('Hotspot Enabled')
+        //     })
+        //     .catch(function(e) {
+        //         console.log('Something went wrong; Perms?', e)
+        //     })
+        // hotspot.disable(opts)
+        //     .then(function() {
+        //         console.log('Hotspot disabled')
+        //     })
+        //     .catch(function(e) {
+        //         console.log('Something went wrong; Perms?', e)
+        //     })
+        // hotspot.stats(opts)
+        //     .then(function(status) {
+        //         console.log('Hotspot status: ' + status) //status contains clients object and state
+        //     })
+        
+        //  Initialize wifi-control package with verbose output
+        // WiFiControl.init({
+        //     debug: true
+        // })
+        //  Try scanning for access points:
+        // WiFiControl.scanForWiFi( function(err, response) {
+        //     if (err) console.log(err);
+        //     console.log(response);
+        // })
+
+        // wifiList(function (err, networks) {
+        //     if (err) throw err
         //     console.log(networks)
         // })
 
@@ -291,7 +350,7 @@ export default {
                 height: 100%;
                 z-index: 10;
                 width: ${this.orientation ? '50%' : '100%'};
-                background-color: rgba(0, 0, 0, 1);
+                background-color: ${this.settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};
                 display: flex;
                 flex-direction: column;
                 box-sizing: border-box;
@@ -308,7 +367,7 @@ export default {
                 height: 50px;
                 z-index: 10;
                 width: ${this.orientation ? '50%' : '100%'};
-                background-color: rgba(0, 0, 0, 0.4);
+                background-color: ${this.settings.topic === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};
                 display: flex;
                 flex-direction: column;
                 box-sizing: border-box;
@@ -324,7 +383,7 @@ export default {
                 height: 50px;
                 z-index: 10;
                 width: ${this.orientation ? '50%' : '100%'};
-                background-color: rgba(0, 0, 0, 0.4);
+                background-color: ${this.settings.topic === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};
                 display: flex;
                 flex-direction: column;
                 box-sizing: border-box;
@@ -340,7 +399,7 @@ export default {
                 height: 50px;
                 z-index: 10;
                 width: ${this.orientation ? '50%' : '100%'};
-                background-color: rgba(0, 0, 0, 0.4);
+                background-color: ${this.settings.topic === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};
                 display: flex;
                 flex-direction: column;
                 box-sizing: border-box;
@@ -353,13 +412,14 @@ export default {
             this.$emit('openApp', appInfo)
         },
         handleGesture(event, gesture){
-            this.$emit('closeContextMenu')
+            // this.$emit('closeContextMenu')
             if (gesture === 'down' && event.target.id !== 'curtainBtn') {
                 // if (this.handleCurtain) {
 
                 // } else if (this.handleCurtain) {
 
                 // }
+                this.$emit('closeContextMenu')
                 let halfHeightOfScreen = window.screen.availHeight / 2
                 let greatherThanHalfOfScreen = this.$refs.curtain.getBoundingClientRect().bottom >= halfHeightOfScreen
                 if (greatherThanHalfOfScreen) {
@@ -368,7 +428,7 @@ export default {
                         height: 50px;
                         z-index: 10;
                         width: ${this.orientation ? '50%' : '100%'};
-                        background-color: rgba(0, 0, 0, 0.4);
+                        background-color: ${this.settings.topic === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};
                         display: flex;
                         flex-direction: column;
                         box-sizing: border-box;
@@ -379,11 +439,11 @@ export default {
                     `
                 } else {
                     this.handleCurtain = true
-                        this.$refs.curtain.style = `
+                    this.$refs.curtain.style = `
                         z-index: 10;
                         height: 50px;
                         width: ${this.orientation ? '50%' : '100%'};
-                        background-color: rgba(0, 0, 0, 1);
+                        background-color: ${this.settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};
                         display: flex;
                         flex-direction: column;
                         box-sizing: border-box;
@@ -401,6 +461,7 @@ export default {
                         height: ${50 + event.y}px;
                         width: ${this.orientation ? '50%' : '100%'};
                         background-color: rgba(0, 0, 0, ${opacityAnimation});
+                        background-color: ${this.settings.topic === 'dark' ? `rgba(0, 0, 0, ${opacityAnimation})` : `rgba(150, 150, 150, ${opacityAnimation})`};
                         display: flex;
                         flex-direction: column;
                         box-sizing: border-box;
@@ -420,7 +481,7 @@ export default {
                         height: 100%;
                         z-index: 10;
                         width: ${this.orientation ? '50%' : '100%'};
-                        background-color: rgba(0, 0, 0, 1);
+                        background-color: ${this.settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};
                         display: flex;
                         flex-direction: column;
                         box-sizing: border-box;
@@ -434,7 +495,7 @@ export default {
                         height: 50px;
                         z-index: 10;
                         width: ${this.orientation ? '50%' : '100%'};
-                        background-color: rgba(0, 0, 0, 0.4);
+                        background-color: ${this.settings.topic === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};
                         display: flex;
                         flex-direction: column;
                         box-sizing: border-box;

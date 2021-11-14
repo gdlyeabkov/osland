@@ -1,13 +1,13 @@
 <template>
-    <div v-if="settings.lockScreen.mode === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" >
-        <span class="timeOnLock">
+    <div v-if="settings.lockScreen.mode === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" :style="`background-image: url(${settings.wallpapers.lockScreen});`">
+        <span :class="`timeOnLock ${settings.lockScreen.watchStyle}WatchStyle`">
             {{ currentTime }}
         </span>
         <span class="unlockLabel">
             Для разблокировки проведите пальцем по экрану
         </span>
     </div>
-    <div v-else-if="settings.lockScreen.mode === 'graphicKey'" class="lock graphicKeyWrap">
+    <div v-else-if="settings.lockScreen.mode === 'graphicKey'" class="lock graphicKeyWrap" :style="`background-image: url(${settings.wallpapers.lockScreen});`">
         <canvas @mousedown="drawGraphicKey($event, 'down')" @mousemove="drawGraphicKey($event, 'move')" @mouseup="drawGraphicKey($event, 'up')" width="500px" height="500px" ref="graphicKey"></canvas>
     </div>
 </template>
@@ -26,7 +26,11 @@ export default {
             password: '123456',
             settings: {
                 lockScreen: {
-                    mode: 'moveSlide'
+                    mode: 'modeSlide'
+                },
+                wallpapers: {
+                    mainScreen: 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg',
+                    lockScreen: 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg'
                 }
             }
         }
@@ -55,46 +59,46 @@ export default {
     //     }
     // },
     async mounted() {
-    //   fetch(`http://localhost:4000/api/apps/all/get/`, {
-    //     mode: 'cors',
-    //     method: 'GET'
-    //   }).then(response => response.body).then(rb  => {
-    //     const reader = rb.getReader()
-    //     return new ReadableStream({
-    //       start(controller) {
-    //         function push() {
-    //           reader.read().then( ({done, value}) => {
-    //             if (done) {
-    //               console.log('done', done);
-    //               controller.close();
-    //               return;
-    //             }
-    //             controller.enqueue(value);
-    //             console.log(done, value);
-    //             push();
-    //           })
-    //         }
-    //         push();
-    //       }
-    //     });
-    //   }).then(stream => {
-    //     return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-    //   })
-    //   .then(result => {
-    //     this.apps = JSON.parse(result).apps
-    //     this.settings = JSON.parse(result).settings
-    //     let isGraphicKey = this.settings.lockScreen.mode === 'graphicKey'
-    //     if(isGraphicKey) {
-    //         this.context = this.$refs.graphicKey.getContext('2d')
-    //         this.drawPossibleKeys()
-    //     }
-    //   })
-        this.settings = await JSON.parse(localStorage.getItem('osland_settings'))
+      fetch(`http://localhost:4000/api/apps/all/get/`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(async result => {
+        this.apps = JSON.parse(result).apps
+        this.settings = await JSON.parse(result).settings
         let isGraphicKey = await this.settings.lockScreen.mode === 'graphicKey'
         if(isGraphicKey) {
             this.context = this.$refs.graphicKey.getContext('2d')
             this.drawPossibleKeys()
         }
+      })
+        // this.settings = await JSON.parse(localStorage.getItem('osland_settings'))
+        // let isGraphicKey = await this.settings.lockScreen.mode === 'graphicKey'
+        // if(isGraphicKey) {
+        //     this.context = this.$refs.graphicKey.getContext('2d')
+        //     this.drawPossibleKeys()
+        // }
     },
     methods: {
         drawPossibleKeys() {
@@ -369,5 +373,16 @@ export default {
         font-weight: bolder;
         width: 250px;
         text-align: center;
+    }
+    .normalWatchStyle {
+        color: rgb(255, 255, 255);
+    }
+    .futureWatchStyle {
+        color: rgb(0, 0, 0);
+        font-weight: bolder;
+    }
+    .outlineWatchStyle {
+        color: rgb(255, 255, 255);
+        text-shadow: 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0), 0px 0px 2px rgb(0, 0, 0);
     }
 </style>

@@ -24,12 +24,16 @@ export default {
         'source',
         'startPlay',
         'soundCommand',
-        'isSpeakersDialog'
+        'isSpeakersDialog',
+        'changeVolume'
     ],
     emits: [
         'resetSpeakers'
     ],
     watch: {
+        async changeVolume(val) {
+            console.log(`changeVolume speakers: ${val}`)
+        },
         async startPlay(val) {
             if(val) {
                 try {

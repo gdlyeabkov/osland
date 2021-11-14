@@ -7,7 +7,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setConnetions()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Подключения
@@ -20,7 +20,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setSoundMode()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Звуки и вибрация
@@ -33,7 +33,7 @@
               volume_up
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setNotifications()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Уведомления
@@ -46,7 +46,7 @@
               mark_chat_unread
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setBrightness()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Дисплей
@@ -59,7 +59,7 @@
               light_mode
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setWallpapers()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Обои
@@ -72,7 +72,7 @@
               image
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setTopic()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Темы
@@ -98,7 +98,7 @@
               lock
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="findDevice()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Биометрия и безопасность
@@ -111,7 +111,7 @@
               shield
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setPrivacy()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Конфиденциальность
@@ -124,7 +124,7 @@
               admin_panel_settings
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setLocation()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Локация
@@ -137,7 +137,7 @@
               location_on
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="getAccounts()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Учетные записи и архивация
@@ -150,7 +150,7 @@
               key
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setGestures()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Дополнительные функции
@@ -163,7 +163,7 @@
               settings
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setDisplayTimeout()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Использование устройства и родительский контроль
@@ -176,7 +176,7 @@
               favorite
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="getDeviceInfo()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Обслуживание устройства
@@ -189,7 +189,7 @@
               refresh
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setPermissions()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Приложения
@@ -202,7 +202,7 @@
               apps
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setLanguage()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Общие настройки
@@ -215,7 +215,7 @@
               tune
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="setSpecialCapabilities()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Специальные возможности
@@ -228,7 +228,7 @@
               accessibility_new
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="getUpdates()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Обновление ПО
@@ -241,7 +241,7 @@
               smartphone
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="getManual()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Руководство пользователя
@@ -254,7 +254,7 @@
               quiz
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="getHardware()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Сведения о телефоне
@@ -267,7 +267,7 @@
               info
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 Параметры разработчика
@@ -286,11 +286,21 @@
 </template>
 
 <script>
+const openGeocoder = require('node-open-geocoder')
+
 export default {
   name: 'OpenedApp',
   data() {
     return {
-      settings: {}
+      settings: {
+        lockScreen: {
+          mode: 'modeSlide'
+        },
+        wallpapers: {
+          mainScreen: 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg',
+          lockScreen: 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg'
+        }
+      }
     }
   },
   props: [
@@ -298,9 +308,266 @@ export default {
     // 'settings'
   ],
   mounted() {
-    this.settings = JSON.parse(localStorage.getItem('osland_settings'))
+    // this.settings = JSON.parse(localStorage.getItem('osland_settings'))
+    fetch(`http://localhost:4000/api/apps/all/get/`, {
+      mode: 'cors',
+      method: 'GET'
+    }).then(response => response.body).then(rb  => {
+      const reader = rb.getReader()
+      return new ReadableStream({
+        start(controller) {
+          function push() {
+            reader.read().then( ({done, value}) => {
+              if (done) {
+                console.log('done', done);
+                controller.close();
+                return;
+              }
+              controller.enqueue(value);
+              console.log(done, value);
+              push();
+            })
+          }
+          push();
+        }
+      });
+    }).then(stream => {
+      return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+    })
+    .then(result => {
+      this.settings = JSON.parse(result).settings
+    });
   },
   methods: {
+    setLocation() {
+      alert('Переключить геолокацию')
+    },
+    setConnetions() {
+      alert('Задать сетевые подключения')
+    },
+    setSoundMode() {
+      alert('Задать звуковой профиль')
+    },
+    setNotifications() {
+      alert('Задать кол-во уведомлений')
+    },
+    setBrightness() {
+      alert('Задать яркость')
+    },
+    setGestures() {
+      alert('Задать чувствительность движений')
+    },
+    setPrivacy() {
+      alert('Задать конфиденциальность')
+    },
+    setGetstures() {
+      alert('Задать чувствительность движений')
+    },
+    setDisplayTimeout() {
+      alert('Переключить спящий режим экрана')
+      let topic = this.settings.topic === 'dark' ?
+        'light'
+      : this.settings.topic === 'light' ?
+        'dark'
+      :
+        'light'
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/topic/set/?topic=${topic}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          console.log('Обновил тему')
+        }
+      });
+    },
+    getDeviceInfo() {
+      alert('2 Гб RAM, Тактовая частота процесоора 1,5 МГц')
+    },
+    setPermissions() {
+      alert('Вы дали разрешения')
+    },
+    resetSettings() {
+      alert('Вы сбросили настройки')
+      let topic = this.settings.topic === 'dark' ?
+        'light'
+      : this.settings.topic === 'light' ?
+        'dark'
+      :
+        'light'
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/reset/`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          console.log('Сбросил настройки на поумолчанию')
+        }
+      });
+    },
+    setLanguage() {
+      alert('Русский/Английский')
+      let topic = this.settings.topic === 'dark' ?
+        'light'
+      : this.settings.topic === 'light' ?
+        'dark'
+      :
+        'light'
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/topic/set/?topic=${topic}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          console.log('Обновил тему')
+        }
+      });
+    },
+    toggleDeveloperMode() {
+      alert('Вы вошли в режим разработчика')
+    },
+    getHardware() {
+      alert('2 Гб RAM, Тактовая частота процесоора 1,5 МГц')
+    },
+    getManual() {
+      alert('OSLand - является OpenSource продуктом в сфере мобильных ОС.\nОбращайтесь с операционной системой OSLand бережно.')
+    },
+    getUpdates() {
+      alert('OsLand v1.0.0')
+    },
+    getAccounts() {
+      alert('Поддерживается только 1 учетная запись')
+    },
+    setTopic() {
+      let topic = this.settings.topic === 'dark' ?
+        'light'
+      : this.settings.topic === 'light' ?
+        'dark'
+      :
+        'light'
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/topic/set/?topic=${topic}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          console.log('Обновил тему')
+        }
+      });
+    },
+    findDevice() {
+      let destination = 'Неизветно'
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+              let lat = position.coords.latitude
+              let lng = position.coords.longitude
+              openGeocoder()
+                .reverse(lng, lat)
+                  .end((err, res) => {
+                    destination = `${res.address.city}, ${res.address.state}, ${res.address.country}`
+                    alert(`Расположение: ${destination}`)
+                  })
+          })
+      } else  {
+        alert(`Расположение: ${destination}`)
+      }
+    },
     setLockScreenMode() {
       let lockScreenMode = this.settings.lockScreen.mode === 'moveSlide' ?
         'graphicKey'
@@ -308,9 +575,17 @@ export default {
         'moveSlide'
       :
         'graphicKey'
-      this.settings.lockScreen.mode = lockScreenMode
-      localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/lockscreen/mode/set/?lockscreenmode=${lockScreenMode}`, {
+      
+      let watchStyle = this.settings.lockScreen.watchStyle === 'normal' ?
+        'future'
+      : this.settings.lockScreen.watchStyle === 'future' ?
+        'outline'
+      :
+        'normal'
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/lockscreen/set/?lockscreenmode=${lockScreenMode}&watchstyle=${watchStyle}`, {
         mode: 'cors',
         method: 'GET'
       }).then(response => response.body).then(rb  => {
@@ -338,6 +613,87 @@ export default {
       .then(result => {
         if(JSON.parse(result).status === 'OK') {
           console.log('Обновил режим экрана блокировки')
+        }
+      });
+    },
+    setWallpapers() {
+      let lockScreen = this.settings.wallpapers.mainScreen === 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg' ?
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRggHh6ohVL1AAaedCBDI791kA6BvC9eC4NqQ&usqp=CAU'
+      : this.settings.wallpapers.mainScreen === 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU' ?
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
+      :
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
+      let mainScreen = this.settings.wallpapers.mainScreen === 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg' ?
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
+      : this.settings.wallpapers.mainScreen === 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU' ?
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRggHh6ohVL1AAaedCBDI791kA6BvC9eC4NqQ&usqp=CAU'
+      :
+        'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg'
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/wallpapers/set/?mainscreen=${mainScreen}&lockscreen=${lockScreen}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          console.log('Обновил обои')
+        }
+      });
+    },
+    setSpecialCapabilities() {
+      let isEnabled = !this.settings.specialCapabilities.voiceAssistant.enabled
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/specialcapabilities/voiceassistant/enabled/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          console.log('Обновил специальные возможности')
         }
       });
     }

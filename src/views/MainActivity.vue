@@ -1,7 +1,7 @@
 <template>
   <div :style="`width: ${orientation ? '50%' : '100%'};`">
-    <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover;`"></div>
-    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" />
+    <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover; background-image: url(${settings.wallpapers.mainScreen});`"></div>
+    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" />
     <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
@@ -60,7 +60,7 @@
       })" :key="appsRow" class="appRow">
         <div v-for="app in apps.filter((app, appIdx) => {
           return appIdx >= appsRow * countAppsPerRow && appIdx < countAppsPerRow * (appsRow + 1) && app.shortcut
-        })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mouseup="holdApp($event, 'up', app)" class="app" :style="`background-image: url('http://localhost:4000/api/apps/favicons/get/?appname=${app.name}.png');`">
+        })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mouseup="holdApp($event, 'up', app)" class="app" :style="`background-image: url('http://localhost:4000/api/apps/favicons/get/?appname=${app.name}.png'); border-radius: ${settings.topic === 'light' ? '5' : '25' }px;`">
         </div>
       </div>
 
@@ -72,7 +72,7 @@
     <Lock v-if="!isUnlock" :currentTime="currentTime" :settings="settings" @unlock="unlockHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <SleepMode v-if="isSleep" :style="`width: ${orientation ? '50%' : '100%'};`" />
-    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" @resetSpeakers="resetSpeakersHandler" @transferSoundMode="transferSoundModeHandler" />
+    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" :changeVolume="changeVolumeHandler" @resetSpeakers="resetSpeakersHandler" @transferSoundMode="transferSoundModeHandler" />
   </div>
   
 </template>
@@ -88,6 +88,11 @@ import Lock from '@/components/Lock.vue'
 import SleepMode from '@/components/SleepMode.vue'
 import Speakers from '@/components/Speakers.vue'
 import ContextMenu from '@/components/ContextMenu.vue'
+
+import speak from "offline-tts"
+
+const systemInformation = require('nodejs-system-info')
+// const osu = require('node-os-utils')
 
 export default {
   name: 'MainActivity',
@@ -130,21 +135,27 @@ export default {
       currentSoundMode: 0,
       orientation: false,
       settings: {
-
+        lockScreen: {
+          mode: 'moveSlide'
+        },
+        wallpapers: {
+          mainScreen: '',
+          lockScreen: ''
+        }
       }
     }
   },
   mounted() {
     
-    if(localStorage.getItem('osland_settings') === null) {
-      localStorage.setItem('osland_settings', JSON.stringify({
-        'lockScreen': {
-          'mode': 'moveSlide'
-        }
-      }))
-    }
-    this.settings = JSON.parse(localStorage.getItem('osland_settings'))
-    console.log(`settings: ${Object.keys(this.settings)}; ${Object.values(this.settings)}`)
+    // if(localStorage.getItem('osland_settings') === null) {
+    //   localStorage.setItem('osland_settings', JSON.stringify({
+    //     'lockScreen': {
+    //       'mode': 'moveSlide'
+    //     }
+    //   }))
+    // }
+    // this.settings = JSON.parse(localStorage.getItem('osland_settings'))
+    // console.log(`settings: ${Object.keys(this.settings)}; ${Object.values(this.settings)}`)
     this.uploadApps()
 
     window.addEventListener('keydown', (event) => {
@@ -197,8 +208,30 @@ export default {
       })  
     }, 60000)
 
+    // const INTERVAL = 500
+    // const systemMonitor = new systemInformation(INTERVAL)
+    // systemMonitor.log(['cpu', 'ram'])
+
   },
   methods: {
+    changeVolumeHandler(volume) {
+      console.log(`changeVolumeHandler: ${volume}`)
+      return volume
+    },
+    handlePermission() {
+      navigator.permissions.query({name:'geolocation'}).then(function(result) {
+        if (result.state == 'granted') {
+          console.log(result.state);
+        } else if (result.state == 'prompt') {
+          console.log(result.state);
+        } else if (result.state == 'denied') {
+          console.log(result.state);
+        }
+        result.onchange = function() {
+          report(result.state);
+        }
+      });
+    },
     filterBlueColorHandler(toggler) {
       this.$refs.wallpapers.style = `
         -webkit-filter: contrast(${!toggler ? '100%' : '50%'});
@@ -273,10 +306,10 @@ export default {
       })
       .then(result => {
         this.apps = JSON.parse(result).apps
-        // this.settings = JSON.parse(result).settings
-        // console.log(`settings: ${Object.keys(this.settings)}; ${Object.values(this.settings)}`)
-        // console.log(`settings: ${JSON.stringify(this.settings)}`)
-        // console.log(`settingsLockScreenMode: ${this.settings.lockScreen.mode}`)
+        this.settings = JSON.parse(result).settings
+        console.log(`settings: ${Object.keys(this.settings)}; ${Object.values(this.settings)}`)
+        console.log(`settings: ${JSON.stringify(this.settings)}`)
+        console.log(`settingsLockScreenMode: ${this.settings.lockScreen.mode}`)
       });
     },
     changeAppShortcutHandler(app, isShortcut) {
@@ -341,6 +374,8 @@ export default {
               y: event.y - 35
             }
             this.isContextMenu = true
+            if(this.settings.specialCapabilities.voiceAssistant.enabled)
+            speak(appInfo.name, 2, 1.5, 0.8, 0.6);
           }
         }, 2000)
       } else if(gesture === 'up') {
