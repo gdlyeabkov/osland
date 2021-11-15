@@ -2,7 +2,7 @@
   <div :style="`width: ${orientation ? '50%' : '100%'};`">
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover; background-image: url(${settings.wallpapers.mainScreen});`"></div>
     <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" />
-    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :style="`width: ${orientation ? '50%' : '100%'};`" />
+    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" @mouseup="holdApp($event, 'up', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" class="app">
@@ -65,9 +65,9 @@
       </div>
 
     </div>
-    <AppsList v-if="isAppsList" :apps="apps" :countAppsRows="countAppsRows" :countAppsPerRow="countAppsPerRow" :orientation="orientation" @openApp="openAppHandler" @holdApp="holdApp" @isSearch="isSearchHandler" @closeContextMenu="closeContextMenuHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
+    <AppsList v-if="isAppsList" :apps="apps" :countAppsRows="countAppsRows" :countAppsPerRow="countAppsPerRow" :orientation="orientation" :settings="settings" @openApp="openAppHandler" @holdApp="holdApp" @isSearch="isSearchHandler" @closeContextMenu="closeContextMenuHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <OpenedApps v-if="isOpenedApps" :openedAppItems="openedApps" @openApp="openAppHandler" @closeApp="closeAppHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
-    <ContextMenu v-if="isContextMenu" :origin="originContextMenu" :appInfo="appInfoContextMenu" :isAppsList="isAppsList" @closeContextMenu="closeContextMenuHandler" @changeAppShortcut="changeAppShortcutHandler" @deleteApp="deleteAppHandler" />
+    <ContextMenu v-if="isContextMenu" :origin="originContextMenu" :appInfo="appInfoContextMenu" :isAppsList="isAppsList" @closeContextMenu="closeContextMenuHandler" :settings="settings" @changeAppShortcut="changeAppShortcutHandler" @deleteApp="deleteAppHandler" />
     <SystemBtns @handleUndoBtn="handleUndoBtnHandler" @handleHomeBtn="handleHomeBtnHandler" @handeOpenedAppsBtn="handeOpenedAppsBtnHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <Lock v-if="!isUnlock" :currentTime="currentTime" :settings="settings" @unlock="unlockHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
@@ -136,13 +136,28 @@ export default {
       orientation: false,
       settings: {
         lockScreen: {
-          mode: 'moveSlide'
+          mode: 'moveSlide',
+          watchStyle: 'normal'
         },
         wallpapers: {
-          mainScreen: '',
-          lockScreen: ''
+          mainScreen: 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg',
+          lockScreen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
+        },
+        specialCapabilities: {
+          voiceAssistant: {
+            enabled: false
+          }
+        },
+        topic: 'dark',
+        general: {
+          language: 'Русский'
+        },
+        deviceUsabilityAndParentControl: {
+          displayTimeout: 60
         }
-      }
+      },
+      displayTimeout: null,
+      launchTime: '00.00.00, 00:00:00'
     }
   },
   mounted() {
@@ -159,6 +174,14 @@ export default {
     this.uploadApps()
 
     window.addEventListener('keydown', (event) => {
+      
+      console.log('нажали клавишу заново отмечаем время')
+      // if(this.displayTimeout !== null) {
+        window.clearTimeout(this.displayTimeout)
+        // this.displayTimeout = null
+        this.setDisplayTimeout()
+      // }
+      
       let tempActiveKey = event.key
       this.activeKey = event.key
       setTimeout(() => {
@@ -174,6 +197,9 @@ export default {
       if(event.key === 'q' && !this.isSearch) {
         this.isSleep = !this.isSleep
         this.isUnlock = false
+        if(!this.isSleep) {
+          this.setDisplayTimeout()
+        }
       } else if(event.key === '+') {
         this.activeSoundCommand = 'volume turn up'
         // this.activeSound = '../../sounds/volumeturn.wav'
@@ -208,12 +234,15 @@ export default {
       })  
     }, 60000)
 
-    // const INTERVAL = 500
-    // const systemMonitor = new systemInformation(INTERVAL)
-    // systemMonitor.log(['cpu', 'ram'])
+    this.launchTime = new Date().toLocaleString()
 
   },
   methods: {
+    setDisplayTimeout() {
+      this.displayTimeout = setTimeout(() => {
+        this.isSleep = true
+      }, this.settings.deviceUsabilityAndParentControl.displayTimeout * 1000)
+    },
     changeVolumeHandler(volume) {
       console.log(`changeVolumeHandler: ${volume}`)
       return volume

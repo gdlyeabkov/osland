@@ -1,5 +1,5 @@
 <template>
-    <div :style="`width: ${orientation ? '50%' : '100%'}; background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};`" class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
+    <div :style="`width: ${orientation ? '50%' : '100%'}; background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};`" class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
         <div class="curtainHeader" @click="handleCurtain = false">
             <div class="curtainItem">
                 <span class="curtainItemIcon">

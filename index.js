@@ -81,6 +81,20 @@ const SettingsSchema = new mongoose.Schema({
             type: Number,
             default: 60
         }
+    },
+    deviceManagement: {
+        type: Object,
+        default: {
+            cpu: 0,
+            drive: 0,
+            memory: 0
+        }
+    },
+    notifications: {
+        enabled: {
+            type: Boolean,
+            default: true
+        }
     }
 }, { collection : 'mysettings' });
 
@@ -116,18 +130,24 @@ app.get('/api/settings/create', async (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
 
-    // si.cpu((err, data) => {
-    //     if(err) {
-    //         console.log(`Не могу дать ответ: ${err}`)    
-    //     } else {
-    //         console.log(`CPU: ${data}`)
-    //     }
-    // })
-    let cpu = osu.cpu
-    console.log(`CPU: ${cpu.count()}`)
-
+    let cpusCount = await osu.cpu.count()
+    let driveSpace = 0
+    osu.drive.info()
+    .then(info => {
+        driveSpace = info.totalGb
+    })
+    let memorySize = 0
+    osu.mem.info().then(info => {
+        memorySize = Math.floor(info.totalMemMb / 1000)
+    })
     await SettingsModel.deleteMany({  })
-    new SettingsModel({  }).save(function (err) {
+    new SettingsModel({
+        deviceManagement: {
+            cpu: cpusCount,
+            drive: driveSpace,
+            memory: memorySize
+        }
+    }).save(function (err) {
         return res.json({ status: 'OK' })
     })
 
@@ -261,7 +281,6 @@ app.get('/api/settings/reset', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    console.log(`Сбросить настройки`)
     let defaultSettings = {
         lockScreen: {
             mode: 'moveSlide',
@@ -276,7 +295,13 @@ app.get('/api/settings/reset', (req, res) => {
                 enabled: false
             }
         },
-        topic: 'dark'
+        topic: 'dark',
+        general: {
+            language: 'Русский'
+        },
+        deviceUsabilityAndParentControl: {
+            displayTimeout: 60
+        }
     }
     SettingsModel.update({  }, defaultSettings, (err, settings) => {
         if(err){
@@ -313,6 +338,23 @@ app.get('/api/settings/deviceusabilityandparentcontrol/timeout/set', (req, res) 
     
     console.log(`req.query.timeout: ${req.query.timeout}`)
     SettingsModel.update({  }, { deviceUsabilityAndParentControl: { displayTimeout: Number(req.query.timeout) } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/notifications/enabled/set', (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    console.log(`req.query.enabled: ${req.query.enabled}`)
+    SettingsModel.update({  }, { notifications: { enabled: req.query.enabled } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })        
         }

@@ -4,7 +4,14 @@
             {{ currentTime }}
         </span>
         <span class="unlockLabel">
-            Для разблокировки проведите пальцем по экрану
+            {{
+                settings.general.language === 'Русский' ?
+                    'Для разблокировки проведите пальцем по экрану'
+                : settings.general.language === 'English' ?
+                    'For unlock tap finger by screen'
+                :
+                    'Для разблокировки проведите пальцем по экрану'
+            }}
         </span>
     </div>
     <div v-else-if="settings.lockScreen.mode === 'graphicKey'" class="lock graphicKeyWrap" :style="`background-image: url(${settings.wallpapers.lockScreen});`">
