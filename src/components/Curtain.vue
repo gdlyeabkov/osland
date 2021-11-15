@@ -150,7 +150,6 @@
 const openGeocoder = require('node-open-geocoder')
 
 // const wifi = require('node-wifi')
-const si = require('systeminformation')
 // const wifi = require('wifi.js')
 // const Wifi = require('wifi')
 // const scanner = require('node-wifi-scanner')
@@ -197,11 +196,16 @@ export default {
         'changeOrientation',
         'filterBlueColor',
         'changeVolume',
+        'location'
     ],
     watch: {
         soundMode(newSoundMode) {
             this.currentSoundMode = newSoundMode
-        }
+        },
+        async location(newLocation) {
+            console.log('changeLocation')
+            this.setGeolocation()
+        },
     },
     mounted() {
         // wifi.init();

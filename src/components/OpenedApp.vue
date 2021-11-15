@@ -1,6 +1,6 @@
 <template>
   <div class="openedApp">
-    <div class="settingsApp" v-if="appInfo.name === 'Settings'">
+    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}`">
         <div class="settingsAppHeader">
           <h4>
             {{
@@ -614,7 +614,10 @@ export default {
   props: [
     'appInfo',
     // 'settings',
-    'launchTime'
+    'launchTime',
+    'soundMode',
+    'brightness',
+    'orientation'
   ],
   mounted() {
     
@@ -651,13 +654,35 @@ export default {
   },
   methods: {
     setLocation() {
-      alert('Переключить геолокацию')
+      this.$emit('setLocation')
     },
     setConnetions() {
       alert('Задать сетевые подключения')
     },
     setSoundMode() {
-      alert('Задать звуковой профиль')
+      
+      let newSoundMode = 1
+      if(this.soundMode === 0) {
+        newSoundMode = 1
+      } else if(this.soundMode === 1) {
+        newSoundMode = 0.1
+      } else if(this.soundMode === 0.1) {
+        newSoundMode = 0
+      }
+      if(this.settings.notifications.enabled) {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            let notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                `Звуковой профиль задан на ${newSoundMode === 0 ? 'Без звука' : newSoundMode === 0.1 ? 'Вибро-режим' : newSoundMode === 1 ? 'Обычный' : 'Обычный'}`
+              : this.settings.general.language === 'English' ?
+                `Sound mode setted on ${newSoundMode === 0 ? 'Muted' : newSoundMode === 0.1 ? 'Vibro-mode' : newSoundMode === 1 ? 'Normal' : 'Normal'}`
+              :
+                `Звуковой профиль задан на ${newSoundMode === 0 ? 'Без звука' : newSoundMode === 0.1 ? 'Вибро-режим' : newSoundMode === 1 ? 'Обычный' : 'Обычный'}`
+              }`)
+          }
+        })
+      }
+      this.$emit('transferSoundMode', newSoundMode)
     },
     setNotifications() {
       let isEnabled = !this.settings.notifications.enabled
@@ -710,13 +735,51 @@ export default {
       });
     },
     setBrightness() {
-      alert('Задать яркость')
+      let brightnessPercent = this.brightness === 100 ?
+        25
+      : this.brightness === 25 ?
+        50
+      : this.brightness === 50 ?
+        75
+      : this.brightness === 75 ?
+        100
+      :
+        100
+      
+      this.$refs.openedAppRef.style = `
+        width: ${this.orientation ? '50%' : '100%'};
+        background-color: ${this.settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};
+        width: 100%;
+        height: 565px;
+        overflow-y: scroll;
+        -webkit-filter: brightness(${brightnessPercent / 100});
+      `
+      
+      this.$emit('changeBrightness', brightnessPercent)
+      if(this.settings.notifications.enabled) {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            let notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                `Яркость дислпея установлена на ${brightnessPercent}`
+              : this.settings.general.language === 'English' ?
+                `Display brightness setted to ${brightnessPercent}`
+              :
+                `Яркость дислпея установлена на ${brightnessPercent}`}`)
+          }
+        })
+      }
     },
     setGestures() {
       alert('Задать чувствительность движений')
     },
     setPrivacy() {
-      alert('Задать конфиденциальность')
+      navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(function(stream) {
+        console.log('You let me use your mic!')
+      })
+      .catch(function(err) {
+        console.log('No mic for you!')
+      });
     },
     setGetstures() {
       alert('Задать чувствительность движений')
@@ -778,15 +841,13 @@ export default {
       });
     },
     getDeviceInfo() {
-      let launchMoment = new moment(this.launchTime, 'DD.MM.YYYY, hh:mm:ss')
+      let launchMoment = new moment(this.launchTime, 'DD.MM.YYYY, HH:mm:ss')
       let nowMoment = new moment()
-      let duration = moment.duration(launchMoment.diff(nowMoment))
-      let elapsedHours = Math.floor(duration.as('hours'))
-      let elapsedMinutes = Math.floor(duration.as('minutes'))
-      let elapsedSeconds = duration.as('seconds')
-      // alert(`Запущено ${elapsedHours}:${elapsedMinutes}:${elapsedSeconds}`)
-      let elapsedMoment = new moment(duration)
-      alert(`Запущено ${elapsedMoment.format('HH:mm:SS')}`)
+      let duration = moment.duration(nowMoment.diff(launchMoment))
+      let elapsedHours = duration.get('hours') > 10 ? duration.get('hours') : `0${duration.get('hours')}`
+      let elapsedMinutes = duration.get('minutes') > 10 ? duration.get('minutes') : `0${duration.get('minutes')}`
+      let elapsedSeconds = duration.get('seconds') > 10 ? duration.get('seconds') : `0${duration.get('seconds')}`
+      alert(`Запущено ${elapsedHours}:${elapsedMinutes}:${elapsedSeconds}`)
     },
     getDefaultApps() {
       alert('Предустановленные приложения: Osland@1.0.0, OslandSettings@1.0.0')

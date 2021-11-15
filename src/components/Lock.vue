@@ -24,7 +24,7 @@ export default {
     name: 'Lock',
     data() {
         return {
-            lastGesture: 0,
+            lastGesture: 1000,
             handleGesture: false,
             context: null,
             originX: 100,
@@ -55,7 +55,8 @@ export default {
         // }
     },
     emits: [
-        'unlock'
+        'unlock',
+        'resetDisplayTimeout'
     ],
     // watch: {
     //     settings(asd) {
@@ -355,6 +356,7 @@ export default {
             }
         },
         handleUnlockGesture(event, gesture) {
+            this.$emit('resetDisplayTimeout')
             if(gesture === 'down') {
                 this.handleGesture = true
             } else if(gesture === 'move') {
@@ -365,7 +367,7 @@ export default {
                 if (this.lastGesture < 150 && this.handleGesture) {
                     this.$emit('unlock')
                 }
-                this.handleGesture = false   
+                this.handleGesture = false
             }
         }
     }
