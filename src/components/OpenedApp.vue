@@ -96,7 +96,7 @@
               mark_chat_unread
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setBrightness()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'display'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -123,7 +123,7 @@
               light_mode
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setWallpapers()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'wallpapers'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -413,7 +413,7 @@
               apps
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="resetSettings(); setLanguage();">
+          <div class="settingsAppBodyItem" @click="activeTab = 'general'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -638,6 +638,223 @@
                     'Select type and color of watch from lock screen'
                   :
                     'Выберите тип и цвет часов на экране блокировки'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <div v-else-if="activeTab === 'wallpapers'">
+        <div class="settingsAppHeader">
+          <h4>
+            {{
+              settings.general.language === 'Русский' ?
+                'Обои'
+              : settings.general.language === 'English' ?
+                'Wallpapers'
+              :
+                'Обои'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setWallpapersLockScreen()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Экран блокировки'
+                  : settings.general.language === 'English' ?
+                    'Lock screen'
+                  :
+                    'Экран блокировки'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Экран блокировки'
+                  : settings.general.language === 'English' ?
+                    'Lock screen'
+                  :
+                    'Экран блокировки'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setWallpapersMainScreen()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Главный экран'
+                  : settings.general.language === 'English' ?
+                    'Main screen'
+                  :
+                    'Главный экран'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Главный экран'
+                  : settings.general.language === 'English' ?
+                    'Main screen'
+                  :
+                    'Главный экран'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <div v-else-if="activeTab === 'general'">
+        <div class="settingsAppHeader">
+          <h4>
+            {{
+              settings.general.language === 'Русский' ?
+                'Общие настройки'
+              : settings.general.language === 'English' ?
+                'General settings'
+              :
+                'Общие настройки'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setLanguage()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Язык и ввод'
+                  : settings.general.language === 'English' ?
+                    'Language and input'
+                  :
+                    'Язык и ввод'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Язык и ввод'
+                  : settings.general.language === 'English' ?
+                    'Language and input'
+                  :
+                    'Язык и ввод'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="resetSettings()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сброс'
+                  : settings.general.language === 'English' ?
+                    'Reset'
+                  :
+                    'Сброс'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сброс'
+                  : settings.general.language === 'English' ?
+                    'Reset'
+                  :
+                    'Сброс'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <div v-else-if="activeTab === 'display'">
+        <div class="settingsAppHeader">
+          <h4>
+            {{
+              settings.general.language === 'Русский' ?
+                'Дислпей'
+              : settings.general.language === 'English' ?
+                'Display'
+              :
+                'Дисплей'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setBrightness()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Яркость'
+                  : settings.general.language === 'English' ?
+                    'Brightness'
+                  :
+                    'Яркость'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Яркость'
+                  : settings.general.language === 'English' ?
+                    'Brightness'
+                  :
+                    'Яркость'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setDisplayTimeout()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Тайм-аут экрана'
+                  : settings.general.language === 'English' ?
+                    'Display timeout'
+                  :
+                    'Тайм-аут экрана'
+                }}
+              </span>
+              <span>
+                Период бездействия -
+                {{
+                  `${settings.deviceUsabilityAndParentControl.displayTimeout} `
+                }}
+                {{
+                  settings.general.language === 'Русский' ?
+                    'секунд'
+                  : settings.general.language === 'English' ?
+                    'seconds'
+                  :
+                    'cекунд'
                 }}
               </span>
             </div>
@@ -1243,14 +1460,7 @@ export default {
         }
       });
     },
-    setWallpapers() {
-      let lockScreen = this.settings.wallpapers.mainScreen === 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg' ?
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRggHh6ohVL1AAaedCBDI791kA6BvC9eC4NqQ&usqp=CAU'
-      : this.settings.wallpapers.mainScreen === 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU' ?
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
-      :
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
-      this.settings.wallpapers.lockScreen = lockScreen
+    setWallpapersMainScreen() {
       let mainScreen = this.settings.wallpapers.mainScreen === 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg' ?
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
       : this.settings.wallpapers.mainScreen === 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU' ?
@@ -1258,9 +1468,68 @@ export default {
       :
         'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg'
       this.settings.wallpapers.mainScreen = mainScreen
+      
       // this.settings.lockScreen.mode = lockScreenMode
       // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/wallpapers/set/?mainscreen=${mainScreen}&lockscreen=${lockScreen}`, {
+      
+      fetch(`http://localhost:4000/api/settings/wallpapers/mainscreen/set/?mainscreen=${mainScreen}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                // let notification = new Notification(`Обои обновлены!`)
+                let notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    'Обои обновлены!'
+                  : this.settings.general.language === 'English' ?
+                    'Wallpapers updated!'
+                  :
+                    'Обои обновлены!'
+                }`)
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setWallpapersLockScreen() {
+      let lockScreen = this.settings.wallpapers.mainScreen === 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg' ?
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRggHh6ohVL1AAaedCBDI791kA6BvC9eC4NqQ&usqp=CAU'
+      : this.settings.wallpapers.mainScreen === 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU' ?
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
+      :
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlHnIx6c3BXbeVDXE38KAZTsc-JU8Pdc8C7g&usqp=CAU'
+      this.settings.wallpapers.lockScreen = lockScreen
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/wallpapers/lockscreen/set/?lockscreen=${lockScreen}`, {
         mode: 'cors',
         method: 'GET'
       }).then(response => response.body).then(rb  => {

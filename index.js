@@ -95,6 +95,46 @@ const SettingsSchema = new mongoose.Schema({
             type: Boolean,
             default: true
         }
+    },
+    display: {
+        fontSize: {
+            type: String,
+            default: '14px'
+        },
+        displayTimeout: {
+            type: Number,
+            default: 60
+        },
+        navigation: {
+            type: {
+                type: String,
+                default: "buttons"
+            },
+            buttonsOrder: {
+                type: String,
+                default: "left"
+            }
+        },
+        screenScale: {
+            type: Number,
+            default: 100
+        },
+    },
+    notifications: {
+        main: {
+            showNotificationsIcons: {
+                type: Boolean,
+                default: true
+            },
+            options: {
+                type: String,
+                default: 'last'
+            }
+        },
+        showBatteryPercents: {
+            type: Boolean,
+            default: false
+        }
     }
 }, { collection : 'mysettings' });
 
@@ -239,15 +279,30 @@ app.get('/api/settings/lockscreen/watchstyle/set', (req, res) => {
 
 })
 
-app.get('/api/settings/wallpapers/set', (req, res) => {
+app.get('/api/settings/wallpapers/mainscreen/set', (req, res) => {
     
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    console.log(`req.query.lockscreen: ${req.query.lockscreen}; req.query.mainScreen: ${req.query.mainscreen};`)
-    SettingsModel.update({  }, { wallpapers: { mainScreen: req.query.mainscreen, lockScreen: req.query.lockscreen } }, (err, app) => {
+    SettingsModel.update({  }, { '$set': { 'wallpapers.mainScreen': req.query.mainscreen } }, (err, app) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/wallpapers/lockscreen/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'wallpapers.lockScreen': req.query.lockscreen } }, (err, app) => {
         if(err){
             return res.json({ status: 'Error' })        
         }
@@ -352,7 +407,6 @@ app.get('/api/settings/deviceusabilityandparentcontrol/timeout/set', (req, res) 
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    console.log(`req.query.timeout: ${req.query.timeout}`)
     SettingsModel.update({  }, { deviceUsabilityAndParentControl: { displayTimeout: Number(req.query.timeout) } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })        
