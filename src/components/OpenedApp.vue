@@ -1,6 +1,7 @@
 <template>
   <div class="openedApp">
-    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}`">
+    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}`">
+      <div v-if="activeTab === 'settings'">
         <div class="settingsAppHeader">
           <h4>
             {{
@@ -176,7 +177,7 @@
               brush
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setLockScreenMode()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'lockScreen'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -575,6 +576,78 @@
             </span>
           </div>
         </div>
+      </div>
+      <div v-else-if="activeTab === 'lockScreen'">
+        <div class="settingsAppHeader">
+          <h4>
+            {{
+              settings.general.language === 'Русский' ?
+                'Экран блокировки'
+              : settings.general.language === 'English' ?
+                'Lock screen'
+              :
+                'Экран блокировки'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setLockScreenMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Тип блокировки экрана'
+                  : settings.general.language === 'English' ?
+                    'Lock screen mode'
+                  :
+                    'Тип блокировки экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    `${settings.lockScreen.mode === 'moveSlide' ? 'Провести по экрану' : settings.lockScreen.mode === 'graphicKey' ? 'Графический ключ' : 'Провести по экрану'}`
+                  : settings.general.language === 'English' ?
+                    `${settings.lockScreen.mode === 'moveSlide' ? 'Move slide' : settings.lockScreen.mode === 'graphicKey' ? 'Graphic key' : 'Move slide'}`
+                  :
+                    `${settings.lockScreen.mode === 'moveSlide' ? 'Провести по экрану' : settings.lockScreen.mode === 'graphicKey' ? 'Графический ключ' : 'Провести по экрану'}`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setWatchStyle()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Стиль часов'
+                  : settings.general.language === 'English' ?
+                    'Watch style'
+                  :
+                    'Стиль часов'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выберите тип и цвет часов на экране блокировки'
+                  : settings.general.language === 'English' ?
+                    'Select type and color of watch from lock screen'
+                  :
+                    'Выберите тип и цвет часов на экране блокировки'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -608,7 +681,8 @@ export default {
         deviceUsabilityAndParentControl: {
           displayTimeout: 60
         }
-      }
+      },
+      activeTab: 'settings'
     }
   },
   props: [
@@ -618,6 +692,9 @@ export default {
     'soundMode',
     'brightness',
     'orientation'
+  ],
+  emits: [
+    'resetDisplayTimeout'
   ],
   mounted() {
     
@@ -653,6 +730,65 @@ export default {
 
   },
   methods: {
+    setWatchStyle() {
+      let watchStyle = this.settings.lockScreen.watchStyle === 'normal' ?
+        'future'
+      : this.settings.lockScreen.watchStyle === 'future' ?
+        'outline'
+      :
+        'normal'
+      this.settings.lockScreen.watchStyle = watchStyle
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/lockscreen/watchstyle/set/?watchstyle=${watchStyle}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
+                    : this.settings.general.language === 'English' ?
+                      `Watch style was changed to ${watchStyle === 'normal' ? 'Normal' : watchStyle === 'future' ? 'Future' : watchStyle === 'outline' ? 'Outline' : 'Normal' }!`
+                    :
+                      `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
     setLocation() {
       this.$emit('setLocation')
     },
@@ -1050,17 +1186,10 @@ export default {
         'graphicKey'
       this.settings.lockScreen.mode = lockScreenMode
 
-      let watchStyle = this.settings.lockScreen.watchStyle === 'normal' ?
-        'future'
-      : this.settings.lockScreen.watchStyle === 'future' ?
-        'outline'
-      :
-        'normal'
-      this.settings.lockScreen.watchStyle = watchStyle
-
       // this.settings.lockScreen.mode = lockScreenMode
       // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/lockscreen/set/?lockscreenmode=${lockScreenMode}&watchstyle=${watchStyle}`, {
+      // fetch(`http://localhost:4000/api/settings/lockscreen/set/?lockscreenmode=${lockScreenMode}&watchstyle=${watchStyle}`, {
+      fetch(`http://localhost:4000/api/settings/lockscreen/mode/set/?lockscreenmode=${lockScreenMode}`, {
         mode: 'cors',
         method: 'GET'
       }).then(response => response.body).then(rb  => {
@@ -1100,13 +1229,13 @@ export default {
                   :
                     `Экран блокировки был сменён на ${lockScreenMode === 'moveSlide' ? 'Сдвинуть слайд' : lockScreenMode === 'graphicKey' ? 'Графический ключ' : 'Сдвинуть слайд' }!`
                 }`)
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
-                    : this.settings.general.language === 'English' ?
-                      `Watch style was changed to ${watchStyle === 'normal' ? 'Normal' : watchStyle === 'future' ? 'Future' : watchStyle === 'outline' ? 'Outline' : 'Normal' }!`
-                    :
-                      `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
-                  }`)
+                // notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                //       `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
+                //     : this.settings.general.language === 'English' ?
+                //       `Watch style was changed to ${watchStyle === 'normal' ? 'Normal' : watchStyle === 'future' ? 'Future' : watchStyle === 'outline' ? 'Outline' : 'Normal' }!`
+                //     :
+                //       `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
+                //   }`)
               }
             })
           }

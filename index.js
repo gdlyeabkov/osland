@@ -207,14 +207,30 @@ app.get('/api/apps/delete', async (req, res) => {
 
 })
 
-app.get('/api/settings/lockscreen/set', (req, res) => {
+app.get('/api/settings/lockscreen/mode/set', (req, res) => {
     
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { lockScreen: { mode: req.query.lockscreenmode, watchStyle: req.query.watchstyle  } }, (err, app) => {
+    SettingsModel.update({  }, { "$set": { 'lockScreen.mode': req.query.lockscreenmode } }, (err, app) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/lockscreen/watchstyle/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { "$set": { 'lockScreen.watchStyle': req.query.watchstyle } }, (err, app) => {
         if(err){
             return res.json({ status: 'Error' })        
         }

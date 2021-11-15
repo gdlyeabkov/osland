@@ -16,7 +16,8 @@
 export default {
     name: 'PowerDialog',
     emits: [
-        'closepowerDialog'
+        'closepowerDialog',
+        'resetDisplayTimeout'
     ],
     methods: {
         powerOn() {
@@ -24,6 +25,7 @@ export default {
             document.close()
         },
         closePowerDialog(event) {
+            this.$emit('resetDisplayTimeout')
             if(event.target.id === 'powerDialogId') {
                 this.$emit('closePowerDialog')
             }

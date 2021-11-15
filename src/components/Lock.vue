@@ -99,6 +99,9 @@ export default {
         if(isGraphicKey) {
             this.context = this.$refs.graphicKey.getContext('2d')
             this.drawPossibleKeys()
+            this.$refs.graphicKey.addEventListener('touchstart', event => {
+                console.log(`touchstart: ${event}`)
+            }, false)
         }
       })
         // this.settings = await JSON.parse(localStorage.getItem('osland_settings'))
@@ -161,6 +164,7 @@ export default {
             })
         },
         drawGraphicKey(event, gesture) {
+            this.$emit('resetDisplayTimeout')
             let startCanvasX = this.$refs.graphicKey.offsetLeft + this.$refs.graphicKey.clientLeft
             let startCanvasY = this.$refs.graphicKey.offsetTop + this.$refs.graphicKey.clientTop
             if (gesture === 'down') {

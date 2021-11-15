@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="resetDisplayTimeout()">
     <div class="desktop" ref="desktop" @click="dragDesktop($event); $emit('closeContextMenu')" :style="`${orientation ? 'width: 50%;' : ''}`">
     </div>
     <div class="appListWithSearch" :style="`${orientation ? 'width: 200%;' : ''}`" @click="$emit('closeContextMenu')">
@@ -250,12 +250,16 @@ export default {
   },
   emits: [
     'openApp',
-    'holdApp'
+    'holdApp',
+    'resetDisplayTimeout'
   ],
   mounted() {
     
   },
   methods: {
+    resetDisplayTimeout() {
+      this.$emit('resetDisplayTimeout')
+    },
     holdApp(event, gesture, appInfo) {
       this.$emit('holdApp', event, gesture, appInfo)
     },

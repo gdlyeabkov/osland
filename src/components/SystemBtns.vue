@@ -1,5 +1,5 @@
 <template>
-    <div class="systemBtnsBlock">
+    <div @click="resetDisplayTimeout()" class="systemBtnsBlock">
         <span @click="undo()" class="material-icons">
             undo
         </span>
@@ -18,9 +18,13 @@ export default {
     emits: [
         'handleUndoBtn',
         'handleHomeBtn',
-        'handeOpenedAppsBtn'
+        'handeOpenedAppsBtn',
+        'resetDisplayTimeout'
     ],
     methods: {
+        resetDisplayTimeout() {
+            this.$emit('resetDisplayTimeout')
+        },
         tabsBlock(){
             this.$emit('handeOpenedAppsBtn')
         },

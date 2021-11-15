@@ -196,7 +196,8 @@ export default {
         'changeOrientation',
         'filterBlueColor',
         'changeVolume',
-        'location'
+        'location',
+        'resetDisplayTimeout'
     ],
     watch: {
         soundMode(newSoundMode) {
@@ -313,6 +314,9 @@ export default {
 
     },
     methods: {
+        resetDisplayTimeout() {
+            this.$emit('resetDisplayTimeout')
+        },
         setGeolocation() {
             if(navigator.geolocation !== null && navigator.geolocation !== undefined) {
                 if(this.geolocationId === null || this.geolocationId === undefined) {
@@ -416,6 +420,7 @@ export default {
             this.$emit('openApp', appInfo)
         },
         handleGesture(event, gesture){
+            this.resetDisplayTimeout()
             // this.$emit('closeContextMenu')
             if (gesture === 'down' && event.target.id !== 'curtainBtn') {
                 // if (this.handleCurtain) {
