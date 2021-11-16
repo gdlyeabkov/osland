@@ -25,6 +25,11 @@
                 <span class="material-icons curtainItemIcon curtainBtn">
                     signal_cellular_alt
                 </span>
+                <span v-if="settings.notifications.showBatteryPercents" class="showBatteryPercents">
+                    {{
+                        batteryLevel * 100
+                    }}%
+                </span>
                 <span class="material-icons curtainItemIcon curtainBtn">
                     battery_full
                 </span>
@@ -546,6 +551,10 @@ export default {
     .brightnessControlFiller {
         background-color: rgb(100, 150, 255);
         width: 50%;
+    }
+
+    .showBatteryPercents {
+        color: rgb(255, 255, 255);
     }
 
 </style>

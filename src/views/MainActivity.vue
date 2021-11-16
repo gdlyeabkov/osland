@@ -168,6 +168,18 @@ export default {
             buttonsOrder: 'left'
           },
           screenScale: 100
+        },
+        notifications: {
+          enabled: true,
+          main: {
+            showNotificationsIcons: true,
+            options: 'last'
+          },
+          showBatteryPercents: false
+        },
+        updates: {
+          lastCheck: new Date().toLocaleString(),
+          lastUpdate: new Date().toLocaleString()
         }
       },
       launchTime: '00.00.00, 00:00:00',

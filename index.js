@@ -134,6 +134,16 @@ const SettingsSchema = new mongoose.Schema({
             type: Number,
             default: 1
         },
+    },
+    updates: {
+        lastCheck: {
+            type: String,
+            default: new Date().toLocaleString()
+        },
+        lastUpdate: {
+            type: String,
+            default: new Date().toLocaleString()
+        }
     }
 }, { collection : 'mysettings' });
 
@@ -488,6 +498,22 @@ app.get('/api/settings/display/screenscale/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
     SettingsModel.update({  }, { '$set': { 'display.screenScale': req.query.screenscale } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/notifications/showbatterypercents/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'notifications.showBatteryPercents': req.query.show } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })        
         }

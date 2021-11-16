@@ -1,6 +1,6 @@
 <template>
   <div class="openedApp">
-    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}`">
+    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}; zoom: ${settings.display.screenScale};`">
       <div v-if="activeTab === 'settings'">
         <div class="settingsAppHeader">
           <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
@@ -15,7 +15,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="setConnetions()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'connections'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -42,7 +42,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setSoundMode()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'soundsAndVibration'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -69,7 +69,7 @@
               volume_up
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setNotifications()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'notifications'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -285,7 +285,7 @@
               location_on
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getAccounts()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'accountsAndArchive'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -467,7 +467,7 @@
               accessibility_new
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getUpdates()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'softwareUpdates'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -972,6 +972,387 @@
         </div>
 
       </div>
+      <div v-else-if="activeTab === 'notifications'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Уведомления'
+              : settings.general.language === 'English' ?
+                'Notifications'
+              :
+                'Уведомления'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setNotifications">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Показывать уведомления'
+                  : settings.general.language === 'English' ?
+                    'Show notifications'
+                  :
+                    'Показывать уведомления'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Показывать уведомления'
+                  : settings.general.language === 'English' ?
+                    'Show notifications'
+                  :
+                    'Показывать уведомления'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Строка состояния'
+                  : settings.general.language === 'English' ?
+                    'Status row'
+                  :
+                    'Строка состояния'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Строка состояния'
+                  : settings.general.language === 'English' ?
+                    'Status row'
+                  :
+                    'Строка состояния'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'accountsAndArchive'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Учетные записи и архивация'
+              : settings.general.language === 'English' ?
+                'Accounts and archive'
+              :
+                'Учетные записи и архивация'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getAccounts()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Учетные записи'
+                  : settings.general.language === 'English' ?
+                    'Accounts'
+                  :
+                    'Учетные записи'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Учетные записи'
+                  : settings.general.language === 'English' ?
+                    'Accounts'
+                  :
+                    'Учетные записи'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="null">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Архивация'
+                  : settings.general.language === 'English' ?
+                    'Archive'
+                  :
+                    'Архивация'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Архивация'
+                  : settings.general.language === 'English' ?
+                    'Archive'
+                  :
+                    'Архивация'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'softwareUpdates'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Обновление ПО'
+              : settings.general.language === 'English' ?
+                'Software updates'
+              :
+                'Обновление ПО'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getUpdates()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Загрузка и установка'
+                  : settings.general.language === 'English' ?
+                    'Uploading and installing'
+                  :
+                    'Загрузка и установка'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    `Дата последней проверки: ${settings.updates.lastCheck.split(' ')[0].split('-')[2]}.${settings.updates.lastCheck.split(' ')[0].split('-')[1]}.${settings.updates.lastCheck.split(' ')[0].split('-')[0]}\nЗа загрузку по мобильным сетям может взиматься дополнительная плата. По возможности используйте Wi-fi.`
+                  : settings.general.language === 'English' ?
+                    `Date of last check: ${settings.updates.lastCheck.split(' ')[0].split('-')[1]}.${settings.updates.lastCheck.split(' ')[0].split('-')[2]}.${settings.updates.lastCheck.split(' ')[0].split('-')[0]}\nFor upload from mobile networks can take auxiliary moneys. Do you can use Wi-fi.`
+                  :
+                    `Дата последней проверки: ${settings.updates.lastCheck.split(' ')[0].split('-')[2]}.${settings.updates.lastCheck.split(' ')[0].split('-')[1]}.${settings.updates.lastCheck.split(' ')[0].split('-')[0]}\nЗа загрузку по мобильным сетям может взиматься дополнительная плата. По возможности используйте Wi-fi.`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="null">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автозагрузка по Wi-fi'
+                  : settings.general.language === 'English' ?
+                    'Auto-upload from Wi-fi'
+                  :
+                    'Автозагрузка по Wi-fi'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автоматическая загрузка обновлений ПО при подключении к сети Wi-fi'
+                  : settings.general.language === 'English' ?
+                    'Auto-uploading software updates when connected to Wi-fi network'
+                  :
+                    'Автоматическая загрузка обновлений ПО при подключении к сети Wi-fi'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="null">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Последнее обновление'
+                  : settings.general.language === 'English' ?
+                    'Last update'
+                  :
+                    'Последнее обновление'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    `Последнее обновление установлено ${settings.updates.lastUpdate.split(' ')[0].split('-')[2]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[1]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[0]} в ${settings.updates.lastUpdate.split(' ')[1].split(':')[0]}:${settings.updates.lastUpdate.split(' ')[1].split(':')[1]}`
+                  : settings.general.language === 'English' ?
+                    `Last update installed at ${settings.updates.lastUpdate.split(' ')[0].split('-')[1]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[2]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[0]} ${settings.updates.lastUpdate.split(' ')[1].split(':')[0]}:${settings.updates.lastUpdate.split(' ')[1].split(':')[1]} ${new Intl.DateTimeFormat('en-AU', {
+                    hour: 'numeric', minute: 'numeric', second: 'numeric',
+                    timeZoneName: 'short'
+                  }).format(new Date(settings.updates.lastUpdate)).split(' ')[1].toUpperCase()}`
+                  :
+                    `Последнее обновление установлено ${settings.updates.lastUpdate.split(' ')[0].split('-')[2]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[1]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[0]} в ${settings.updates.lastUpdate.split(' ')[1].split(':')[0]}:${settings.updates.lastUpdate.split(' ')[1].split(':')[1]}`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'soundsAndVibration'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Звуки и вибрация'
+              : settings.general.language === 'English' ?
+                'Sounds and vibration'
+              :
+                'Звуки и вибрация'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setSoundMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим звука'
+                  : settings.general.language === 'English' ?
+                    'Sound mode'
+                  :
+                    'Режим звука'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим звука'
+                  : settings.general.language === 'English' ?
+                    'Sound mode'
+                  :
+                    'Режим звука'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="null">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Громкость'
+                  : settings.general.language === 'English' ?
+                    'Volume'
+                  :
+                    'Громкость'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Громкость'
+                  : settings.general.language === 'English' ?
+                    'Volume'
+                  :
+                    'Громкость'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'connections'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Подключения'
+              : settings.general.language === 'English' ?
+                'Connections'
+              :
+                'Подключения'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setConnetions()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим звука'
+                  : settings.general.language === 'English' ?
+                    'Sound mode'
+                  :
+                    'Режим звука'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим звука'
+                  : settings.general.language === 'English' ?
+                    'Sound mode'
+                  :
+                    'Режим звука'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="null">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Громкость'
+                  : settings.general.language === 'English' ?
+                    'Volume'
+                  :
+                    'Громкость'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Громкость'
+                  : settings.general.language === 'English' ?
+                    'Volume'
+                  :
+                    'Громкость'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -1013,6 +1394,10 @@ export default {
             buttonsOrder: 'left'
           },
           screenScale: 1
+        },
+        updates: {
+          lastCheck: new Date().toLocaleString(),
+          lastUpdate: new Date().toLocaleString()
         }
       },
       activeTab: 'settings',
@@ -1069,6 +1454,61 @@ export default {
 
   },
   methods: {
+    setShowBatteryPercents() {
+      
+      let showBatteryPercents = !this.settings.notifications.showBatteryPercents
+      this.settings.notifications.showBatteryPercents = showBatteryPercents
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/notifications/showbatterypercents/set/?show=${showBatteryPercents}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `${showBatteryPercents ? 'Отображение' : !showBatteryPercents ? 'Скрытие' : 'Отображение' } процентов заряда`
+                    : this.settings.general.language === 'English' ?
+                      `${showBatteryPercents ? 'Show' : !showBatteryPercents ? 'Hide' : 'Show' } of percents battery`
+                    :
+                      `${showBatteryPercents ? 'Отображение' : !showBatteryPercents ? 'Скрытие' : 'Отображение' } процентов заряда`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
     setScreenScale() {
       let screenScale = this.settings.display.screenScale === 1 ?
         2
