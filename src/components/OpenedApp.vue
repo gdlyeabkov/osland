@@ -386,7 +386,7 @@
               refresh
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'applications'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -548,7 +548,7 @@
               info
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'developerParameters'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1067,7 +1067,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'statusRow'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1350,26 +1350,26 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="setConnetions()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'wi-fi'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим звука'
+                    'WI-FI'
                   : settings.general.language === 'English' ?
-                    'Sound mode'
+                    'WI-FI'
                   :
-                    'Режим звука'
+                    'WI-FI'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим звука'
+                    'ssid'
                   : settings.general.language === 'English' ?
-                    'Sound mode'
+                    'ssid'
                   :
-                    'Режим звука'
+                    'ssid'
                 }}
               </span>
             </div>
@@ -1382,21 +1382,156 @@
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Громкость'
+                    'Вызовы по WI-FI'
                   : settings.general.language === 'English' ?
-                    'Volume'
+                    'WI-FI calling'
                   :
-                    'Громкость'
+                    'Вызовы по WI-FI'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Громкость'
+                    'Вызовы по WI-FI'
                   : settings.general.language === 'English' ?
-                    'Volume'
+                    'WI-FI calling'
                   :
-                    'Громкость'
+                    'Вызовы по WI-FI'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Авиарежим'
+                  : settings.general.language === 'English' ?
+                    'Airplane mode'
+                  :
+                    'Авиарежим'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Авиарежим'
+                  : settings.general.language === 'English' ?
+                    'Airplane mode'
+                  :
+                    'Авиарежим'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Мобильные сети'
+                  : settings.general.language === 'English' ?
+                    'Mobile networks'
+                  :
+                    'Мобильные сети'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Мобильные сети'
+                  : settings.general.language === 'English' ?
+                    'Mobile networks'
+                  :
+                    'Мобильные сети'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использование данных'
+                  : settings.general.language === 'English' ?
+                    'Data usability'
+                  :
+                    'Использование данных'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Диспетчер SIM-карт'
+                  : settings.general.language === 'English' ?
+                    'SIM manager'
+                  :
+                    'Диспетчер SIM-карт'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Мобильная точка доступа и модем'
+                  : settings.general.language === 'English' ?
+                    'Mobile hotspot and modem'
+                  :
+                    'Мобильная точка доступа и модем'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Мобильная точка доступа и модем'
+                  : settings.general.language === 'English' ?
+                    'Mobile hotspot and modem'
+                  :
+                    'Мобильная точка доступа и модем'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Другие настройки'
+                  : settings.general.language === 'English' ?
+                    'Other settings'
+                  :
+                    'Другие настройки'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Другие настройки'
+                  : settings.general.language === 'English' ?
+                    'Other settings'
+                  :
+                    'Другие настройки'
                 }}
               </span>
             </div>
@@ -2794,8 +2929,4366 @@
           </div>
         </div>
       </div>
+      <div v-else-if="activeTab === 'statusRow'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Строка состояния'
+              : settings.general.language === 'English' ?
+                'Status row'
+              :
+                'Строка состояния'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setNotificationsOptions()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отображать значки уведомлений'
+                  : settings.general.language === 'English' ?
+                    'Show notifications icons'
+                  :
+                    'Отображать значки уведомлений'
+                }}
+              </span>
+              <span>
+                {{
+                  batteryCharging ?
+                    'Заряжается'
+                  :
+                    'Не заряжается'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Показать процент зарядки'
+                  : settings.general.language === 'English' ?
+                    'Show battery percents'
+                  :
+                    'Показать процент зарядки'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Показать процент зарядки'
+                  : settings.general.language === 'English' ?
+                    'Show battery percents'
+                  :
+                    'Показать процент зарядки'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'developerParameters'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Параметры разработчика'
+              : settings.general.language === 'English' ?
+                'Developer parameters'
+              :
+                'Параметры разработчика'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Оперативная память'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'Оперативная память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'specialCapabilities'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Специальные возможности'
+              : settings.general.language === 'English' ?
+                'Special capabilities'
+              :
+                'Специальные возможности'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим разработчика'
+                  : settings.general.language === 'English' ?
+                    'Developer mode'
+                  :
+                    'Режим разработчика'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'applications'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Приложения'
+              : settings.general.language === 'English' ?
+                'Applications'
+              :
+                'Приложения'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  `Все ${apps.length}`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div v-for="app in apps" :key="app.name" class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  app.name
+                }}
+              </span>
+              <span>
+                {{
+                  '75,00 Мб'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'deviceManagement'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Обслуживание устройства'
+              : settings.general.language === 'English' ?
+                'Device management'
+              :
+                'Обслуживание устройства'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Батарея'
+                  : settings.general.language === 'English' ?
+                    'Battery'
+                  :
+                    'Батарея'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'a'
+                  : settings.general.language === 'English' ?
+                    'b'
+                  :
+                    'a'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Память'
+                  : settings.general.language === 'English' ?
+                    'Drive'
+                  :
+                    'Память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Память'
+                  : settings.general.language === 'English' ?
+                    'Drive'
+                  :
+                    'Память'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'ОЗУ'
+                  : settings.general.language === 'English' ?
+                    'RAM'
+                  :
+                    'ОЗУ'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'a'
+                  : settings.general.language === 'English' ?
+                    'b'
+                  :
+                    'a'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Безопасность'
+                  : settings.general.language === 'English' ?
+                    'Security'
+                  :
+                    'Безопасность'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'a'
+                  : settings.general.language === 'English' ?
+                    'b'
+                  :
+                    'a'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'deviceUsabilityAndParentControl'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Использование устройства и родительский контроль'
+              : settings.general.language === 'English' ?
+                'Device usability and parent control'
+              :
+                'Использование устройства и родительский контроль'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Таймеры приложений'
+                  : settings.general.language === 'English' ?
+                    'Applications timers'
+                  :
+                    'Таймеры приложений'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'a'
+                  : settings.general.language === 'English' ?
+                    'b'
+                  :
+                    'a'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим концентрации'
+                  : settings.general.language === 'English' ?
+                    'Attention mode'
+                  :
+                    'Режим концентрации'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим концентрации'
+                  : settings.general.language === 'English' ?
+                    'Attention mode'
+                  :
+                    'Режим концентрации'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отдых'
+                  : settings.general.language === 'English' ?
+                    'Relax'
+                  :
+                    'Отдых'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'a'
+                  : settings.general.language === 'English' ?
+                    'b'
+                  :
+                    'a'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Родительский контроль'
+                  : settings.general.language === 'English' ?
+                    'Parent control'
+                  :
+                    'Родительский контроль'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'a'
+                  : settings.general.language === 'English' ?
+                    'b'
+                  :
+                    'a'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'auxiliaryFunctions'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Дополнительные функции'
+              : settings.general.language === 'English' ?
+                'Auxiliary functions'
+              :
+                'Дополнительные функции'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Всплывающие уведомления'
+                  : settings.general.language === 'English' ?
+                    'Transition notifications'
+                  :
+                    'Всплывающие уведомления'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Получение уведомлений значками, которые при нажатии отображаются в виде всплывающих окон'
+                  : settings.general.language === 'English' ?
+                    'Receive notification as icons, which drive pressed show as view transition windows'
+                  :
+                    'Получение уведомлений значками, которые при нажатии отображаются в виде всплывающих окон'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Снимки экрана'
+                  : settings.general.language === 'English' ?
+                    'Screenshots'
+                  :
+                    'Снимки экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Управляйте отображением панели инструментов для снимков, а также настраивайте будут ли удалены снимки после как вы ими поделитесь'
+                  : settings.general.language === 'English' ?
+                    'Manage of display tools bar for screenshots, also set do you need remove screenshots after as your share them'
+                  :
+                    'Управляйте отображением панели инструментов для снимков, а также настраивайте будут ли удалены снимки после как вы ими поделитесь'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Упрощение анимаций'
+                  : settings.general.language === 'English' ?
+                    'Animations reduction'
+                  :
+                    'Упрощение анимаций'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Уменьшение интенсивности анимаций на экране, например при открытии и закрытии приложений'
+                  : settings.general.language === 'English' ?
+                    'Intensity reduction animations for screen, as for open and close of apps'
+                  :
+                    'Уменьшение интенсивности анимаций на экране, например при открытии и закрытии приложений'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Движения и жесты'
+                  : settings.general.language === 'English' ?
+                    'Motion and gestures'
+                  :
+                    'Движения и жесты'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Управление функциями связанными с движениями и жестами'
+                  : settings.general.language === 'English' ?
+                    'Functions management for motion and gestures'
+                  :
+                    'Управление функциями связанными с движениями и жестами'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Экстренные сообщения'
+                  : settings.general.language === 'English' ?
+                    'Emergency messages'
+                  :
+                    'Экстренные сообщения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'a'
+                  : settings.general.language === 'English' ?
+                    'b'
+                  :
+                    'a'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'location'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Местоположение'
+              : settings.general.language === 'English' ?
+                'Geolocation'
+              :
+                'Местоположение'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Разрешения приложения'
+                  : settings.general.language === 'English' ?
+                    'Applications permissions'
+                  :
+                    'Разрешения приложения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Разрешения приложения'
+                  : settings.general.language === 'English' ?
+                    'Applications permissions'
+                  :
+                    'Разрешения приложения'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Улучшение точности'
+                  : settings.general.language === 'English' ?
+                    'Improving accuracy'
+                  :
+                    'Улучшение точности'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использование WI-FI и Bluetooth, для более точного определения местоположения'
+                  : settings.general.language === 'English' ?
+                    'Use WI-FI and Bluetooth for above improvable definition of geolocation'
+                  :
+                    'Использование WI-FI и Bluetooth, для более точного определения местоположения'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'privacy'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Конфиденциальность'
+              : settings.general.language === 'English' ?
+                'Privacy'
+              :
+                'Конфиденциальность'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дипетчер разрешений'
+                  : settings.general.language === 'English' ?
+                    'Permissions manager'
+                  :
+                    'Дипетчер разрешений'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дипетчер разрешений'
+                  : settings.general.language === 'English' ?
+                    'Permissions manager'
+                  :
+                    'Дипетчер разрешений'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отчеты об ошибках'
+                  : settings.general.language === 'English' ?
+                    'Reports of bugs'
+                  :
+                    'Отчеты об ошибках'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отчеты об ошибках'
+                  : settings.general.language === 'English' ?
+                    'Reports of bugs'
+                  :
+                    'Отчеты об ошибках'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Маркетинговая информация'
+                  : settings.general.language === 'English' ?
+                    'Market info'
+                  :
+                    'Маркетинговая информация'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Маркетинговая информация'
+                  : settings.general.language === 'English' ?
+                    'Market info'
+                  :
+                    'Маркетинговая информация'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Реклама'
+                  : settings.general.language === 'English' ?
+                    'Ads'
+                  :
+                    'Реклама'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Рекламный идентификатор и персонализация'
+                  : settings.general.language === 'English' ?
+                    'Ads id and personalization'
+                  :
+                    'Рекламный идентификатор и персонализация'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использование и диагностика'
+                  : settings.general.language === 'English' ?
+                    'Usability and diagnostic'
+                  :
+                    'Использование и диагностика'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Разрешить отправлять данные чтобы улучшить OsLand'
+                  : settings.general.language === 'English' ?
+                    'Agree send data for improve OsLand'
+                  :
+                    'Разрешить отправлять данные чтобы улучшить OsLand'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'biometryAndSecurity'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Конфиденциальность'
+              : settings.general.language === 'English' ?
+                'Privacy'
+              :
+                'Конфиденциальность'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Распознавание лица'
+                  : settings.general.language === 'English' ?
+                    'Face recognition'
+                  :
+                    'Распознавание лица'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Зарегестрируйте лицо'
+                  : settings.general.language === 'English' ?
+                    'Register face'
+                  :
+                    'Зарегестрируйте лицо'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отпечатки пальцев'
+                  : settings.general.language === 'English' ?
+                    'Fingers imprints'
+                  :
+                    'Отпечатки пальцев'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Добавление отпечатков пальцев'
+                  : settings.general.language === 'English' ?
+                    'Adding figers imprints'
+                  :
+                    'Добавление отпечатков пальцев'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Поиск устройства'
+                  : settings.general.language === 'English' ?
+                    'Device search'
+                  :
+                    'Поиск устройства'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Включено без функции \"Удаленная разблокировка\"'
+                  : settings.general.language === 'English' ?
+                    'Enabled without \"Remote unblock\" functtion'
+                  :
+                    'Включено без функции \"Удаленная разблокировка\"'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Шифрование и расшифровка SD-карты'
+                  : settings.general.language === 'English' ?
+                    'Encoding and decoding SD card'
+                  :
+                    'Шифрование и расшифровка SD-карты'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Нет SD-карты'
+                  : settings.general.language === 'English' ?
+                    'SD card not found'
+                  :
+                    'Нет SD-карты'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Другие параметры безопасности'
+                  : settings.general.language === 'English' ?
+                    'Other security parameters'
+                  :
+                    'Другие параметры безопасности'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Разрешить отправлять данные чтобы улучшить OsLand'
+                  : settings.general.language === 'English' ?
+                    'Agree send data for improve OsLand'
+                  :
+                    'Разрешить отправлять данные чтобы улучшить OsLand'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'wi-fi'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'WI-FI'
+              : settings.general.language === 'English' ?
+                'WI-FI'
+              :
+                'WI-FI'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Включено'
+                  : settings.general.language === 'English' ?
+                    'Enabled'
+                  :
+                    'Включено'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Включено'
+                  : settings.general.language === 'English' ?
+                    'Enabled'
+                  :
+                    'Включено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  'Имя_текущей_сети'
+                }}
+              </span>
+              <span>
+                {{
+                  'Не подключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                    'Имя_доступной_сети'
+                }}
+              </span>
+              <span>
+                {{
+                    'Имя_доступной_сети'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Добавить сеть'
+                  : settings.general.language === 'English' ?
+                    'Add network'
+                  :
+                    'Добавить сеть'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Добавить сеть'
+                  : settings.general.language === 'English' ?
+                    'Add network'
+                  :
+                    'Добавить сеть'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'connectToNetwork'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              'Динамическое_имя_сети'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Введите пароль'
+                  : settings.general.language === 'English' ?
+                    'Enter password'
+                  :
+                    'Введите пароль'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Введите пароль'
+                  : settings.general.language === 'English' ?
+                    'Enter password'
+                  :
+                    'Введите пароль'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Подключаться автоматически'
+                  : settings.general.language === 'English' ?
+                    'Auto connect'
+                  :
+                    'Подключаться автоматически'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Подключаться автоматически'
+                  : settings.general.language === 'English' ?
+                    'Auto connect'
+                  :
+                    'Подключаться автоматически'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дополнительно'
+                  : settings.general.language === 'English' ?
+                    'Auxiliary'
+                  :
+                    'Дополнительно'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дополнительно'
+                  : settings.general.language === 'English' ?
+                    'Auxiliary'
+                  :
+                    'Дополнительно'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Подключиться'
+                  : settings.general.language === 'English' ?
+                    'Connect'
+                  :
+                    'Подключиться'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Подключиться'
+                  : settings.general.language === 'English' ?
+                    'Connect'
+                  :
+                    'Подключиться'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'addNetwork'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Добавить сеть'
+              : settings.general.language === 'English' ?
+                'Add network'
+              :
+                'Добавить сеть'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  'Название сети'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Безопасность'
+                  : settings.general.language === 'English' ?
+                    'Security'
+                  :
+                    'Безопасность'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Подключаться автоматически'
+                  : settings.general.language === 'English' ?
+                    'Auto connect'
+                  :
+                    'Подключаться автоматически'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Подключаться автоматически'
+                  : settings.general.language === 'English' ?
+                    'Auto connect'
+                  :
+                    'Подключаться автоматически'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дополнительно'
+                  : settings.general.language === 'English' ?
+                    'Auxiliary'
+                  :
+                    'Дополнительно'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дополнительно'
+                  : settings.general.language === 'English' ?
+                    'Auxiliary'
+                  :
+                    'Дополнительно'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сохранить'
+                  : settings.general.language === 'English' ?
+                    'Save'
+                  :
+                    'Сохранить'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сохранить'
+                  : settings.general.language === 'English' ?
+                    'Save'
+                  :
+                    'Сохранить'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'networkAuxiliary'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Добавить сеть'
+              : settings.general.language === 'English' ?
+                'Add network'
+              :
+                'Добавить сеть'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  'Параметры IP'
+                }}
+              </span>
+              <span>
+                {{
+                  'Параметры IP'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Прокси'
+                  : settings.general.language === 'English' ?
+                    'Proxy'
+                  :
+                    'Прокси'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Прокси'
+                  : settings.general.language === 'English' ?
+                    'Proxy'
+                  :
+                    'Прокси'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сеть с лимитным подключением'
+                  : settings.general.language === 'English' ?
+                    'Network with limited connection'
+                  :
+                    'Сеть с лимитным подключением'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автоматическое определение'
+                  : settings.general.language === 'English' ?
+                    'Auto definition'
+                  :
+                    'Автоматическое определение'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Скрытая сеть'
+                  : settings.general.language === 'English' ?
+                    'Hidden network'
+                  :
+                    'Скрытая сеть'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Добавление скрытой сети'
+                  : settings.general.language === 'English' ?
+                    'Add hidden network'
+                  :
+                    'Добавление скрытой сети'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'mobileNetworks'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Мобильные сети'
+              : settings.general.language === 'English' ?
+                'Mobile networks'
+              :
+                'Мобильные сети'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Данные в роуминге'
+                  : settings.general.language === 'English' ?
+                    'Data in rouming'
+                  :
+                    'Данные в роуминге'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'За использование мобильных данных в роуминге может взиматься дополнительная плата'
+                  : settings.general.language === 'English' ?
+                    'For use mobile data in rouming may pay moneys'
+                  :
+                    'За использование мобильных данных в роуминге может взиматься дополнительная плата'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Вызовы VoLTE SIM 1'
+                  : settings.general.language === 'English' ?
+                    'Callings VoLTE SIM 1'
+                  :
+                    'Вызовы VoLTE SIM 1'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использование сетей LTE для совершения вызовов, когда это возможно'
+                  : settings.general.language === 'English' ?
+                    'Use LTE networks for call when it possible'
+                  :
+                    'Использование сетей LTE для совершения вызовов, когда это возможно'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим сети SIM 1'
+                  : settings.general.language === 'English' ?
+                    'Network mode SIM 1'
+                  :
+                    'Режим сети SIM 1'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'LTE/3G/2G (авто подключение)'
+                  : settings.general.language === 'English' ?
+                    'LTE/3G/2G (auto connect)'
+                  :
+                    'LTE/3G/2G (авто подключение)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим сети SIM 2'
+                  : settings.general.language === 'English' ?
+                    'Network mode SIM 2'
+                  :
+                    'Режим сети SIM 2'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'LTE/3G/2G (авто подключение)'
+                  : settings.general.language === 'English' ?
+                    'LTE/3G/2G (auto connect)'
+                  :
+                    'LTE/3G/2G (авто подключение)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Передача данных во время вызова'
+                  : settings.general.language === 'English' ?
+                    'Data transfer when calling'
+                  :
+                    'Передача данных во время вызова'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Не прерывайте обмен данными во время вызовов, временно используя SIM карту, с помощью которой совершается вызов, для передачи мобильных данных. За это может взиматься дополнительная плата'
+                  : settings.general.language === 'English' ?
+                    'Not stop data interchange when calling, temporary use SIM, which call, for transfer mobile data. For it may pay moneys'
+                  :
+                    'Не прерывайте обмен данными во время вызовов, временно используя SIM карту, с помощью которой совершается вызов, для передачи мобильных данных. За это может взиматься дополнительная плата'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Точки доступа'
+                  : settings.general.language === 'English' ?
+                    'Access points'
+                  :
+                    'Точки доступа'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Точки доступа'
+                  : settings.general.language === 'English' ?
+                    'Access points'
+                  :
+                    'Точки доступа'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Операторы сети'
+                  : settings.general.language === 'English' ?
+                    'Network providers'
+                  :
+                    'Операторы сети'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Операторы сети'
+                  : settings.general.language === 'English' ?
+                    'Network providers'
+                  :
+                    'Операторы сети'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'accessPoints'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Точки доступа'
+              : settings.general.language === 'English' ?
+                'Access points'
+              :
+                'Точки доступа'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  'Megafon'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'За использование мобильных данных в роуминге может взиматься дополнительная плата'
+                  : settings.general.language === 'English' ?
+                    'For use mobile data in rouming may pay moneys'
+                  :
+                    'За использование мобильных данных в роуминге может взиматься дополнительная плата'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'networksProviders'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Операторы сети'
+              : settings.general.language === 'English' ?
+                'Network providers'
+              :
+                'Операторы сети'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выбирать автоматически'
+                  : settings.general.language === 'English' ?
+                    'Auto select'
+                  :
+                    'Выбирать автоматически'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автоматический выбор наилучшей сети для подключения телефона'
+                  : settings.general.language === 'English' ?
+                    'Auto select best network for phone connect'
+                  :
+                    'Автоматический выбор наилучшей сети для подключения телефона'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выбрать вручную'
+                  : settings.general.language === 'English' ?
+                    'Manual select'
+                  :
+                    'Выбрать вручную'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Поиск всех доступных сетей'
+                  : settings.general.language === 'English' ?
+                    'Search of all available networks'
+                  :
+                    'Поиск всех доступных сетей'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
-    
   </div>
 </template>
 
@@ -2807,12 +7300,7 @@ export default {
   name: 'OpenedApp',
   data() {
     return {
-      accounts: [
-        {
-          login: 'gdlyeabkov@gmail.com',
-          service: 'gmail'
-        }
-      ],
+      undo: false,
       settings: {
         lockScreen: {
           mode: 'moveSlide',
@@ -2849,6 +7337,11 @@ export default {
         updates: {
           lastCheck: new Date().toLocaleString(),
           lastUpdate: new Date().toLocaleString()
+        },
+        notifications: {
+          enabled: true,
+          options: 'last',
+          showBatteryPercents: false
         }
       },
       activeTab: 'settings',
@@ -2886,11 +7379,33 @@ export default {
     },
     'batteryCharging': {
 
+    },
+    'isUndo': {
+
+    },
+    'apps': {
+      default: []
     }
   },
   emits: [
-    'resetDisplayTimeout'
+    'resetDisplayTimeout',
+    'undoEnded'
   ],
+  watch: {
+    async isUndo(newUndo) {
+      if(newUndo) {
+        let isQuit = false
+        if (this.activeTab === 'settings') {
+          isQuit = true
+        } else if (this.activeTab === 'connections' || this.activeTab === 'soundsAndVibration' || this.activeTab === 'notifications' || this.activeTab === 'display' || this.activeTab === 'wallpapers' || this.activeTab === 'topics' || this.activeTab === 'lockScreen' || this.activeTab === 'biometryAndSecurity' || this.activeTab === 'privacy' || this.activeTab === 'location' || this.activeTab === 'accountsAndArchive' || this.activeTab === 'auxiliaryFunctions' || this.activeTab === 'deviceUsabilityAndParentControl' || this.activeTab === 'deviceManagement' || this.activeTab === 'applications' || this.activeTab === 'general' || this.activeTab === 'specialCapabilities' || this.activeTab === 'updates' || this.activeTab === 'userManual' || this.activeTab === 'phoneInformation' || this.activeTab === 'developerParameters') {
+          this.activeTab = 'settings'
+        } else if (this.activeTab === 'softwareInfo' || this.activeTab === 'legalInfo' || this.activeTab === 'state' || this.activeTab === 'accumulatorDetails') {
+          this.activeTab = 'phoneInformation'
+        }
+        this.$emit('undoEnded', isQuit)
+      }
+    }
+  },
   mounted() {
     
     // this.settings = JSON.parse(localStorage.getItem('osland_settings'))
@@ -2923,6 +7438,10 @@ export default {
       this.settings = JSON.parse(result).settings
     });
 
+    this.undo = this.isUndo
+    // window.addEventListener('click', (event) => {
+    //   console.log('передал')
+    // })
   },
   computed: {
     getDeviceInfo() {
@@ -2937,6 +7456,61 @@ export default {
     }
   },
   methods: {
+    setNotificationsOptions() {
+      
+      let options = `${this.settings.notifications.options === 'last' ? 'all' : this.settings.notifications.options === 'all' ? 'count' : this.settings.notifications.options === 'count' ? 'last' : 'last' }`
+      this.settings.notifications.options = options
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/notifications/options/set/?options=${options}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен показ уведомлений на ${options === 'last' ? 'последние 3' : options === 'all' ? 'все' : options === 'count' ? 'только количество' : 'последние 3' }`
+                    : this.settings.general.language === 'English' ?
+                      `Обновлен показ уведомлений на ${options === 'last' ? 'последние 3' : options === 'all' ? 'все' : options === 'count' ? 'только количество' : 'последние 3' }`
+                    :
+                      `${options ? 'Отображение' : !options ? 'Скрытие' : 'Отображение' } процентов заряда`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
     addAcount() {
       let accountLogin = 'xxx888xxx888xxx888xxx@gmail.com'
       let accountService = 'gmail'

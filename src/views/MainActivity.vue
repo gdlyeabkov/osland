@@ -2,7 +2,7 @@
   <div :style="`width: ${orientation ? '50%' : '100%'};`">
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover; background-image: url(${settings.wallpapers.mainScreen});`"></div>
     <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" />
-    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
+    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" :isUndo="oneUndo" :apps="apps" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" @undoEnded="undoEndedHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" @mouseup="holdApp($event, 'up', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" class="app">
@@ -193,7 +193,8 @@ export default {
       launchTime: '00.00.00, 00:00:00',
       brightness: 100,
       location: 0,
-      trySleep: []
+      trySleep: [],
+      oneUndo: false
     }
   },
   mounted() {
@@ -238,14 +239,14 @@ export default {
         }
       } else if(event.key === '+') {
         this.activeSoundCommand = 'volume turn up'
-        // this.activeSound = '../../sounds/volumeturn.wav'
-        this.activeSound = '../../sounds/krik.mp3'
+        this.activeSound = '../../sounds/volumeturn.wav'
+        // this.activeSound = '../../sounds/krik.mp3'
         this.isStartPlay = true
         this.isSpeakersDialog = true
       } else if(event.key === '-') {
         this.activeSoundCommand = 'volume turn down'
-        // this.activeSound = '../../sounds/volumeturn.wav'
-        this.activeSound = '../../sounds/krik.mp3'
+        this.activeSound = '../../sounds/volumeturn.wav'
+        // this.activeSound = '../../sounds/krik.mp3'
         this.isStartPlay = true
         this.isSpeakersDialog = true
       }
@@ -288,6 +289,12 @@ export default {
 
   },
   methods: {
+    undoEndedHandler(isQuit) {
+      this.oneUndo = false
+      if(isQuit) {
+        this.appIsOpen = false
+      }
+    },
     clearDisplayTimeout() {
       this.trySleep.map(trySleep => {
         clearTimeout(trySleep)
@@ -533,6 +540,8 @@ export default {
       this.isContextMenu = false
       this.isAppsList = false
       this.isOpenedApps = false
+      console.log('нужно выйти на уровень назад')
+      this.oneUndo = true
     },
     handleHomeBtnHandler(){
       this.isContextMenu = false

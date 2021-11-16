@@ -102,15 +102,9 @@ const SettingsSchema = new mongoose.Schema({
             type: Boolean,
             default: true
         },
-        main: {
-            showNotificationsIcons: {
-                type: Boolean,
-                default: true
-            },
-            options: {
-                type: String,
-                default: 'last'
-            }
+        options: {
+            type: String,
+            default: 'last'
         },
         showBatteryPercents: {
             type: Boolean,
@@ -393,6 +387,11 @@ app.get('/api/settings/reset', (req, res) => {
         },
         deviceUsabilityAndParentControl: {
             displayTimeout: 60
+        },
+        notifications: {
+            enabled: true,
+            options: 'last',
+            showBatteryPercents: false
         }
     }
     SettingsModel.update({  }, defaultSettings, (err, settings) => {
@@ -575,6 +574,22 @@ app.get('/api/settings/accounsandarchieve/accounts/add', (req, res) => {
         } else {
             return res.json({ "status": "OK" })
         }
+    })
+
+})
+
+app.get('/api/settings/notifications/options/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'notifications.options': req.query.options } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
     })
 
 })

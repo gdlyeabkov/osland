@@ -38,7 +38,7 @@
         <div class="curtainBodyHeader" @click="handleCurtain = false">
             <div class="curtainItem">
                 <span class="material-icons curtainItemIcon" @click="openApp({
-                    processId: Math.floor(Math.random() * 5000),
+                    processId: settingsProcessId,
                     name: 'Settings'
                 })" id="curtainBtn">
                     settings
@@ -185,7 +185,8 @@ export default {
             isAccessPoint: false,
             isWifiCalling: true,
             isDontDisturb: false,
-            isVideoMode: true
+            isVideoMode: true,
+            settingsProcessId: 0,
         }
     },
     props: [
@@ -316,6 +317,8 @@ export default {
         // });
 
         this.currentSoundMode = this.soundMode
+
+        this.settingsProcessId = Math.floor(Math.random() * 5000)
 
     },
     methods: {

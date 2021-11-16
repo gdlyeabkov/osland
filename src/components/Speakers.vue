@@ -35,6 +35,7 @@ export default {
             console.log(`changeVolume speakers: ${val}`)
         },
         async startPlay(val) {
+            console.log('startPlay')
             if(val) {
                 try {
                     if(this.soundCommand === 'volume turn up') {
