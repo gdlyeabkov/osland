@@ -75,6 +75,12 @@ const SettingsSchema = new mongoose.Schema({
         language: {
             type: 'String',
             default: 'Русский'
+        },
+        dateAndTime: {
+            fullHoursFormat: {
+                type: Boolean,
+                default: true
+            }
         }
     },
     deviceUsabilityAndParentControl: {
@@ -144,6 +150,9 @@ const SettingsSchema = new mongoose.Schema({
             type: String,
             default: new Date().toLocaleString()
         }
+    },
+    accountsAndArchive: {
+        accounts: [mongoose.Schema.Types.Map]
     }
 }, { collection : 'mysettings' });
 
@@ -377,7 +386,10 @@ app.get('/api/settings/reset', (req, res) => {
         },
         topic: 'dark',
         general: {
-            language: 'Русский'
+            language: 'Русский',
+            dateAndTime: {
+                fullHoursFormat: true
+            }
         },
         deviceUsabilityAndParentControl: {
             displayTimeout: 60
@@ -518,6 +530,51 @@ app.get('/api/settings/notifications/showbatterypercents/set', (req, res) => {
             return res.json({ status: 'Error' })        
         }
         return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/general/dateandtime/fullhoursformat/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'general.dateAndTime.fullHoursFormat': req.query.full } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/accounsandarchieve/accounts/add', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  },
+        { $push: 
+            {
+                'accountsAndArchive.accounts': [
+                    {
+                        login: req.query.accountlogin,
+                        service: req.query.accountservice
+
+                    }
+                ]
+                
+            }
+    }, (err, settings) => {
+        if(err){
+            return res.json({ "status": "Error" })
+        } else {
+            return res.json({ "status": "OK" })
+        }
     })
 
 })

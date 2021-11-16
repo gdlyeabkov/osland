@@ -1,6 +1,6 @@
 <template>
   <div class="openedApp">
-    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}; zoom: ${settings.display.screenScale};`">
+    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}; zoom: ${settings.display.screenScale}; height: ${settings.display.navigation.type === 'gesture' ? '625' : '575'}px;`">
       <div v-if="activeTab === 'settings'">
         <div class="settingsAppHeader">
           <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
@@ -374,11 +374,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Аккамулятор, хранилище, ОЗУ, безопасность'
+                    'Аккумулятор, хранилище, ОЗУ, безопасность'
                   : settings.general.language === 'English' ?
                     'Accumulator, storage, RAM, security'
                   :
-                    'Аккамулятор, хранилище, ОЗУ, безопасность'
+                    'Аккумулятор, хранилище, ОЗУ, безопасность'
                 }}
               </span>
             </div>
@@ -521,7 +521,7 @@
               quiz
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDeviceInfo()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'phoneInformation'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -763,6 +763,60 @@
               wifi
             </span>
           </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'dateAndTime'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дата и время'
+                  : settings.general.language === 'English' ?
+                    'Date and time'
+                  :
+                    'Дата и время'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дата и время'
+                  : settings.general.language === 'English' ?
+                    'Date and time'
+                  :
+                    'Дата и время'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="giveFeedback()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Свяжитесь с нами'
+                  : settings.general.language === 'English' ?
+                    'Feedback'
+                  :
+                    'Свяжитесь с нами'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Свяжитесь с нами'
+                  : settings.general.language === 'English' ?
+                    'Feedback'
+                  :
+                    'Свяжитесь с нами'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
           <div class="settingsAppBodyItem" @click="resetSettings()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
@@ -807,7 +861,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="null">
+          <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1056,7 +1110,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="getAccounts()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'accounts'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1083,7 +1137,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="null">
+          <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1153,7 +1207,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="null">
+          <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1180,7 +1234,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="null">
+          <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1253,7 +1307,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="null">
+          <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1323,7 +1377,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="null">
+          <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1352,8 +1406,1396 @@
           </div>
         </div>
       </div>
-
+      <div v-else-if="activeTab === 'phoneInformation'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Сведения о телефоне'
+              : settings.general.language === 'English' ?
+                'Phone info'
+              :
+                'Сведения о телефоне'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="activeTab = 'state'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Состояние'
+                  : settings.general.language === 'English' ?
+                    'State'
+                  :
+                    'Состояние'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Просмотр состояния SIM-карты, IMEI-устройства и другой информации'
+                  : settings.general.language === 'English' ?
+                    'View state SIM, IMEI and other info'
+                  :
+                    'Просмотр состояния SIM-карты, IMEI-устройства и другой информации'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'legalInfo'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Юридическая информация'
+                  : settings.general.language === 'English' ?
+                    'Legal info'
+                  :
+                    'Юридическая информация'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Юридическая информация'
+                  : settings.general.language === 'English' ?
+                    'Legal info'
+                  :
+                    'Юридическая информация'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'softwareInfo'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сведения о ПО'
+                  : settings.general.language === 'English' ?
+                    'Software details'
+                  :
+                    'Сведения о ПО'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Просмотр текущей версии OsLand, полосы частот, ядра, номера сборки и т. д.'
+                  : settings.general.language === 'English' ?
+                    'View current version of OsLand, broadcast, kernels, assembly, etc'
+                  :
+                    'Просмотр текущей версии OsLand, полосы частот, ядра, номера сборки и т. д.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'accumulatorDetails'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сведения об аккумуляторе'
+                  : settings.general.language === 'English' ?
+                    'Details of accumulator'
+                  :
+                    'Сведения об аккумуляторе'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Просмотр состояния аккумулятора, оставшегося уровня заряда и другой информации'
+                  : settings.general.language === 'English' ?
+                    'View state accumulator, left level of battery and other info'
+                  :
+                    'Просмотр состояния аккумулятора, оставшегося уровня заряда и другой информации'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'accounts'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Учетные записи'
+              : settings.general.language === 'English' ?
+                'Accounts'
+              :
+                'Учетные записи'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div v-for="account in settings.accountsAndArchive.accounts" :key="account.login" class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  account.login
+                }}
+              </span>
+              <span>
+                {{
+                  account.service
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              email
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="addAcount()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Добавить учетную запись'
+                  : settings.general.language === 'English' ?
+                    'Add account'
+                  :
+                    'Добавить учетную запись'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Добавить учетную запись'
+                  : settings.general.language === 'English' ?
+                    'Add account'
+                  :
+                    'Добавить учетную запись'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автосинхронизация данных'
+                  : settings.general.language === 'English' ?
+                    'Autosync data'
+                  :
+                    'Автосинхронизация данных'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автосинхронизация данных'
+                  : settings.general.language === 'English' ?
+                    'Autosync data'
+                  :
+                    'Автосинхронизация данных'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'dateAndTime'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Дата и время'
+              : settings.general.language === 'English' ?
+                'Date and time'
+              :
+                'Дата и время'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автоопределение времени'
+                  : settings.general.language === 'English' ?
+                    'Auto-definition of time'
+                  :
+                    'Автоопределение времени'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использование даты и времени сети'
+                  : settings.general.language === 'English' ?
+                    'Use date and time of network'
+                  :
+                    'Использование даты и времени сети'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon chip">
+              {{
+                true ?
+                  'toggle_on'
+                :
+                  'toggle_off'
+              }}
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    '24-часовой формат'
+                  : settings.general.language === 'English' ?
+                    '24-hours format'
+                  :
+                    '24-часовой формат'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'state'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Состояние'
+              : settings.general.language === 'English' ?
+                'State'
+              :
+                'Состояние'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="activeTab = 'simState'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Состояние SIM-карты'
+                  : settings.general.language === 'English' ?
+                    'SIM state'
+                  :
+                    'Состояние SIM-карты'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'imeiDetails'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сведения об IMEI'
+                  : settings.general.language === 'English' ?
+                    'IMEI details'
+                  :
+                    'Сведения об IMEI'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'IP-адресс'
+                  : settings.general.language === 'English' ?
+                    'IP'
+                  :
+                    'IP-адресс'
+                }}
+              </span>
+              <span>
+                {{
+                  '192.168.0.101'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'MAC-адресс Wi-fi'
+                  : settings.general.language === 'English' ?
+                    'MAC of Wi-fi'
+                  :
+                    'MAC-адресс Wi-fi'
+                }}
+              </span>
+              <span>
+                {{
+                  '48:79:4D:04:A0:9F'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Адресс Bluetooth'
+                  : settings.general.language === 'English' ?
+                    'Bluetooth address'
+                  :
+                    'Адресс Bluetooth'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Серийный номер'
+                  : settings.general.language === 'English' ?
+                    'Serial number'
+                  :
+                    'Серийный номер'
+                }}
+              </span>
+              <span>
+                {{
+                  'R9WMB0EV1AJ'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Время работы'
+                  : settings.general.language === 'English' ?
+                    'Work time'
+                  :
+                    'Время работы'
+                }}
+              </span>
+              <span>
+                {{
+                  getDeviceInfo
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon chip">
+              {{
+                true ?
+                  'toggle_on'
+                :
+                  'toggle_off'
+              }}
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Состояние телефона'
+                  : settings.general.language === 'English' ?
+                    'Phone state'
+                  :
+                    'Состояние телефона'
+                }}
+              </span>
+              <span>
+                {{
+                  'Официально'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'FCC-сертификаты'
+                  : settings.general.language === 'English' ?
+                    'FCC certs'
+                  :
+                    'FCC-сертификаты'
+                }}
+              </span>
+              <span>
+                {{
+                  'FCC ID: ZCASMA207F'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Номинальные значения'
+                  : settings.general.language === 'English' ?
+                    'Name values'
+                  :
+                    'Номинальные значения'
+                }}
+              </span>
+              <span>
+                {{
+                  'DC 9 V; 1.67 A'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'legalInfo'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Юридическая информация'
+              : settings.general.language === 'English' ?
+                'Legal Info'
+              :
+                'Юридическая информация'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Лицензии открытого ПО'
+                  : settings.general.language === 'English' ?
+                    'Licenses opensource'
+                  :
+                    'Лицензии открытого ПО'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Правовая информация'
+                  : settings.general.language === 'English' ?
+                    'Law info'
+                  :
+                    'Правовая информация'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Лицензии системных обновлений'
+                  : settings.general.language === 'English' ?
+                    'Licenses of system updates'
+                  :
+                    'Лицензии системных обновлений'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Лицензии'
+                  : settings.general.language === 'English' ?
+                    'Licenses'
+                  :
+                    'Лицензии'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Юридические сведения'
+                  : settings.general.language === 'English' ?
+                    'Legal details'
+                  :
+                    'Юридические сведения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Политика конфиденциальности'
+                  : settings.general.language === 'English' ?
+                    'Privacy politics'
+                  :
+                    'Политика конфиденциальности'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сведения о безопасности'
+                  : settings.general.language === 'English' ?
+                    'Security details'
+                  :
+                    'Сведения о безопасности'
+                }}
+              </span>
+              <span>
+                {{
+                  getDeviceInfo
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon chip">
+              {{
+                true ?
+                  'toggle_on'
+                :
+                  'toggle_off'
+              }}
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Версии юрид. документов'
+                  : settings.general.language === 'English' ?
+                    'Versions legal documents'
+                  :
+                    'Версии юрид. документов'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'softwareInfo'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Сведения о ПО'
+              : settings.general.language === 'English' ?
+                'Software info'
+              :
+                'Сведения о ПО'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Лицензии открытого ПО'
+                  : settings.general.language === 'English' ?
+                    'Licenses opensource'
+                  :
+                    'Лицензии открытого ПО'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.dateAndTime.fullHoursFormat ?
+                    '13:00'
+                  :
+                    '01:00 PM'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Версия OUI'
+                  : settings.general.language === 'English' ?
+                    'OUI version'
+                  :
+                    'Версия OUI'
+                }}
+              </span>
+              <span>
+                {{
+                  'v1.0.0'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Версия OsLand'
+                  : settings.general.language === 'English' ?
+                    'OsLand version'
+                  :
+                    'Версия OsLand'
+                }}
+              </span>
+              <span>
+                {{
+                  'v1.0.0'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Версия ядра'
+                  : settings.general.language === 'English' ?
+                    'Kernel version'
+                  :
+                    'Версия ядра'
+                }}
+              </span>
+              <span>
+                {{
+                  'v1.0.0'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Номер сборки'
+                  : settings.general.language === 'English' ?
+                    'Assembly number'
+                  :
+                    'Номер сборки'
+                }}
+              </span>
+              <span>
+                {{
+                  'v1.0.0'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Состояние SE для OsLand'
+                  : settings.general.language === 'English' ?
+                    'OsLand SE state'
+                  :
+                    'Состояние SE для OsLand'
+                }}
+              </span>
+              <span>
+                {{
+                  'Неизвестно'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Версия ПО (регион/оператор)'
+                  : settings.general.language === 'English' ?
+                    'Версия ПО (region/provider)'
+                  :
+                    'Версия ПО (регион/оператор)'
+                }}
+              </span>
+              <span>
+                {{
+                  'v1.0.0'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon chip">
+              {{
+                true ?
+                  'toggle_on'
+                :
+                  'toggle_off'
+              }}
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Версия ПО безопасности'
+                  : settings.general.language === 'English' ?
+                    'Version soft security'
+                  :
+                    'Версия ПО безопасности'
+                }}
+              </span>
+              <span>
+                {{
+                  'v1.0.0'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Уровень безопасности OsLand'
+                  : settings.general.language === 'English' ?
+                    'OsLand security level'
+                  :
+                    'Уровень безопасности OsLand'
+                }}
+              </span>
+              <span>
+                {{
+                  'Неизвестно'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'accumulatorDetails'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Сведения об аккумуляторе'
+              : settings.general.language === 'English' ?
+                'Accumulator details'
+              :
+                'Сведения об аккумуляторе'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Состояние аккумулятора'
+                  : settings.general.language === 'English' ?
+                    'Accumulator state'
+                  :
+                    'Состояние аккумулятора'
+                }}
+              </span>
+              <span>
+                {{
+                  batteryCharging ?
+                    'Заряжается'
+                  :
+                    'Не заряжается'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Уровень заряда батареи'
+                  : settings.general.language === 'English' ?
+                    'Battery level'
+                  :
+                    'Уровень заряда батареи'
+                }}
+              </span>
+              <span>
+                {{
+                  `${batteryLevel * 100}%`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Емкость аккумулятора'
+                  : settings.general.language === 'English' ?
+                    'Accumulator capacity'
+                  :
+                    'Емкость аккумулятора'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    '4000 мАч (стандартно)'
+                  : settings.general.language === 'English' ?
+                    '4000 mAh (default)'
+                  :
+                    '4000 мАч (стандартно)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'simState'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Состояние SIM-карты'
+              : settings.general.language === 'English' ?
+                'SIM state'
+              :
+                'Состояние SIM-карты'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сеть'
+                  : settings.general.language === 'English' ?
+                    'Network'
+                  :
+                    'Сеть'
+                }}
+              </span>
+              <span>
+                {{
+                  'Мегафон'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Состояние мобильной сети'
+                  : settings.general.language === 'English' ?
+                    'Mobile network state'
+                  :
+                    'Состояние мобильной сети'
+                }}
+              </span>
+              <span>
+                {{
+                  'Неизвестно'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Состояние услуги'
+                  : settings.general.language === 'English' ?
+                    'Service state'
+                  :
+                    'Состояние услуги'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Работает'
+                  : settings.general.language === 'English' ?
+                    'Enabled'
+                  :
+                    'Работает'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Статус регистрации в IMS'
+                  : settings.general.language === 'English' ?
+                    'Registration status IMS'
+                  :
+                    'Статус регистрации в IMS'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Registered'
+                  : settings.general.language === 'English' ?
+                    'Зарегестрировано'
+                  :
+                    'Registered'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Уровень сигнала'
+                  : settings.general.language === 'English' ?
+                    'Signal level'
+                  :
+                    'Уровень сигнала'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    '4000 мАч (стандартно)'
+                  : settings.general.language === 'English' ?
+                    '4000 mAh (default)'
+                  :
+                    '4000 мАч (стандартно)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Тип сети моб. голосовой связи'
+                  : settings.general.language === 'English' ?
+                    'Network type of mobile voice data'
+                  :
+                    'Тип сети моб. голосовой связи'
+                }}
+              </span>
+              <span>
+                {{
+                  'LTE'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Тип сети мобильных данных'
+                  : settings.general.language === 'English' ?
+                    'Network type of mobile data'
+                  :
+                    'Тип сети мобильных данных'
+                }}
+              </span>
+              <span>
+                {{
+                  'LTE'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Роуминг'
+                  : settings.general.language === 'English' ?
+                    'Rouming'
+                  :
+                    'Роуминг'
+                }}
+              </span>
+              <span>
+                {{
+                  'Не в роуминге'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'imeiDetails'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Сведения об IMEI'
+              : settings.general.language === 'English' ?
+                'IMEI details'
+              :
+                'Сведения об IMEI'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'IMEI (гнездо 1)'
+                  : settings.general.language === 'English' ?
+                    'IMEI (port 1)'
+                  :
+                    'IMEI (гнездо 1)'
+                }}
+              </span>
+              <span>
+                {{
+                  batteryCharging ?
+                    'Заряжается'
+                  :
+                    'Не заряжается'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'IMEI SV (гнездо 1)'
+                  : settings.general.language === 'English' ?
+                    'IMEI SV (гнездо 1)'
+                  :
+                    'IMEI SV (гнездо 1)'
+                }}
+              </span>
+              <span>
+                {{
+                  `${batteryLevel * 100}%`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'IMEI (гнездо 2)'
+                  : settings.general.language === 'English' ?
+                    'IMEI (port 2)'
+                  :
+                    'IMEI (гнездо 2)'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    '4000 мАч (стандартно)'
+                  : settings.general.language === 'English' ?
+                    '4000 mAh (default)'
+                  :
+                    '4000 мАч (стандартно)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" >
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'IMEI SV (гнездо 2)'
+                  : settings.general.language === 'English' ?
+                    'IMEI SV (port 2)'
+                  :
+                    'IMEI SV (гнездо 2)'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    '4000 мАч (стандартно)'
+                  : settings.general.language === 'English' ?
+                    '4000 mAh (default)'
+                  :
+                    '4000 мАч (стандартно)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
+    
   </div>
 </template>
 
@@ -1365,6 +2807,12 @@ export default {
   name: 'OpenedApp',
   data() {
     return {
+      accounts: [
+        {
+          login: 'gdlyeabkov@gmail.com',
+          service: 'gmail'
+        }
+      ],
       settings: {
         lockScreen: {
           mode: 'moveSlide',
@@ -1381,7 +2829,10 @@ export default {
         },
         topic: 'dark',
         general: {
-          language: 'Русский'
+          language: 'Русский',
+          dateAndTime: {
+            fullHoursFormat: true
+          }
         },
         deviceUsabilityAndParentControl: {
           displayTimeout: 60
@@ -1409,14 +2860,34 @@ export default {
       handleGesture: false
     }
   },
-  props: [
-    'appInfo',
+  props: {
+    'appInfo': {
+
+    },
     // 'settings',
-    'launchTime',
-    'soundMode',
-    'brightness',
-    'orientation'
-  ],
+    'launchTime': {
+
+    },
+    'soundMode': {
+
+    },
+    'brightness': {
+
+    },
+    'orientation': {
+
+    },
+    // 'battery': {
+    //   level: 1,
+    //   charging: false
+    // }
+    'batteryLevel': {
+
+    },
+    'batteryCharging': {
+
+    }
+  },
   emits: [
     'resetDisplayTimeout'
   ],
@@ -1453,7 +2924,127 @@ export default {
     });
 
   },
+  computed: {
+    getDeviceInfo() {
+      let launchMoment = new moment(this.launchTime, 'DD.MM.YYYY, HH:mm:ss')
+      let nowMoment = new moment()
+      let duration = moment.duration(nowMoment.diff(launchMoment))
+      let elapsedHours = duration.get('hours') >= 10 ? duration.get('hours') : `0${duration.get('hours')}`
+      let elapsedMinutes = duration.get('minutes') >= 10 ? duration.get('minutes') : `0${duration.get('minutes')}`
+      let elapsedSeconds = duration.get('seconds') >= 10 ? duration.get('seconds') : `0${duration.get('seconds')}`
+      // alert(`Запущено ${elapsedHours}:${elapsedMinutes}:${elapsedSeconds} назад`)
+      return `Запущено ${elapsedHours}:${elapsedMinutes}:${elapsedSeconds} назад`
+    }
+  },
   methods: {
+    addAcount() {
+      let accountLogin = 'xxx888xxx888xxx888xxx@gmail.com'
+      let accountService = 'gmail'
+      fetch(`http://localhost:4000/api/settings/accounsandarchieve/accounts/add/?accountlogin=${accountLogin}&accountservice=${accountService}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Добавлена учетная запись`
+                  : this.settings.general.language === 'English' ?
+                    `Added account`
+                  :
+                    `Добавлена учетная запись`
+                }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    giveFeedback() {
+      alert('фидбек')
+    },
+    toggleFullHoursFormat() {
+      
+      let fullHoursFormat = !this.settings.general.dateAndTime.fullHoursFormat
+      this.settings.general.dateAndTime.fullHoursFormat = fullHoursFormat
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/general/dateandtime/fullhoursformat/set/?full=${fullHoursFormat}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `${fullHoursFormat ? '24' : '12' }-часовой формат`
+                    : this.settings.general.language === 'English' ?
+                      `${fullHoursFormat ? '24' : '12' }-hours format`
+                    :
+                      `${fullHoursFormat ? '24' : '12' }-часовой формат`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
     setShowBatteryPercents() {
       
       let showBatteryPercents = !this.settings.notifications.showBatteryPercents
@@ -2369,15 +3960,6 @@ export default {
         }
       });
     },
-    getDeviceInfo() {
-      let launchMoment = new moment(this.launchTime, 'DD.MM.YYYY, HH:mm:ss')
-      let nowMoment = new moment()
-      let duration = moment.duration(nowMoment.diff(launchMoment))
-      let elapsedHours = duration.get('hours') > 10 ? duration.get('hours') : `0${duration.get('hours')}`
-      let elapsedMinutes = duration.get('minutes') > 10 ? duration.get('minutes') : `0${duration.get('minutes')}`
-      let elapsedSeconds = duration.get('seconds') > 10 ? duration.get('seconds') : `0${duration.get('seconds')}`
-      alert(`Запущено ${elapsedHours}:${elapsedMinutes}:${elapsedSeconds}`)
-    },
     getDefaultApps() {
       alert('Предустановленные приложения: Osland@1.0.0, OslandSettings@1.0.0')
     },
@@ -2912,6 +4494,10 @@ export default {
 
   .brightnessFooter {
     min-width: 750px;
+  }
+
+  .chip {
+    cursor: pointer;
   }
 
 </style>

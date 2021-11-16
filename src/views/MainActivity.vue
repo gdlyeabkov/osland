@@ -2,7 +2,7 @@
   <div :style="`width: ${orientation ? '50%' : '100%'};`">
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover; background-image: url(${settings.wallpapers.mainScreen});`"></div>
     <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" />
-    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
+    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" @mouseup="holdApp($event, 'up', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" class="app">
@@ -130,7 +130,12 @@ export default {
       countAppsPerRow: 4,
       appInfo: {},
       currentTime: `${new Date().toLocaleTimeString().split(':')[0]}:${new Date().toLocaleTimeString().split(':')[1]}`,
+      battery: {
+        level: 1,
+        charging: false
+      },
       batteryLevel: 1,
+      batteryCharging: false,
       isSearch: false,
       currentSoundMode: 0,
       orientation: false,
@@ -150,7 +155,10 @@ export default {
         },
         topic: 'dark',
         general: {
-          language: 'Русский'
+          language: 'Русский',
+          dateAndTime: {
+            fullHoursFormat: true
+          }
         },
         deviceUsabilityAndParentControl: {
           displayTimeout: 60
@@ -245,7 +253,10 @@ export default {
     })
 
     navigator.getBattery().then(battery => {
+      // this.battery = battery
       this.batteryLevel = battery.level
+      this.batteryCharging = battery.charging
+      // console.log(`battery: ${Object.keys(this.battery)}`)
     })
     setInterval(() => {
       // обновление время
@@ -257,9 +268,10 @@ export default {
       let currentTime = `${hours}:${minutes}`
       this.currentTime = currentTime
       // обновление заряда
-      navigator.getBattery().then(battery => {
-          this.batteryLevel = battery.level
-      })  
+      // navigator.getBattery().then(battery => {
+        // this.battery = battery
+        // console.log(`battery: ${Object.keys(battery)}`)
+      // })  
     }, 60000)
 
     this.launchTime = new Date().toLocaleString()
