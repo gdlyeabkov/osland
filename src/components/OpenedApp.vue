@@ -3,7 +3,7 @@
     <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}`">
       <div v-if="activeTab === 'settings'">
         <div class="settingsAppHeader">
-          <h4>
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
             {{
               settings.general.language === 'Русский' ?
                 'Настройки'
@@ -579,7 +579,7 @@
       </div>
       <div v-else-if="activeTab === 'lockScreen'">
         <div class="settingsAppHeader">
-          <h4>
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
             {{
               settings.general.language === 'Русский' ?
                 'Экран блокировки'
@@ -617,6 +617,9 @@
             <span class="material-icons settingsAppWifiIcon">
               wifi
             </span>
+            <div v-show="isPasswordInput" class="lock graphicKeyWrap" :style="`background-image: url(${settings.wallpapers.lockScreen});`">
+              <canvas @mousedown="drawGraphicKey($event, 'down')" @mousemove="drawGraphicKey($event, 'move')" @mouseup="drawGraphicKey($event, 'up')" width="500px" height="500px" ref="graphicKey"></canvas>
+            </div>
           </div>
           <div class="settingsAppBodyItem" @click="setWatchStyle()">
             <div class="settingsAppBodyItemContent">
@@ -650,7 +653,7 @@
       </div>
       <div v-else-if="activeTab === 'wallpapers'">
         <div class="settingsAppHeader">
-          <h4>
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
             {{
               settings.general.language === 'Русский' ?
                 'Обои'
@@ -721,7 +724,7 @@
       </div>
       <div v-else-if="activeTab === 'general'">
         <div class="settingsAppHeader">
-          <h4>
+          <h4  :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
             {{
               settings.general.language === 'Русский' ?
                 'Общие настройки'
@@ -792,10 +795,10 @@
       </div>
       <div v-else-if="activeTab === 'display'">
         <div class="settingsAppHeader">
-          <h4>
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
             {{
               settings.general.language === 'Русский' ?
-                'Дислпей'
+                'Дисплей'
               : settings.general.language === 'English' ?
                 'Display'
               :
@@ -804,7 +807,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="setBrightness()">
+          <div class="settingsAppBodyItem" @click="null">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -816,14 +819,37 @@
                     'Яркость'
                 }}
               </span>
+              <div class="brightnessFooter">
+                <div @click="changeBrightness($event)" class="brightnessControl progress" id="curtainBtn">
+                  <div  @click="changeBrightness($event)" ref="brightnessControlFiller" class="brightnessControlFiller progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="50" aria-valuemax="100"  id="curtainBtn">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setFontSize()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Размер и стиль шрифта'
+                  : settings.general.language === 'English' ?
+                    'Font size and style'
+                  :
+                    'Размер и стиль шрифта'
+                }}
+              </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Яркость'
+                    'Размер и стиль шрифта'
                   : settings.general.language === 'English' ?
-                    'Brightness'
+                    'Font size and style'
                   :
-                    'Яркость'
+                    'Размер и стиль шрифта'
                 }}
               </span>
             </div>
@@ -855,6 +881,60 @@
                     'seconds'
                   :
                     'cекунд'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setNavigationType(); setNavigationButtonsOrder()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Навигационная панель'
+                  : settings.general.language === 'English' ?
+                    'Navigation bar'
+                  :
+                    'Навигационная панель'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Управляйте с помощью кнопок \"Домой\", \"Назад\" и \"Последние\" или используйте жесты, чтобы освободить экран'
+                  : settings.general.language === 'English' ?
+                    'seconds'
+                  :
+                    'cекунд'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setTopic()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим затемнения'
+                  : settings.general.language === 'English' ?
+                    'Dimmed mode'
+                  :
+                    'Режим затемнения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Режим затемнения'
+                  : settings.general.language === 'English' ?
+                    'Dimmed mode'
+                  :
+                    'Режим затемнения'
                 }}
               </span>
             </div>
@@ -897,9 +977,24 @@ export default {
         },
         deviceUsabilityAndParentControl: {
           displayTimeout: 60
+        },
+        display: {
+          fontSize: 0,
+          displayTimeout: 60,
+          navigation: {
+            type: 'buttons',
+            buttonsOrder: 'left'
+          },
+          screenScale: 100
         }
       },
-      activeTab: 'settings'
+      activeTab: 'settings',
+      isPasswordInput: false,
+      context: null,
+      gestures: [],
+      originX: 100,
+      originY: 150,
+      handleGesture: false
     }
   },
   props: [
@@ -947,6 +1042,558 @@ export default {
 
   },
   methods: {
+    setLockScreenModeToGraphicKey(lockScreenMode) {
+      this.isPasswordInput = false
+      this.settings.lockScreen.mode = lockScreenMode
+      this.handleGesture = false
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      // fetch(`http://localhost:4000/api/settings/lockscreen/set/?lockscreenmode=${lockScreenMode}&watchstyle=${watchStyle}`, {
+      fetch(`http://localhost:4000/api/settings/lockscreen/mode/set/?lockscreenmode=${lockScreenMode}&lockscreenpassword=${this.gestures.flatMap(gesture => gesture.character).join('')}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(lockScreenMode === 'graphicKey') {
+            this.drawPossibleKeys()
+            this.gestures = []
+          }
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                // let notification = new Notification(`Экран блокировки был сменён на ${lockScreenMode === 'moveSlide' ? 'Сдвинуть слайд' : lockScreenMode === 'graphicKey' ? 'Графический ключ' : 'Сдвинуть слайд' }!`)
+                // notification = new Notification(`Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`)
+                let notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Экран блокировки был сменён на ${lockScreenMode === 'moveSlide' ? 'Сдвинуть слайд' : lockScreenMode === 'graphicKey' ? 'Графический ключ' : 'Сдвинуть слайд' }!`
+                  : this.settings.general.language === 'English' ?
+                    `Lock screen was changed to ${lockScreenMode === 'moveSlide' ? 'Move slide' : lockScreenMode === 'graphicKey' ? 'Graphic key' : 'Move slide' }!`
+                  :
+                    `Экран блокировки был сменён на ${lockScreenMode === 'moveSlide' ? 'Сдвинуть слайд' : lockScreenMode === 'graphicKey' ? 'Графический ключ' : 'Сдвинуть слайд' }!`
+                }`)
+                // notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                //       `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
+                //     : this.settings.general.language === 'English' ?
+                //       `Watch style was changed to ${watchStyle === 'normal' ? 'Normal' : watchStyle === 'future' ? 'Future' : watchStyle === 'outline' ? 'Outline' : 'Normal' }!`
+                //     :
+                //       `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
+                //   }`)
+              }
+            })
+          }
+
+        }
+      });
+    },
+    drawPossibleKeys() {
+      this.context.clearRect(0, 0, 500, 500)
+      this.context.fillStyle = "#fff";
+      this.context.beginPath();
+      this.context.arc(100, 150, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(250, 150, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(400, 150, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(100, 300, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(250, 300, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(400, 300, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(100, 450, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(250, 450, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.beginPath();
+      this.context.arc(400, 450, 15, 0, Math.PI * 2, false);
+      this.context.fill();
+      this.context.closePath();
+      this.context.lineCap = 'round'
+      this.context.lineJoin = 'round'
+      this.context.lineWidth = 3
+      this.context.strokeStyle = "rgb(0, 100, 255)";
+      this.gestures.map(gesture => {
+          this.context.beginPath()
+          this.context.moveTo(gesture.fromX, gesture.fromY)
+          this.context.lineTo(gesture.toX, gesture.toY)
+          this.context.stroke()
+          this.context.closePath()
+      })
+  },
+  drawGraphicKey(event, gesture) {
+      this.$emit('resetDisplayTimeout')
+      let startCanvasX = this.$refs.graphicKey.offsetLeft + this.$refs.graphicKey.clientLeft
+      let startCanvasY = this.$refs.graphicKey.offsetTop + this.$refs.graphicKey.clientTop
+      if (gesture === 'down') {
+          if(event.x >= startCanvasX + 100 - 15 && event.x <= startCanvasX + 115 && event.y >= startCanvasY + 150 - 15 && event.y <= startCanvasY + 165) {
+              this.handleGesture = true
+              this.originX = 100
+              this.originY = 150
+          } else if(event.x >= startCanvasX + 250 - 15 && event.x <= startCanvasX + 265 && event.y >= startCanvasY + 150 - 15 && event.y <= startCanvasY + 165) {
+              this.handleGesture = true
+              this.originX = 250
+              this.originY = 150
+          } else if(event.x >= startCanvasX + 400 - 15 && event.x <= startCanvasX + 415 && event.y >= startCanvasY + 150 - 15 && event.y <= startCanvasY + 165) {
+              this.handleGesture = true
+              this.originX = 400
+              this.originY = 150
+          } else if(event.x >= startCanvasX + 100 - 15 && event.x <= startCanvasX + 115 && event.y >= startCanvasY + 300 - 15 && event.y <= startCanvasY + 315) {
+              this.handleGesture = true
+              this.originX = 100
+              this.originY = 300
+          } else if(event.x >= startCanvasX + 250 - 15 && event.x <= startCanvasX + 265 && event.y >= startCanvasY + 300 - 15 && event.y <= startCanvasY + 315) {
+              this.handleGesture = true
+              this.originX = 250
+              this.originY = 300
+          } else if(event.x >= startCanvasX + 400 - 15 && event.x <= startCanvasX + 415 && event.y >= startCanvasY + 300 - 15 && event.y <= startCanvasY + 315) {
+              this.handleGesture = true
+              this.originX = 400
+              this.originY = 300
+          } else if(event.x >= startCanvasX + 100 - 15 && event.x <= startCanvasX + 115 && event.y >= startCanvasY + 450 - 15 && event.y <= startCanvasY + 465) {
+              this.handleGesture = true
+              this.originX = 100
+              this.originY = 450
+          } else if(event.x >= startCanvasX + 250 - 15 && event.x <= startCanvasX + 265 && event.y >= startCanvasY + 450 - 15 && event.y <= startCanvasY + 465) {
+              this.handleGesture = true
+              this.originX = 250
+              this.originY = 450
+          } else if(event.x >= startCanvasX + 400 - 15 && event.x <= startCanvasX + 415 && event.y >= startCanvasY + 450 - 15 && event.y <= startCanvasY + 465) {
+              this.handleGesture = true
+              this.originX = 400
+              this.originY = 450
+          }
+      } else if (gesture === 'move') {
+          if(this.handleGesture) {
+              if(event.x >= startCanvasX + 100 - 15 && event.x <= startCanvasX + 115 && event.y >= startCanvasY + 150 - 15 && event.y <= startCanvasY + 165) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('1')) {
+                      this.gestures.push({
+                          character: '1',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 100,
+                          toY: 150
+                      })
+                      this.originX = 100
+                      this.originY = 150
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 250 - 15 && event.x <= startCanvasX + 265 && event.y >= startCanvasY + 150 - 15 && event.y <= startCanvasY + 165) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('2')) {
+                      this.gestures.push({
+                          character: '2',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 250,
+                          toY: 150
+                      })
+                      this.originX = 250
+                      this.originY = 150
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 400 - 15 && event.x <= startCanvasX + 415 && event.y >= startCanvasY + 150 - 15 && event.y <= startCanvasY + 165) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('3')) {
+                      this.gestures.push({
+                          character: '3',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 400,
+                          toY: 150
+                      })
+                      this.originX = 400
+                      this.originY = 150
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 100 - 15 && event.x <= startCanvasX + 115 && event.y >= startCanvasY + 300 - 15 && event.y <= startCanvasY + 315) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('4')) {
+                      this.gestures.push({
+                          character: '4',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 100,
+                          toY: 300
+                      })
+                      this.originX = 100
+                      this.originY = 300
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 250 - 15 && event.x <= startCanvasX + 265 && event.y >= startCanvasY + 300 - 15 && event.y <= startCanvasY + 315) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('5')) {
+                      this.gestures.push({
+                          character: '5',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 250,
+                          toY: 300
+                      })
+                      this.originX = 250
+                      this.originY = 300
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 400 - 15 && event.x <= startCanvasX + 415 && event.y >= startCanvasY + 300 - 15 && event.y <= startCanvasY + 315) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('6')) {
+                      this.gestures.push({
+                          character: '6',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 400,
+                          toY: 300
+                      })
+                      this.originX = 400
+                      this.originY = 300
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 100 - 15 && event.x <= startCanvasX + 115 && event.y >= startCanvasY + 450 - 15 && event.y <= startCanvasY + 465) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('7')) {
+                      this.gestures.push({
+                          character: '7',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 100,
+                          toY: 450
+                      })
+                      this.originX = 100
+                      this.originY = 450
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 250 - 15 && event.x <= startCanvasX + 265 && event.y >= startCanvasY + 450 - 15 && event.y <= startCanvasY + 465) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('8')) {
+                      this.gestures.push({
+                          character: '8',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 250,
+                          toY: 450
+                      })
+                      this.originX = 250
+                      this.originY = 450
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              } else if(event.x >= startCanvasX + 400 - 15 && event.x <= startCanvasX + 415 && event.y >= startCanvasY + 450 - 15 && event.y <= startCanvasY + 465) {
+                  if(!this.gestures.flatMap(gesture => gesture.character).includes('9')) {
+                      this.gestures.push({
+                          character: '9',
+                          fromX: this.originX,
+                          fromY: this.originY,
+                          toX: 400,
+                          toY: 450
+                      })
+                      this.originX = 400
+                      this.originY = 450
+                      if(this.gestures.length >= 6) {
+                        this.setLockScreenModeToGraphicKey('graphicKey')
+                      }
+                  }
+              }
+              this.context.clearRect(0, 0, 500, 500)
+              this.drawPossibleKeys()
+              this.context.beginPath()
+              this.context.moveTo(this.originX, this.originY)
+              this.context.lineTo(event.x - startCanvasX, event.y - startCanvasY)
+              this.context.stroke()
+              this.context.closePath();
+          }
+    } else if (gesture === 'up') {
+      if(this.handleGesture) {
+          this.handleGesture = false
+          this.gestures = []
+          this.drawPossibleKeys()
+      }
+    }
+  },
+  handleUnlockGesture(event, gesture) {
+      this.$emit('resetDisplayTimeout')
+      if(gesture === 'down') {
+        this.handleGesture = true
+      } else if(gesture === 'move') {
+        if(this.handleGesture) {
+          this.lastGesture = event.y
+        }
+      } else if(gesture === 'up') {
+        if (this.lastGesture < 150 && this.handleGesture) {
+          this.$emit('unlock')
+        }
+        this.handleGesture = false
+      }
+    },
+    changeBrightness(event) {
+      let brightnessPercent = Math.floor(event.x / 8)
+      this.$refs.brightnessControlFiller.style = `
+          background-color: rgb(100, 150, 255);
+          width: ${brightnessPercent}%;
+      `
+      this.$refs.openedAppRef.style = `
+        height: 100%;
+        z-index: 10;
+        width: ${this.orientation ? '50%' : '100%'};
+        background-color: ${this.settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 0px 15px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        -webkit-filter: brightness(${brightnessPercent / 100});
+      `
+      this.$emit('changeBrightness', brightnessPercent)
+      if(this.settings.notifications.enabled) {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            let notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                `Яркость дисплея установлена на ${brightnessPercent}`
+              : this.settings.general.language === 'English' ?
+                `Display brightness setted to ${brightnessPercent}`
+              :
+                `Яркость дисплея установлена на ${brightnessPercent}`}`)
+          }
+        })
+      }
+    },
+    setNavigationButtonsOrder() {
+      let buttonsOrder = this.settings.display.navigation.buttonsOrder === 'left' ?
+        'right'
+      : this.settings.display.navigation.type === 'right' ?
+        'left'
+      :
+        'left'
+      this.settings.display.navigation.buttonsOrder = buttonsOrder
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/navigation/buttonsorder/set/?order=${buttonsOrder}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Порядок кнопок навигации обновлен на ${buttonsOrder === 'left' ? 'слева направо' : 'справа налево'}`
+                    : this.settings.general.language === 'English' ?
+                      `Navigation buttons order changed to ${buttonsOrder === 'left' ? 'ltr' : 'rtl'}`
+                    :
+                      `Порядок кнопок навигации обновлен на ${buttonsOrder === 'left' ? 'слева направо' : 'справа налево'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setNavigationType() {
+      let navigationType = this.settings.display.navigation.type === 'buttons' ?
+        'gesture'
+      : this.settings.display.navigation.type === 'gesture' ?
+        'buttons'
+      :
+        'buttons'
+      this.settings.display.navigation.type = navigationType
+
+      let buttonsOrder = this.settings.display.navigation.buttonsOrder === 'left' ?
+        'right'
+      : this.settings.display.navigation.type === 'right' ?
+        'left'
+      :
+        'left'
+      this.settings.display.navigation.buttonsOrder = buttonsOrder
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/navigation/type/set/?type=${navigationType}&order=${buttonsOrder}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Тип навигации обновлен на ${navigationType === 'buttons' ? 'кнопки навигации' : 'жесты'}`
+                    : this.settings.general.language === 'English' ?
+                      `Navigation type changed to ${navigationType === 'buttons' ? 'navigation buttons' : 'gestures'}`
+                    :
+                      `Тип навигации обновлен на ${navigationType === 'buttons' ? 'кнопки навигации' : 'жесты'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setFontSize() {
+      let fontSize = this.settings.display.fontSize === 0 ?
+        2
+      : this.settings.display.fontSize === 2 ?
+        4
+      :
+        this.settings.display.fontSize === 4 ?
+        -4
+      :
+        this.settings.display.fontSize === -4 ?
+        -2
+      :
+        this.settings.display.fontSize === -2 ?
+        0
+      :
+        0
+      this.settings.display.fontSize = fontSize
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/display/fontsize/set/?fontsize=${fontSize}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.display.fontSize === 'Русский' ?
+                      `Размер шрифта обновлен на ${14 + fontSize}`
+                    : this.settings.general.language === 'English' ?
+                      `Font size was changed to ${14 + fontSize}`
+                    :
+                      `Размер шрифта обновлен на ${14 + fontSize}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
     setWatchStyle() {
       let watchStyle = this.settings.lockScreen.watchStyle === 'normal' ?
         'future'
@@ -1113,11 +1760,11 @@ export default {
         Notification.requestPermission().then((permission) => {
           if (permission === "granted") {
             let notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                `Яркость дислпея установлена на ${brightnessPercent}`
+                `Яркость дисплея установлена на ${brightnessPercent}`
               : this.settings.general.language === 'English' ?
                 `Display brightness setted to ${brightnessPercent}`
               :
-                `Яркость дислпея установлена на ${brightnessPercent}`}`)
+                `Яркость дисплея установлена на ${brightnessPercent}`}`)
           }
         })
       }
@@ -1394,7 +2041,7 @@ export default {
         alert(`Расположение: ${destination}`)
       }
     },
-    setLockScreenMode() {
+    async setLockScreenMode() {
       let lockScreenMode = this.settings.lockScreen.mode === 'moveSlide' ?
         'graphicKey'
       : this.settings.lockScreen.mode === 'graphicKey' ?
@@ -1402,63 +2049,13 @@ export default {
       :
         'graphicKey'
       this.settings.lockScreen.mode = lockScreenMode
-
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      // fetch(`http://localhost:4000/api/settings/lockscreen/set/?lockscreenmode=${lockScreenMode}&watchstyle=${watchStyle}`, {
-      fetch(`http://localhost:4000/api/settings/lockscreen/mode/set/?lockscreenmode=${lockScreenMode}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
-                }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
-              })
-            }
-            push();
-          }
-        });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                // let notification = new Notification(`Экран блокировки был сменён на ${lockScreenMode === 'moveSlide' ? 'Сдвинуть слайд' : lockScreenMode === 'graphicKey' ? 'Графический ключ' : 'Сдвинуть слайд' }!`)
-                // notification = new Notification(`Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`)
-                let notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                    `Экран блокировки был сменён на ${lockScreenMode === 'moveSlide' ? 'Сдвинуть слайд' : lockScreenMode === 'graphicKey' ? 'Графический ключ' : 'Сдвинуть слайд' }!`
-                  : this.settings.general.language === 'English' ?
-                    `Lock screen was changed to ${lockScreenMode === 'moveSlide' ? 'Move slide' : lockScreenMode === 'graphicKey' ? 'Graphic key' : 'Move slide' }!`
-                  :
-                    `Экран блокировки был сменён на ${lockScreenMode === 'moveSlide' ? 'Сдвинуть слайд' : lockScreenMode === 'graphicKey' ? 'Графический ключ' : 'Сдвинуть слайд' }!`
-                }`)
-                // notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                //       `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
-                //     : this.settings.general.language === 'English' ?
-                //       `Watch style was changed to ${watchStyle === 'normal' ? 'Normal' : watchStyle === 'future' ? 'Future' : watchStyle === 'outline' ? 'Outline' : 'Normal' }!`
-                //     :
-                //       `Стиль часов был сменён на ${watchStyle === 'normal' ? 'Обычный' : watchStyle === 'future' ? 'Футуризм' : watchStyle === 'outline' ? 'Обводка' : 'Обычный' }!`
-                //   }`)
-              }
-            })
-          }
-
-        }
-      });
+      if(lockScreenMode === 'graphicKey') {
+        this.isPasswordInput = true
+        this.context = this.$refs.graphicKey.getContext('2d')
+        this.drawPossibleKeys()
+      } else if(lockScreenMode === 'moveSlide') {
+        this.setLockScreenModeToGraphicKey(lockScreenMode)
+      }
     },
     setWallpapersMainScreen() {
       let mainScreen = this.settings.wallpapers.mainScreen === 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg' ?
@@ -1633,7 +2230,7 @@ export default {
   .settingsApp {
     background-color: rgb(255, 255, 255);
     width: 100%;
-    height: 565px;
+    height: 625px;
     overflow-y: scroll;
   }
 
@@ -1772,6 +2369,20 @@ export default {
   .settingsAppDeveloperSettingsIcon {
     color: rgb(125, 125, 125);
     font-size: 36px;
+  }
+
+  .brightnessControl {
+    min-width: 100%;
+    background-color: rgb(255, 215, 255);
+  }
+
+  .brightnessControlFiller {
+    background-color: rgb(100, 150, 255);
+    width: 50%;
+  }
+
+  .brightnessFooter {
+    min-width: 750px;
   }
 
 </style>

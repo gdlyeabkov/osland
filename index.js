@@ -45,7 +45,8 @@ const SettingsSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Object,
         default: {
             mode: 'moveSlide',
-            watchStyle: 'normal'
+            watchStyle: 'normal',
+            password: '123456'
         }
     },
     wallpapers: {
@@ -94,12 +95,26 @@ const SettingsSchema = new mongoose.Schema({
         enabled: {
             type: Boolean,
             default: true
+        },
+        main: {
+            showNotificationsIcons: {
+                type: Boolean,
+                default: true
+            },
+            options: {
+                type: String,
+                default: 'last'
+            }
+        },
+        showBatteryPercents: {
+            type: Boolean,
+            default: false
         }
     },
     display: {
         fontSize: {
-            type: String,
-            default: '14px'
+            type: Number,
+            default: 0
         },
         displayTimeout: {
             type: Number,
@@ -119,22 +134,6 @@ const SettingsSchema = new mongoose.Schema({
             type: Number,
             default: 100
         },
-    },
-    notifications: {
-        main: {
-            showNotificationsIcons: {
-                type: Boolean,
-                default: true
-            },
-            options: {
-                type: String,
-                default: 'last'
-            }
-        },
-        showBatteryPercents: {
-            type: Boolean,
-            default: false
-        }
     }
 }, { collection : 'mysettings' });
 
@@ -254,7 +253,7 @@ app.get('/api/settings/lockscreen/mode/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { "$set": { 'lockScreen.mode': req.query.lockscreenmode } }, (err, app) => {
+    SettingsModel.update({  }, { "$set": { 'lockScreen.mode': req.query.lockscreenmode, 'lockScreen.password': req.query.lockscreenpassword } }, (err, app) => {
         if(err){
             return res.json({ status: 'Error' })        
         }
@@ -425,6 +424,54 @@ app.get('/api/settings/notifications/enabled/set', (req, res) => {
     
     console.log(`req.query.enabled: ${req.query.enabled}`)
     SettingsModel.update({  }, { notifications: { enabled: req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/display/fontsize/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'display.fontSize': req.query.fontsize } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/navigation/type/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'display.navigation.type': req.query.type } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/navigation/buttonsorder/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'display.navigation.buttonsOrder': req.query.order } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })        
         }

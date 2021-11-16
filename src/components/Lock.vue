@@ -30,10 +30,11 @@ export default {
             originX: 100,
             originY: 150,
             gestures: [],
-            password: '123456',
             settings: {
                 lockScreen: {
-                    mode: 'modeSlide'
+                    mode: 'modeSlide',
+                    watchStyle: 'normal',
+                    password: '123456'
                 },
                 wallpapers: {
                     mainScreen: 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg',
@@ -99,9 +100,6 @@ export default {
         if(isGraphicKey) {
             this.context = this.$refs.graphicKey.getContext('2d')
             this.drawPossibleKeys()
-            this.$refs.graphicKey.addEventListener('touchstart', event => {
-                console.log(`touchstart: ${event}`)
-            }, false)
         }
       })
         // this.settings = await JSON.parse(localStorage.getItem('osland_settings'))
@@ -218,7 +216,7 @@ export default {
                             })
                             this.originX = 100
                             this.originY = 150
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -233,7 +231,7 @@ export default {
                             })
                             this.originX = 250
                             this.originY = 150
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -248,7 +246,7 @@ export default {
                             })
                             this.originX = 400
                             this.originY = 150
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -263,7 +261,7 @@ export default {
                             })
                             this.originX = 100
                             this.originY = 300
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -278,7 +276,7 @@ export default {
                             })
                             this.originX = 250
                             this.originY = 300
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -293,7 +291,7 @@ export default {
                             })
                             this.originX = 400
                             this.originY = 300
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -308,7 +306,7 @@ export default {
                             })
                             this.originX = 100
                             this.originY = 450
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -323,7 +321,7 @@ export default {
                             })
                             this.originX = 250
                             this.originY = 450
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
@@ -338,7 +336,7 @@ export default {
                             })
                             this.originX = 400
                             this.originY = 450
-                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.password) {
+                            if(this.gestures.length >= 6 && this.gestures.flatMap(gesture => gesture.character).join('') === this.settings.lockScreen.password) {
                                 this.$emit('unlock')
                             }
                         }
