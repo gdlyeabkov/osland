@@ -132,7 +132,7 @@ const SettingsSchema = new mongoose.Schema({
         },
         screenScale: {
             type: Number,
-            default: 100
+            default: 1
         },
     }
 }, { collection : 'mysettings' });
@@ -472,6 +472,22 @@ app.get('/api/settings/navigation/buttonsorder/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
     SettingsModel.update({  }, { '$set': { 'display.navigation.buttonsOrder': req.query.order } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })        
+        }
+        return res.json({ status: 'OK' })    
+    })
+
+})
+
+app.get('/api/settings/display/screenscale/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'display.screenScale': req.query.screenscale } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })        
         }

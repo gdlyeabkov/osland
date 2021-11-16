@@ -857,6 +857,33 @@
               wifi
             </span>
           </div>
+          <div class="settingsAppBodyItem" @click="setScreenScale()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Масштабирование экрана'
+                  : settings.general.language === 'English' ?
+                    'Screen scale'
+                  :
+                    'Масштабирование экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Масштабирование экрана'
+                  : settings.general.language === 'English' ?
+                    'Screen scale'
+                  :
+                    'Масштабирование экрана'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
           <div class="settingsAppBodyItem" @click="setDisplayTimeout()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
@@ -985,7 +1012,7 @@ export default {
             type: 'buttons',
             buttonsOrder: 'left'
           },
-          screenScale: 100
+          screenScale: 1
         }
       },
       activeTab: 'settings',
@@ -1042,6 +1069,68 @@ export default {
 
   },
   methods: {
+    setScreenScale() {
+      let screenScale = this.settings.display.screenScale === 1 ?
+        2
+      : this.settings.display.screenScale === 2 ?
+        0.5
+      :
+        this.settings.display.screenScale === 0.5 ?
+        1
+      :
+        1
+      this.settings.display.screenScale = screenScale
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/display/screenscale/set/?screenscale=${screenScale}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Масштабирование экрана было изменено на ${screenScale === 0.5 ? 'полэкрана' : screenScale === 1 ? 'обычный' : screenScale === 2 ? 'в 2 раза' : 'обычный' }!`
+                    : this.settings.general.language === 'English' ?
+                      `Screen scale was changed to ${screenScale === 0.5 ? 'splitscreen' : screenScale === 1 ? 'normal' : screenScale === 2 ? 'в 2 раза' : 'normal' }!`
+                    :
+                      `Масштабирование экрана было изменено на ${screenScale === 0.5 ? 'полэкрана' : screenScale === 1 ? 'обычный' : screenScale === 2 ? 'в 2 раза' : 'обычный' }!`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
     setLockScreenModeToGraphicKey(lockScreenMode) {
       this.isPasswordInput = false
       this.settings.lockScreen.mode = lockScreenMode
