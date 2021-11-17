@@ -46,7 +46,25 @@ const SettingsSchema = new mongoose.Schema({
         default: {
             mode: 'moveSlide',
             watchStyle: 'normal',
-            password: '123456'
+            password: '123456',
+            notifications: {
+                enabled: {
+                    type: Boolean,
+                    default: true
+                },
+                style: {
+                    type: String,
+                    default: 'icons'
+                },
+                hideInfo: {
+                    type: Boolean,
+                    default: true
+                },
+                showOnlyEmergency: {
+                    type: Boolean,
+                    default: false
+                }
+            }
         }
     },
     wallpapers: {
@@ -78,13 +96,13 @@ const SettingsSchema = new mongoose.Schema({
         },
         languageAndInput: {
             tts: {
-                tone: {
-                    type: Number,
-                    default: 1
-                },
                 speed: {
-                    type: Number,
-                    default: 1
+                    type: String,
+                    default: '1.5'
+                },
+                pitch: {
+                    type: String,
+                    default: '0.6'
                 }
             },
             pointerSpeed: {
@@ -167,6 +185,46 @@ const SettingsSchema = new mongoose.Schema({
     },
     accountsAndArchive: {
         accounts: [mongoose.Schema.Types.Map]
+    },
+    auxiliaryFunctions: {
+        emergencyMessages: {
+            type: Boolean,
+            default: false
+        },
+        motionAndGestures: {
+            simpleDisableSound: {
+                type: Boolean,
+                default: false
+            },
+            directCall:  {
+                type: Boolean,
+                default: false
+            },
+            gesturesImprints:  {
+                type: Boolean,
+                default: false
+            },
+            fastCall:  {
+                type: Boolean,
+                default: false
+            }
+        },
+        screenshots: {
+            format: {
+                type: String,
+                default: 'jpg'
+            }
+        }
+    },
+    privacy: {
+        bugReports: {
+            type: Boolean,
+            default: true
+        },
+        marketInfo: {
+            type: Boolean,
+            default: true
+        }
     }
 }, { collection : 'mysettings' });
 
@@ -387,7 +445,13 @@ app.get('/api/settings/reset', (req, res) => {
     let defaultSettings = {
         lockScreen: {
             mode: 'moveSlide',
-            watchStyle: 'normal'
+            watchStyle: 'normal',
+            notifications: {
+                enabled: true,
+                style: 'icons',
+                hideInfo: true,
+                showOnlyEmergency: false
+            }
         },
         wallpapers: {
             mainScreen: 'https://i.pinimg.com/originals/ba/f6/8e/baf68edfc6889408276a7679e3b4eeda.jpg',
@@ -402,7 +466,12 @@ app.get('/api/settings/reset', (req, res) => {
         general: {
             language: 'Русский',
             languageAndInput: {
-                isLeftMainMouseBtn: true
+                isLeftMainMouseBtn: true,
+                pointerSpeed: '1',
+                tts: {
+                    speed: '1.5',
+                    pitch: '0.6'
+                },
             },
             dateAndTime: {
                 fullHoursFormat: true
@@ -415,6 +484,19 @@ app.get('/api/settings/reset', (req, res) => {
             enabled: true,
             options: 'last',
             showBatteryPercents: false
+        },
+        auxiliaryFunctions: {
+            emergencyMessages: false,
+            motionAndGestures: {
+                simpleDisableSound: false,
+                directCall: false,
+                gesturesImprints: false,
+                fastCall: false,
+            }
+        },
+        privacy: {
+            bugReports: true,
+            marketInfo: true
         }
     }
     SettingsModel.update({  }, defaultSettings, (err, settings) => {
@@ -433,7 +515,6 @@ app.get('/api/settings/general/language/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    console.log(`req.query.language: ${req.query.language}`)
     SettingsModel.update({  }, { general: { language: req.query.language } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })        
@@ -641,6 +722,230 @@ app.get('/api/settings/general/languageandinput/isleftmainmousebtn/set', (req, r
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
     SettingsModel.update({  }, { '$set': { 'general.languageAndInput.isLeftMainMouseBtn': req.query.isleftbtn } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/general/languageandinput/tts/speed/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'general.languageAndInput.tts.speed': req.query.speed } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/general/languageandinput/tts/pitch/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'general.languageAndInput.tts.pitch': req.query.pitch } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/auxiliaryfunctions/emergencymessages/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'auxiliaryFunctions.emergencyMessages': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/auxiliaryfunctions/motionandgestures/simpledisablesound/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'auxiliaryFunctions.motionAndGestures.simpleDisableSound': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/auxiliaryfunctions/motionandgestures/directcall/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'auxiliaryFunctions.motionAndGestures.directCall': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/auxiliaryfunctions/motionandgestures/gesturesImprints/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'auxiliaryFunctions.motionAndGestures.gesturesImprints': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/auxiliaryfunctions/motionandgestures/fastcall/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'auxiliaryFunctions.motionAndGestures.fastCall': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/auxiliaryfunctions/screenshots/format/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'auxiliaryFunctions.screenshots.format': req.query.format } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/privacy/marketinfo/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'privacy.marketInfo': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/privacy/bugreports/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'privacy.bugReports': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/lockscreen/notifications/enabled/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'lockScreen.notifications.enabled': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/lockscreen/notifications/style/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'lockScreen.notifications.style': req.query.style } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/lockscreen/notifications/hideinfo/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'lockscreen.notifications.hideInfo': req.query.hide } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/lockscreen/notifications/showonlyemergency/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'lockScreen.notifications.showOnlyEmergency': req.query.show } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }

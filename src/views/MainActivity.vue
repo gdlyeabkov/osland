@@ -477,8 +477,11 @@ export default {
               y: event.y - 35
             }
             this.isContextMenu = true
-            if(this.settings.specialCapabilities.voiceAssistant.enabled)
-            speak(appInfo.name, 2, 1.5, 0.8, 0.6);
+            if(this.settings.specialCapabilities.voiceAssistant.enabled) {
+              let ttsSpeed = Number(this.settings.general.languageAndInput.tts.speed)
+              let ttsPitch = Number(this.settings.general.languageAndInput.tts.pitch)
+              speak(appInfo.name, 2, ttsSpeed, 0.8, ttsPitch)
+            }
           }
         }, 2000)
       } else if(gesture === 'up') {

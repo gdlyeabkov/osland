@@ -648,6 +648,60 @@
               wifi
             </span>
           </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'lockScreenNotifications'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Уведомления'
+                  : settings.general.language === 'English' ?
+                    'Notifications'
+                  :
+                    'Уведомления'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Включено'
+                  : settings.general.language === 'English' ?
+                    'Enabled'
+                  :
+                    'Включено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getLockScreenInfo()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'О блокировке экрана'
+                  : settings.general.language === 'English' ?
+                    'About lockscren'
+                  :
+                    'О блокировке экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'О блокировке экрана'
+                  : settings.general.language === 'English' ?
+                    'About lockscren'
+                  :
+                    'О блокировке экрана'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
         </div>
 
       </div>
@@ -5982,7 +6036,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'screenshots'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -6036,7 +6090,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'motionAndGestures'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -6063,7 +6117,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setEmergencyMessages()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -6230,7 +6284,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setBugReports()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -6257,7 +6311,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setMarketInfo()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -7382,7 +7436,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'tts'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -8069,6 +8123,465 @@
           </div>
         </div>
       </div>
+      <div v-else-if="activeTab === 'tts'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Преобразование текста в речь'
+              : settings.general.language === 'English' ?
+                'Text to speech'
+              :
+                'Преобразование текста в речь'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setVoiceAssistant()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Предпочитаемый модуль'
+                  : settings.general.language === 'English' ?
+                    'Wanted unit'
+                  :
+                    'Предпочитаемый модуль'
+                }}
+              </span>
+              <span>
+                {{
+                  'OTTS'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setVoiceAssistant()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Язык'
+                  : settings.general.language === 'English' ?
+                    'Language'
+                  :
+                    'Язык'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использовать системный язык'
+                  : settings.general.language === 'English' ?
+                    'Use system language'
+                  :
+                    'Использовать системный язык'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setTTSSpeed()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Скорость речи'
+                  : settings.general.language === 'English' ?
+                    'Voice speed'
+                  :
+                    'Скорость речи'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Низкая'
+                  : settings.general.language === 'English' ?
+                    'Slow'
+                  :
+                    'Низкая'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setTTSPitch()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Тон'
+                  : settings.general.language === 'English' ?
+                    'Pitch'
+                  :
+                    'Тон'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Тон'
+                  : settings.general.language === 'English' ?
+                    'Pitch'
+                  :
+                    'Тон'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>          
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'motionAndGestures'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Движение и жесты'
+              : settings.general.language === 'English' ?
+                'Motion and gestures'
+              :
+                'Движение и жесты'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setSimpleDisableSound()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Простое отключение звука'
+                  : settings.general.language === 'English' ?
+                    'Simple sound disabled'
+                  :
+                    'Простое отключение звука'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setDirectCall()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Прямой вызов'
+                  : settings.general.language === 'English' ?
+                    'Direct call'
+                  :
+                    'Прямой вызов'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setGesturesImprints()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Жесты датчика отпечатков'
+                  : settings.general.language === 'English' ?
+                    'Gestures imprints sensor'
+                  :
+                    'Жесты датчика отпечатков'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Открытие и закрытие панели уведомлений при помощи датчика отпечатка пальца.'
+                  : settings.general.language === 'English' ?
+                    'Open and close notification bars driven imprints fingers sensor.'
+                  :
+                    'Открытие и закрытие панели уведомлений при помощи датчика отпечатка пальца.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setFastCall()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Быстрый вызов'
+                  : settings.general.language === 'English' ?
+                    'Fast call'
+                  :
+                    'Быстрый вызов'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Включено'
+                  : settings.general.language === 'English' ?
+                    'Enabled'
+                  :
+                    'Включено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>          
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'screenshots'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Движение и жесты'
+              : settings.general.language === 'English' ?
+                'Motion and gestures'
+              :
+                'Движение и жесты'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Панель инструментов для снимков'
+                  : settings.general.language === 'English' ?
+                    'Toolsbar for screenshots'
+                  :
+                    'Панель инструментов для снимков'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Удаление снимков после отправки'
+                  : settings.general.language === 'English' ?
+                    'Remove screenshots after send'
+                  :
+                    'Удаление снимков после отправки'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автоматическое удаление снимков экрана после их отправки с помощью специальной панели инструментов'
+                  : settings.general.language === 'English' ?
+                    'Auto remove screenshots after send them driven special tools bar'
+                  :
+                    'Автоматическое удаление снимков экрана после их отправки с помощью специальной панели инструментов'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setScreenshotsFormat()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Формат снимка экрана'
+                  : settings.general.language === 'English' ?
+                    'Screenshot format'
+                  :
+                    'Формат снимка экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.auxiliaryFunctions.screenshots.format
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'lockScreenNotifications'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Уведомления'
+              : settings.general.language === 'English' ?
+                'Notifications'
+              :
+                'Уведомления'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setLockScreenNotifications()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setLockScreenNotificationsStyle()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Стиль просмотра'
+                  : settings.general.language === 'English' ?
+                    'Display style'
+                  :
+                    'Стиль просмотра'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setHideInfo()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Скрыть содержимое'
+                  : settings.general.language === 'English' ?
+                    'Hide content'
+                  :
+                    'Скрыть содержимое'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Скрытие содержимого уведомлений на панели уведомлений'
+                  : settings.general.language === 'English' ?
+                    'Hide notifications content from notifications bar'
+                  :
+                    'Скрытие содержимого уведомлений на панели уведомлений'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setShowOnlyEmergency()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отображаемые оповещения'
+                  : settings.general.language === 'English' ?
+                    'Displayable notifications'
+                  :
+                    'Отображаемые оповещения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отображаемые оповещения'
+                  : settings.general.language === 'English' ?
+                    'Displayable notifications'
+                  :
+                    'Отображаемые оповещения'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
       
     </div>
   </div>
@@ -8243,6 +8756,766 @@ export default {
     }
   },
   methods: {
+    setLockScreenNotificationsStyle() {
+      let notificationsStyle = this.settings.lockScreen.notifications.style === 'icons' ? 'info' : this.settings.lockScreen.notifications.style === 'info' ? 'icons' : 'icons'
+      this.settings.lockScreen.notifications.style = notificationsStyle
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/lockscreen/notifications/style/set/?style=${notificationsStyle}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлены стили уведомлений на экране блокировки на ${notificationsStyle === 'icons' ? 'только иконки' : notificationsStyle === 'info' ? 'содержимое' : 'только иконки'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated notifications style from locksreen to ${notificationsStyle === 'icons' ? 'icons only' : notificationsStyle === 'info' ? 'content' : 'icons only'}`
+                    :
+                      `Обновлены стили уведомлений на экране блокировки на ${notificationsStyle === 'icons' ? 'только иконки' : notificationsStyle === 'info' ? 'содержимое' : 'только иконки'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setHideInfo() {
+      let isEnabled = !this.settings.lockScreen.notifications.hideInfo
+      this.settings.lockScreen.notifications.hideInfo = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/lockscreen/notifications/hideinfo/set/?hide=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлено скрытие содержимого уведомлений на экране блокировки на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated \"Hide info\" to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлено скрытие содержимого уведомлений на экране блокировки на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setShowOnlyEmergency() {
+      let isEnabled = !this.settings.lockScreen.notifications.showOnlyEmergency
+      this.settings.lockScreen.notifications.showOnlyEmergency = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/lockscreen/notifications/showonlyemergency/set/?show=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлены отображаемые оповещения на экране блокировки на ${isEnabled ? 'Только экстренные уведомления' : !isEnabled ? 'Экстренные уведомления и уведомления без звука' : 'Только экстренные уведомления'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated displayable notifications from lockscreen to ${isEnabled ? 'show only emergency notifications' : !isEnabled ? 'Emergency and soundless notifications' : 'show only emergency notifications'}`
+                    :
+                      `Обновлены отображаемые оповещения на экране блокировки на ${isEnabled ? 'Только экстренные уведомления' : !isEnabled ? 'Экстренные уведомления и уведомления без звука' : 'Только экстренные уведомления'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setLockScreenNotifications() {
+      let isEnabled = !this.settings.lockScreen.notifications.enabled
+      this.settings.lockScreen.notifications.enabled = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/lockscreen/notifications/enabled/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлены уведомления на экране блокировки на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated \"Lockscreen notifications\" to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлены уведомления на экране блокировки на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    getLockScreenInfo() {
+      alert('OLSv1.0.0')
+    },
+    setBugReports() {
+    
+      let isEnabled = !this.settings.privacy.bugReports
+      this.settings.privacy.bugReports = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/privacy/bugreports/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлены отчеты об ошибках на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated \"Bug reports\" to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлены отчеты об ошибках на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setMarketInfo() {
+    
+      let isEnabled = !this.settings.privacy.marketInfo
+      this.settings.privacy.marketInfo = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/privacy/marketinfo/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлена маркетинговая информация на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated \"Market info\" to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлена маркетинговая информация на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setScreenshotsFormat() {
+
+      let screenshotFormat = this.settings.auxiliaryFunctions.screenshots.format === 'jpg' ? 'png' : this.settings.auxiliaryFunctions.screenshots.format === 'png' ? 'jpg' : 'jpg'
+      this.settings.auxiliaryFunctions.screenshots.format = screenshotFormat
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/auxiliaryfunctions/screenshots/format/set/?format=${screenshotFormat}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен формат снимка экрана на ${screenshotFormat}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated screenshot format to ${screenshotFormat}`
+                    :
+                      `Обновлен формат снимка экрана на ${screenshotFormat}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setSimpleDisableSound() {
+    
+      let isEnabled = !this.settings.auxiliaryFunctions.motionAndGestures.simpleDisableSound
+      this.settings.auxiliaryFunctions.motionAndGestures.simpleDisableSound = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/auxiliaryfunctions/motionandgestures/simpledisablesound/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлено простое отключение звука на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated \"Simple disable sound\" to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлено простое отключение звука на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setDirectCall() {
+    
+      let isEnabled = !this.settings.auxiliaryFunctions.motionAndGestures.directCall
+      this.settings.auxiliaryFunctions.motionAndGestures.directCall = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/auxiliaryfunctions/motionandgestures/directcall/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен прямой вызов на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated \"Direct call\" to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлен прямой вызов на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setGesturesImprints() {
+    
+      let isEnabled = !this.settings.auxiliaryFunctions.motionAndGestures.gesturesImrints
+      this.settings.auxiliaryFunctions.motionAndGestures.gesturesImrints = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/auxiliaryfunctions/motionandgestures/gesturesimprints/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлены жесты отпечатков пальцев на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated fingers imprints to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлены жесты отпечатков пальцев на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setFastCall() {
+    
+      let isEnabled = !this.settings.auxiliaryFunctions.motionAndGestures.fastCall
+      this.settings.auxiliaryFunctions.motionAndGestures.fastCall = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/auxiliaryfunctions/motionandgestures/fastcall/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен быстрый вызов на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated \"Fast call\" to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлен быстрый вызов на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setEmergencyMessages() {
+    
+      let isEnabled = !this.settings.auxiliaryFunctions.emergencyMessages
+      this.settings.auxiliaryFunctions.emergencyMessages = isEnabled
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/auxiliaryfunctions/emergencymessages/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлены экстренные сообщения на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated emergency messages to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'}`
+                    :
+                      `Обновлены экстренные сообщения на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setTTSSpeed() {
+    
+      let ttsSpeed = this.settings.general.languageAndInput.tts.speed === '1.5' ? '2.0' : this.settings.general.languageAndInput.tts.speed === '2.0' ? '0.5' : this.settings.general.languageAndInput.tts.speed === '0.5' ? '1.0' : this.settings.general.languageAndInput.tts.speed === '1.0' ? '1.5' : '1.5'
+      this.settings.general.languageAndInput.tts.speed = ttsSpeed
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/general/languageandinput/tts/speed/set/?speed=${ttsSpeed}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлена скорость голосового помощника на ${ttsSpeed === '1.5' ? 'Шустрая' : ttsSpeed === '2.0' ? 'Быстрая' : ttsSpeed === '0.5' ? 'Медленная' : ttsSpeed === '1.0' ? 'Обычная' : 'Шустрая'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated voice assistant speed to ${ttsSpeed === '1.5' ? 'Nimble' : ttsSpeed === '2.0' ? 'Fast' : ttsSpeed === '0.5' ? 'Slow' : ttsSpeed === '1.0' ? 'Normal' : 'Nimble'}`
+                    :
+                      `Обновлена скорость голосового помощника на ${ttsSpeed === '1.5' ? 'Шустрая' : ttsSpeed === '2.0' ? 'Быстрая' : ttsSpeed === '0.5' ? 'Медленная' : ttsSpeed === '1.0' ? 'Обычная' : 'Шустрая'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setTTSPitch() {
+    
+      let ttsPitch = this.settings.general.languageAndInput.tts.pitch === '0.6' ? '0.8' : this.settings.general.languageAndInput.tts.pitch === '0.8' ? '1.0' : this.settings.general.languageAndInput.tts.pitch === '1.0' ? '1.2' : this.settings.general.languageAndInput.tts.pitch === '1.2' ? '0.6' : '0.6'
+      this.settings.general.languageAndInput.tts.pitch = ttsPitch
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/general/languageandinput/tts/pitch/set/?pitch=${ttsPitch}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен тон голосового помощника на ${ttsPitch === '0.6' ? 'Тихий' : ttsPitch === '0.8' ? 'Средний' : ttsPitch === '1.0' ? 'Твердый' : ttsPitch === '1.2' ? 'Звонкий' : 'Тихий'}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated voice assistant pitch to ${ttsPitch === '0.6' ? 'Quiet' : ttsPitch === '0.8' ? 'Middle' : ttsPitch === '1.0' ? 'Solid' : ttsPitch === '1.2' ? 'Voiced' : 'Quiet'}`
+                    :
+                      `Обновлен тон голосового помощника на ${ttsPitch === '0.6' ? 'Тихий' : ttsPitch === '0.8' ? 'Средний' : ttsPitch === '1.0' ? 'Твердый' : ttsPitch === '1.2' ? 'Звонкий' : 'Тихий'}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
     setMainMouseBtn() {
     
       let mainMouseButton = !this.settings.general.languageAndInput.isLeftMainMouseButton
