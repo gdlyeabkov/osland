@@ -5722,11 +5722,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    '22 час 30 мин.'
+                    `${batteryDischarging === Infinity ? 'Заряжается' : `${batteryDischarging * 60 * 60 - 1} час`} ${batteryDischarging === Infinity ? '' : `${batteryDischarging * 60 - 1} мин.`}`
                   : settings.general.language === 'English' ?
-                    '22 hrs 30 mins'
+                    `${batteryDischarging === Infinity ? 'Charging' : `${batteryDischarging * 60 * 60 - 1} hrs`} ${batteryDischarging === Infinity ? '' : `${batteryDischarging * 60 - 1} mins`}`
                   :
-                    '22 час 30 мин.'
+                    `${batteryDischarging === Infinity ? 'Заряжается' : `${batteryDischarging * 60 * 60 - 1} час`} ${batteryDischarging === Infinity ? '' : `${batteryDischarging * 60 - 1} мин.`}`
                 }}
               </span>
             </div>
@@ -7409,7 +7409,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setPointerSpeed()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -7424,11 +7424,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Скорость указателя'
+                    `${pointerSpeed === '1' ? 'Обычная' : pointerSpeed === '1.5' ? 'Быстрая' : pointerSpeed === '0.5' ? 'Медленная' : 'Обычная' }`
                   : settings.general.language === 'English' ?
-                    'Pointer speed'
+                    `${pointerSpeed === '1' ? 'Normal' : pointerSpeed === '1.5' ? 'Fast' : pointerSpeed === '0.5' ? 'Slow' : 'Normal' }`
                   :
-                    'Скорость указателя'
+                    `${pointerSpeed === '1' ? 'Обычная' : pointerSpeed === '1.5' ? 'Быстрая' : pointerSpeed === '0.5' ? 'Медленная' : 'Обычная' }`
                 }}
               </span>
             </div>
@@ -7436,7 +7436,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setMainMouseBtn()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -7451,11 +7451,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Левая'
+                    `${settings.general.languageAndInput.isLeftMainMouseButton ? 'Левая' : !settings.general.languageAndInput.isLeftMainMouseButton ? 'Правая' : 'Левая'}`
                   : settings.general.language === 'English' ?
-                    'Left'
+                    `${settings.general.languageAndInput.isLeftMainMouseButton ? 'Left' : !settings.general.languageAndInput.isLeftMainMouseButton ? 'Right' : 'Left'}`
                   :
-                    'Левая'
+                    `${settings.general.languageAndInput.isLeftMainMouseButton ? 'Левая' : !settings.general.languageAndInput.isLeftMainMouseButton ? 'Правая' : 'Левая'}`
                 }}
               </span>
             </div>
@@ -8162,6 +8162,9 @@ export default {
     'batteryCharging': {
 
     },
+    'batteryDischarging': {
+
+    },
     'isUndo': {
 
     },
@@ -8240,6 +8243,114 @@ export default {
     }
   },
   methods: {
+    setMainMouseBtn() {
+    
+      let mainMouseButton = !this.settings.general.languageAndInput.isLeftMainMouseButton
+      this.settings.general.languageAndInput.isLeftMainMouseButton = mainMouseButton
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/general/languageandinput/isleftmainmousebtn/set/?isleftbtn=${mainMouseButton}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлена основная кнопка мыши на ${mainMouseButton ? 'левая' : !mainMouseButton ? 'правая' : 'левая' }`
+                    : this.settings.general.language === 'English' ?
+                      `Updated main mouse button to ${mainMouseButton ? 'left' : !mainMouseButton ? 'right' : 'left' }`
+                    :
+                      `Обновлена основная кнопка мыши на ${mainMouseButton ? 'левая' : !mainMouseButton ? 'правая' : 'левая' }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
+    setPointerSpeed() {
+    
+      let pointerSpeed = `${this.settings.general.languageAndInput.pointerSpeed === '1' ? '1.5' : this.settings.general.languageAndInput.pointerSpeed === '1.5' ? '0.5' : this.settings.general.languageAndInput.pointerSpeed === '0.5' ? '1' : '1' }`
+      this.settings.general.languageAndInput.pointerSpeed = pointerSpeed
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/general/languageandinput/pointerspeed/set/?speed=${pointerSpeed}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлена скорость указателя на ${pointerSpeed === '1' ? 'обычная' : pointerSpeed === '1.5' ? 'быстрая' : pointerSpeed === '0.5' ? 'медленная' : 'обычная' }`
+                    : this.settings.general.language === 'English' ?
+                      `Update pointer speed to ${pointerSpeed === '1' ? 'normal' : pointerSpeed === '1.5' ? 'fast' : pointerSpeed === '0.5' ? 'slow' : 'normal' }`
+                    :
+                      `Обновлена скорость указателя на ${pointerSpeed === '1' ? 'обычная' : pointerSpeed === '1.5' ? 'быстрая' : pointerSpeed === '0.5' ? 'медленная' : 'обычная' }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
     aboutSpecialCapabilities() {
       alert('OsLand scv1.0.0')
     },

@@ -76,6 +76,26 @@ const SettingsSchema = new mongoose.Schema({
             type: 'String',
             default: 'Русский'
         },
+        languageAndInput: {
+            tts: {
+                tone: {
+                    type: Number,
+                    default: 1
+                },
+                speed: {
+                    type: Number,
+                    default: 1
+                }
+            },
+            pointerSpeed: {
+                type: String,
+                default: '1'
+            },
+            isLeftMainMouseBtn: {
+                type: Boolean,
+                default: true
+            }
+        },
         dateAndTime: {
             fullHoursFormat: {
                 type: Boolean,
@@ -381,6 +401,9 @@ app.get('/api/settings/reset', (req, res) => {
         topic: 'dark',
         general: {
             language: 'Русский',
+            languageAndInput: {
+                isLeftMainMouseBtn: true
+            },
             dateAndTime: {
                 fullHoursFormat: true
             }
@@ -586,6 +609,38 @@ app.get('/api/settings/notifications/options/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
     SettingsModel.update({  }, { '$set': { 'notifications.options': req.query.options } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/general/languageandinput/pointerspeed/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'general.languageAndInput.pointerSpeed': req.query.speed } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/general/languageandinput/isleftmainmousebtn/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'general.languageAndInput.isLeftMainMouseBtn': req.query.isleftbtn } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
