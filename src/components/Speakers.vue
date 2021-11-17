@@ -25,7 +25,8 @@ export default {
         'startPlay',
         'soundCommand',
         'isSpeakersDialog',
-        'changeVolume'
+        'changeVolume',
+        'soundMode'
     ],
     emits: [
         'resetSpeakers'
@@ -87,6 +88,10 @@ export default {
                     this.$emit('resetSpeakers')
                 }
             }
+        },
+        async soundMode(newSoundMode) {
+            console.log(`newSoundMode: ${newSoundMode}`)
+            this.$refs.speakers.volume = newSoundMode
         }
     },
     mounted() {

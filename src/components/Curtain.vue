@@ -66,7 +66,7 @@
                         : currentSoundMode === 0.1 ?
                             0
                         :
-                            1">
+                            1; $emit('transferSoundMode', currentSoundMode)">
                     {{
                         currentSoundMode > 0.1 ?
                             'volume_up'
@@ -130,7 +130,7 @@
                 <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isVideoMode, 'btn-light': !isVideoMode }" id="curtainBtn" @click="isVideoMode = !isVideoMode">
                     play_circle_outline
                 </span>
-                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isDontDisturb, 'btn-light': !isDontDisturb }" id="curtainBtn" @click="isDontDisturb = !isDontDisturb; $emit('changeVolume', 0)">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isDontDisturb, 'btn-light': !isDontDisturb }" id="curtainBtn" @click="isDontDisturb = !isDontDisturb; $emit('changeVolume', 0); $emit('transferSoundMode', isDontDisturb ? 0 : 1)">
                     do_not_disturb_on
                 </span>
                 <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isWifiCalling, 'btn-light': !isWifiCalling }" id="curtainBtn" @click="isWifiCalling = !isWifiCalling">
@@ -203,7 +203,8 @@ export default {
         'filterBlueColor',
         'changeVolume',
         'location',
-        'resetDisplayTimeout'
+        'resetDisplayTimeout',
+        'transferSoundMode'
     ],
     watch: {
         soundMode(newSoundMode) {

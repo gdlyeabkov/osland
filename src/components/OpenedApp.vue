@@ -663,11 +663,26 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Включено'
+                    (
+                    settings.lockScreen.notifications.enabled ?
+                      'Включено'
+                    :
+                      'Выключено'
+                    )
                   : settings.general.language === 'English' ?
-                    'Enabled'
+                    (
+                    settings.lockScreen.notifications.enabled ?
+                      'Enabled'
+                    :
+                      'Disabled'
+                    )
                   :
-                    'Включено'
+                    (
+                    settings.lockScreen.notifications.enabled ?
+                      'Включено'
+                    :
+                      'Выключено'
+                    )
                 }}
               </span>
             </div>
@@ -1094,7 +1109,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="setNotifications">
+          <div class="settingsAppBodyItem" @click="setNotifications()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1361,7 +1376,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" >
+          <div class="settingsAppBodyItem" @click="setSoundMode()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -7478,11 +7493,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    `${pointerSpeed === '1' ? 'Обычная' : pointerSpeed === '1.5' ? 'Быстрая' : pointerSpeed === '0.5' ? 'Медленная' : 'Обычная' }`
+                    `${settings.general.languageAndInput.pointerSpeed === '1' ? 'Обычная' : settings.general.languageAndInput.pointerSpeed === '1.5' ? 'Быстрая' : settings.general.languageAndInput.pointerSpeed === '0.5' ? 'Медленная' : 'Обычная' }`
                   : settings.general.language === 'English' ?
-                    `${pointerSpeed === '1' ? 'Normal' : pointerSpeed === '1.5' ? 'Fast' : pointerSpeed === '0.5' ? 'Slow' : 'Normal' }`
+                    `${settings.general.languageAndInput.pointerSpeed === '1' ? 'Normal' : settings.general.languageAndInput.pointerSpeed === '1.5' ? 'Fast' : settings.general.languageAndInput.pointerSpeed === '0.5' ? 'Slow' : 'Normal' }`
                   :
-                    `${pointerSpeed === '1' ? 'Обычная' : pointerSpeed === '1.5' ? 'Быстрая' : pointerSpeed === '0.5' ? 'Медленная' : 'Обычная' }`
+                    `${settings.general.languageAndInput.pointerSpeed === '1' ? 'Обычная' : settings.general.languageAndInput.pointerSpeed === '1.5' ? 'Быстрая' : settings.general.languageAndInput.pointerSpeed === '0.5' ? 'Медленная' : 'Обычная' }`
                 }}
               </span>
             </div>
@@ -8514,11 +8529,32 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Выключено'
+                    (
+                    settings.lockScreen.notifications.style === 'icons' ?
+                      'Только иконки'
+                    : settings.lockScreen.notifications.style === 'info' ?
+                      'Содержимое'
+                    :
+                      'Только иконки'
+                    )
                   : settings.general.language === 'English' ?
-                    'Disabled'
+                    (
+                    settings.lockScreen.notifications.style === 'icons' ?
+                      'Only icons'
+                    : settings.lockScreen.notifications.style === 'info' ?
+                      'Content'
+                    :
+                      'Only icons'
+                    )
                   :
-                    'Выключено'
+                    (
+                    settings.lockScreen.notifications.style === 'icons' ?
+                      'Только иконки'
+                    : settings.lockScreen.notifications.style === 'info' ?
+                      'Содержимое'
+                    :
+                      'Только иконки'
+                    )
                 }}
               </span>
             </div>
@@ -8568,11 +8604,32 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Отображаемые оповещения'
+                    (
+                    settings.lockScreen.notifications.showOnlyEmergency ?
+                      'Только экстренные уведомления'
+                    : !settings.lockScreen.notifications.showOnlyEmergency ?
+                      'Экстренные уведомления и уведомления без звука'
+                    :
+                      'Только экстренные уведомления'
+                    )
                   : settings.general.language === 'English' ?
-                    'Displayable notifications'
+                    (
+                    settings.lockScreen.notifications.showOnlyEmergency ?
+                      'Only emergency notifictions'
+                    : !settings.lockScreen.notifications.showOnlyEmergency ?
+                      'Emergency and soundless notifications'
+                    :
+                      'Only emergency notifictions'
+                    )
                   :
-                    'Отображаемые оповещения'
+                    (
+                    settings.lockScreen.notifications.showOnlyEmergency ?
+                      'Только экстренные уведомления'
+                    : !settings.lockScreen.notifications.showOnlyEmergency ?
+                      'Экстренные уведомления и уведомления без звука'
+                    :
+                      'Только экстренные уведомления'
+                    )
                 }}
               </span>
             </div>
@@ -8695,12 +8752,20 @@ export default {
         let isQuit = false
         if (this.activeTab === 'settings') {
           isQuit = true
-        } else if (this.activeTab === 'connections' || this.activeTab === 'soundsAndVibration' || this.activeTab === 'notifications' || this.activeTab === 'display' || this.activeTab === 'wallpapers' || this.activeTab === 'topics' || this.activeTab === 'lockScreen' || this.activeTab === 'biometryAndSecurity' || this.activeTab === 'privacy' || this.activeTab === 'location' || this.activeTab === 'accountsAndArchive' || this.activeTab === 'auxiliaryFunctions' || this.activeTab === 'deviceUsabilityAndParentControl' || this.activeTab === 'deviceManagement' || this.activeTab === 'applications' || this.activeTab === 'general' || this.activeTab === 'specialCapabilities' || this.activeTab === 'updates' || this.activeTab === 'userManual' || this.activeTab === 'phoneInformation' || this.activeTab === 'developerParameters') {
+        } else if (this.activeTab === 'connections' || this.activeTab === 'soundsAndVibration' || this.activeTab === 'notifications' || this.activeTab === 'display' || this.activeTab === 'wallpapers' || this.activeTab === 'topics' || this.activeTab === 'lockScreen' || this.activeTab === 'biometryAndSecurity' || this.activeTab === 'privacy' || this.activeTab === 'location' || this.activeTab === 'accountsAndArchive' || this.activeTab === 'auxiliaryFunctions' || this.activeTab === 'deviceUsabilityAndParentControl' || this.activeTab === 'deviceManagement' || this.activeTab === 'applications' || this.activeTab === 'general' || this.activeTab === 'specialCapabilities' || this.activeTab === 'softwareUpdates' || this.activeTab === 'userManual' || this.activeTab === 'phoneInformation' || this.activeTab === 'developerParameters') {
           this.activeTab = 'settings'
         } else if (this.activeTab === 'softwareInfo' || this.activeTab === 'legalInfo' || this.activeTab === 'state' || this.activeTab === 'accumulatorDetails') {
           this.activeTab = 'phoneInformation'
         } else if (this.activeTab === 'dateAndTime' || this.activeTab === 'languageAndInput') {
           this.activeTab = 'general'
+        } else if (this.activeTab === 'statusRow') {
+          this.activeTab = 'notifications'
+        } else if (this.activeTab === 'simState' || this.activeTab === 'imeiDetails') {
+          this.activeTab = 'state'
+        } else if (this.activeTab === 'screenReading' || this.activeTab === 'auxiliaryParameters' || this.activeTab === 'coordinationViolationAndInteractive' || this.activeTab === 'improveListen') {
+          this.activeTab = 'specialCapabilities'
+        } else if (this.activeTab === 'tts') {
+          this.activeTab = 'languageAndInput'
         }
         this.$emit('undoEnded', isQuit)
       }

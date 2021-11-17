@@ -1,7 +1,7 @@
 <template>
   <div :style="`width: ${orientation ? '50%' : '100%'};`">
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover; background-image: url(${settings.wallpapers.mainScreen});`"></div>
-    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" />
+    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" @transferSoundMode="transferSoundModeHandler" />
     <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" :batteryDischarging="batteryDischarging" :isUndo="oneUndo" :apps="apps" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" @undoEnded="undoEndedHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
@@ -72,7 +72,7 @@
     <Lock v-if="!isUnlock" :currentTime="currentTime" :settings="settings" @unlock="unlockHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <SleepMode v-if="isSleep" :style="`width: ${orientation ? '50%' : '100%'};`" />
-    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" :changeVolume="changeVolumeHandler" @resetSpeakers="resetSpeakersHandler" @transferSoundMode="transferSoundModeHandler" />
+    <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" :changeVolume="changeVolumeHandler" :soundMode="currentSoundMode" @resetSpeakers="resetSpeakersHandler" @transferSoundMode="transferSoundModeHandler" />
     <VKeyboard v-if="virtualKeyboard" />
   </div>
   
