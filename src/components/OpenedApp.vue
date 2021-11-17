@@ -204,7 +204,7 @@
               lock
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="findDevice()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'biometryAndSecurity'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -231,7 +231,7 @@
               shield
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setPrivacy()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'privacy'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -258,7 +258,7 @@
               admin_panel_settings
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setLocation()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'location'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -305,7 +305,7 @@
               key
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setGestures()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'auxiliaryFunctions'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -332,7 +332,7 @@
               settings
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setDisplayTimeout()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'deviceUsabilityAndParentControl'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -359,7 +359,7 @@
               favorite
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getHardware()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'deviceManagement'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -440,7 +440,7 @@
               tune
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setSpecialCapabilities()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'specialCapabilities'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -736,7 +736,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="setLanguage()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'languageAndInput'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -5435,21 +5435,48 @@
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    `Используются ${'2'} функции`
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    `Functions ${'2'} used`
                   :
-                    'Режим разработчика'
+                    `Используются ${'2'} функции`
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    `Используются ${'2'} функции`
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    `Functions ${'2'} used`
                   :
-                    'Режим разработчика'
+                    `Используются ${'2'} функции`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'screenReading'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Чтение с экрана'
+                  : settings.general.language === 'English' ?
+                    'Reading from screen'
+                  :
+                    'Чтение с экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Озвучивание голосовых подсказок и использование специальных элементов управления, позволяющих выполнять навигацию не глядя на экран.'
+                  : settings.general.language === 'English' ?
+                    'Speak voice annotations and special controls used, which run navigation not watch to screen.'
+                  :
+                    'Озвучивание голосовых подсказок и использование специальных элементов управления, позволяющих выполнять навигацию не глядя на экран.'
                 }}
               </span>
             </div>
@@ -5462,21 +5489,102 @@
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    'Средства улучшения видимости'
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    'Improving watch media'
                   :
-                    'Режим разработчика'
+                    'Средства улучшения видимости'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    'Настройте размер, контрастность и цвет в соответствии с вашими потребностями'
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    'Set size, contrast and color so as you want'
                   :
-                    'Режим разработчика'
+                    'Настройте размер, контрастность и цвет в соответствии с вашими потребностями'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'improveListen'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Повышение слышимости'
+                  : settings.general.language === 'English' ?
+                    'Imroving listen'
+                  :
+                    'Повышение слышимости'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Настройте громкость звука, чтобы слышать озвучиваемую информацию, или используйте альтернативные средста, например текст.'
+                  : settings.general.language === 'English' ?
+                    'Set sound volume, for listen sound info or use alternatives media, so text.'
+                  :
+                    'Настройте громкость звука, чтобы слышать озвучиваемую информацию, или используйте альтернативные средста, например текст.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'coordinationViolationAndInteractive'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Нарушение координации и взаимодействие'
+                  : settings.general.language === 'English' ?
+                    'Сoordination violation and interactive'
+                  :
+                    'Нарушение координации и взаимодействие'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Повысьте качество сенсорного ввода и других видов управления или замените их'
+                  : settings.general.language === 'English' ?
+                    'Imrove sensor input quality and other controls or replace them'
+                  :
+                    'Повысьте качество сенсорного ввода и других видов управления или замените их'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'auxiliaryParameters'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Дополнительные параметры'
+                  : settings.general.language === 'English' ?
+                    'Auxiliary parameters'
+                  :
+                    'Дополнительные параметры'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Управляйте прямым доступом и другими расширенными функциями.'
+                  : settings.general.language === 'English' ?
+                    'Mange direct access and other auxiliary functions.'
+                  :
+                    'Управляйте прямым доступом и другими расширенными функциями.'
                 }}
               </span>
             </div>
@@ -5489,21 +5597,21 @@
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    'Установленные службы'
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    'Installed sevices'
                   :
-                    'Режим разработчика'
+                    'Установленные службы'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    `${'1'} служба`
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    `${'1'} service`
                   :
-                    'Режим разработчика'
+                    `${'1'} служба`
                 }}
               </span>
             </div>
@@ -5511,161 +5619,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+          <div class="settingsAppBodyItem" @click="aboutSpecialCapabilities()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    'О специальных возможностях'
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    'About special capabilities'
                   :
-                    'Режим разработчика'
+                    'О специальных возможностях'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим разработчика'
+                    'Свяжитесь с нами'
                   : settings.general.language === 'English' ?
-                    'Developer mode'
+                    'Feedback'
                   :
-                    'Режим разработчика'
-                }}
-              </span>
-            </div>
-            <span class="material-icons settingsAppWifiIcon">
-              add
-            </span>
-          </div>
-          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
-            <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-              <span>
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-            </div>
-            <span class="material-icons settingsAppWifiIcon">
-              add
-            </span>
-          </div>
-          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
-            <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-              <span>
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-            </div>
-            <span class="material-icons settingsAppWifiIcon">
-              add
-            </span>
-          </div>
-          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
-            <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-              <span>
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-            </div>
-            <span class="material-icons settingsAppWifiIcon">
-              add
-            </span>
-          </div>
-          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
-            <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-              <span>
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-            </div>
-            <span class="material-icons settingsAppWifiIcon">
-              add
-            </span>
-          </div>
-          <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
-            <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
-                }}
-              </span>
-              <span>
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Режим разработчика'
-                  : settings.general.language === 'English' ?
-                    'Developer mode'
-                  :
-                    'Режим разработчика'
+                    'Свяжитесь с нами'
                 }}
               </span>
             </div>
@@ -5734,7 +5707,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="getHardware()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -5749,11 +5722,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'a'
+                    '22 час 30 мин.'
                   : settings.general.language === 'English' ?
-                    'b'
+                    '22 hrs 30 mins'
                   :
-                    'a'
+                    '22 час 30 мин.'
                 }}
               </span>
             </div>
@@ -5763,7 +5736,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
                     'Память'
@@ -5776,11 +5749,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Память'
+                    '30,9 Гб /32 Гб'
                   : settings.general.language === 'English' ?
-                    'Drive'
+                    '30,9 Gb /32 Gb'
                   :
-                    'Память'
+                    '30,9 Гб /32 Гб'
                 }}
               </span>
             </div>
@@ -5803,11 +5776,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'a'
+                    '1,9 Гб /3 Гб'
                   : settings.general.language === 'English' ?
-                    'b'
+                    '1,9 Gb /3 Gb'
                   :
-                    'a'
+                    '1,9 Гб /3 Гб'
                 }}
               </span>
             </div>
@@ -5830,11 +5803,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'a'
+                    'Выключено'
                   : settings.general.language === 'English' ?
-                    'b'
+                    'Disabled'
                   :
-                    'a'
+                    'Выключено'
                 }}
               </span>
             </div>
@@ -5873,11 +5846,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'a'
+                    'Установите ограничение на использование каждого приложения в течение дня'
                   : settings.general.language === 'English' ?
-                    'b'
+                    'Set limit of usability every app in day'
                   :
-                    'a'
+                    'Установите ограничение на использование каждого приложения в течение дня'
                 }}
               </span>
             </div>
@@ -5887,7 +5860,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим концентрации'
@@ -5900,11 +5873,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Режим концентрации'
+                    'Не отвлекайтесь на телефон и займитесь важными делами'
                   : settings.general.language === 'English' ?
-                    'Attention mode'
+                    'Not detected of phone and do yourself deeds'
                   :
-                    'Режим концентрации'
+                    'Не отвлекайтесь на телефон и займитесь важными делами'
                 }}
               </span>
             </div>
@@ -5927,11 +5900,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'a'
+                    'Чтобы раслабиться перед сном, переведите экран в режим \"Градации серого\" или заблокируйте уведомления'
                   : settings.general.language === 'English' ?
-                    'b'
+                    'Then relax before sleep, transfer screen to \"Grayscale\" mode or block notifications'
                   :
-                    'a'
+                    'Чтобы раслабиться перед сном, переведите экран в режим \"Градации серого\" или заблокируйте уведомления'
                 }}
               </span>
             </div>
@@ -5954,11 +5927,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'a'
+                    'Добавьте ограничения на просмотр содержимого и другие условия, чтобы помочь детям более сбалансировано пользоваться устройством.'
                   : settings.general.language === 'English' ?
-                    'b'
+                    'Parent control'
                   :
-                    'a'
+                    'Добавьте ограничения на просмотр содержимого и другие условия, чтобы помочь детям более сбалансировано пользоваться устройством.'
                 }}
               </span>
             </div>
@@ -5982,7 +5955,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setGestures()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -6011,7 +5984,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
                     'Снимки экрана'
@@ -6105,11 +6078,11 @@
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'a'
+                    'Выключено'
                   : settings.general.language === 'English' ?
-                    'b'
+                    'Disabled'
                   :
-                    'a'
+                    'Выключено'
                 }}
               </span>
             </div>
@@ -6133,7 +6106,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setLocation()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -6162,7 +6135,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
                     'Разрешения приложения'
@@ -6230,7 +6203,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setPrivacy()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -6259,7 +6232,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отчеты об ошибках'
@@ -6372,11 +6345,11 @@
           <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
             {{
               settings.general.language === 'Русский' ?
-                'Конфиденциальность'
+                'Биометрия и безопасность'
               : settings.general.language === 'English' ?
-                'Privacy'
+                'Biometry and security'
               :
-                'Конфиденциальность'
+                'Бизометрия и безопасность'
             }}
           </h4>
         </div>
@@ -6410,7 +6383,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отпечатки пальцев'
@@ -6435,7 +6408,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="findDevice()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -7287,7 +7260,816 @@
           </div>
         </div>
       </div>
-
+      <div v-else-if="activeTab === 'languageAndInput'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Язык и ввод'
+              : settings.general.language === 'English' ?
+                'Language and input'
+              :
+                'Язык и ввод'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setLanguage()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Язык'
+                  : settings.general.language === 'English' ?
+                    'Language'
+                  :
+                    'Язык'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Русский (Россия)'
+                  : settings.general.language === 'English' ?
+                    'English (USA)'
+                  :
+                    'Русский (Россия)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Экранная клавиатура'
+                  : settings.general.language === 'English' ?
+                    'Virtual keyboard'
+                  :
+                    'Экранная клавиатура'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Голосовой ввод и клавиатура'
+                  : settings.general.language === 'English' ?
+                    'Voice input and keyboard'
+                  :
+                    'Голосовой ввод и клавиатура'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Физическая клавиатура'
+                  : settings.general.language === 'English' ?
+                    'Real keyboard'
+                  :
+                    'Физическая клавиатура'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Не подключено'
+                  : settings.general.language === 'English' ?
+                    'Not connected'
+                  :
+                    'Не подключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Служба автозаполнения'
+                  : settings.general.language === 'English' ?
+                    'Autocomplete service'
+                  :
+                    'Служба автозаполнения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Служба автозаполнения'
+                  : settings.general.language === 'English' ?
+                    'Autocomplete service'
+                  :
+                    'Служба автозаполнения'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Преобразование текста в речь'
+                  : settings.general.language === 'English' ?
+                    'Text to speech'
+                  :
+                    'Преобразование текста в речь'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Преобразование текста в речь'
+                  : settings.general.language === 'English' ?
+                    'Text to speech'
+                  :
+                    'Преобразование текста в речь'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Скорость указателя'
+                  : settings.general.language === 'English' ?
+                    'Pointer speed'
+                  :
+                    'Скорость указателя'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Скорость указателя'
+                  : settings.general.language === 'English' ?
+                    'Pointer speed'
+                  :
+                    'Скорость указателя'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Основная кнопка мыши'
+                  : settings.general.language === 'English' ?
+                    'Main mouse button'
+                  :
+                    'Основная кнопка мыши'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Левая'
+                  : settings.general.language === 'English' ?
+                    'Left'
+                  :
+                    'Левая'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'auxiliaryParameters'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Дополнительные параметры'
+              : settings.general.language === 'English' ?
+                'Auxiliary parameters'
+              :
+                'Дополнительные параметры'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Питание и увеличение громкости'
+                  : settings.general.language === 'English' ?
+                    'Power and volume increase'
+                  :
+                    'Питание и увеличение громкости'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Выключено'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Клавишы громкости'
+                  : settings.general.language === 'English' ?
+                    'Volume keys'
+                  :
+                    'Клавишы громкости'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Выключено'
+                  : settings.general.language === 'English' ?
+                    'Disabled'
+                  :
+                    'Выключено'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Уведомления с помощью вспышки'
+                  : settings.general.language === 'English' ?
+                    'Notifications driven flash'
+                  :
+                    'Уведомления с помощью вспышки'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Уведомления с помощью вспышки'
+                  : settings.general.language === 'English' ?
+                    'Notifications driven flash'
+                  :
+                    'Уведомления с помощью вспышки'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Напоминание об уведомлениях'
+                  : settings.general.language === 'English' ?
+                    'Notifications reminders'
+                  :
+                    'Напоминание об уведомлениях'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Получение периодических напоминаний об уведомлениях'
+                  : settings.general.language === 'English' ?
+                    'Get temporary notifications reminders'
+                  :
+                    'Получение периодических напоминаний об уведомлениях'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Время на совершение действия'
+                  : settings.general.language === 'English' ?
+                    'Time for deed complete'
+                  :
+                    'Время на совершение действия'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'По умолчанию'
+                  : settings.general.language === 'English' ?
+                    'Default'
+                  :
+                    'По умолчанию'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'coordinationViolationAndInteractive'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Нарушение координации и взаимодействие'
+              : settings.general.language === 'English' ?
+                'Сoordination violation and interactive'
+              :
+                'Нарушение координации и взаимодействие'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Вспомогательное меню'
+                  : settings.general.language === 'English' ?
+                    'Auxiliary menu'
+                  :
+                    'Вспомогательное меню'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Отображение меню удобных кнопок, которым можно заменить аппаратные клавишы, жесты и другие распространенные способы взаимодействия'
+                  : settings.general.language === 'English' ?
+                    'Display menu buttons, which can replace hardware keys, gestures and others interactive methods'
+                  :
+                    'Отображение меню удобных кнопок, которым можно заменить аппаратные клавишы, жесты и другие распространенные способы взаимодействия'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Ответ и завершение звонков'
+                  : settings.general.language === 'English' ?
+                    'Answer and complete calls'
+                  :
+                    'Ответ и завершение звонков'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Ответ и завершение звонков'
+                  : settings.general.language === 'English' ?
+                    'Answer and complete calls'
+                  :
+                    'Ответ и завершение звонков'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Контроль взаимодействия'
+                  : settings.general.language === 'English' ?
+                    'Interaction control'
+                  :
+                    'Контроль взаимодействия'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Блокировка сенсорного ввода для кнопок \"Назад\", \"Домой\" и \"Последние\", а также клавиатуры и выбранной области экрана'
+                  : settings.general.language === 'English' ?
+                    'Lock sensor input for \"Undo\", \"Home\" и \"Recent\" buttons, also keyboard and select screen area'
+                  :
+                    'Блокировка сенсорного ввода для кнопок \"Назад\", \"Домой\" и \"Последние\", а также клавиатуры и выбранной области экрана'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Задержка касания и удерживания'
+                  : settings.general.language === 'English' ?
+                    'Touch and hold delay'
+                  :
+                    'Задержка касания и удерживания'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Короткая (0.5 c)'
+                  : settings.general.language === 'English' ?
+                    'Short (0.5 sec)'
+                  :
+                    'Короткая (0.5 c)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Продолжительность прикосновения'
+                  : settings.general.language === 'English' ?
+                    'Touch continuous'
+                  :
+                    'Продолжительность прикосновения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Задайте продолжительность взаимодействия, при которой оно будет распознаваться как касание.'
+                  : settings.general.language === 'English' ?
+                    'Set duration interaction, which be recognize as touch.'
+                  :
+                    'Задайте продолжительность взаимодействия, при которой оно будет распознаваться как касание.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Игнорирование повторяющихся прикосновений'
+                  : settings.general.language === 'English' ?
+                    'Ignore repeatable touches'
+                  :
+                    'Игнорирование повторяющихся прикосновений'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Задайте временной период, в течение которого будут игнорироваться повторные прикосновения.'
+                  : settings.general.language === 'English' ?
+                    'Set time period, which be ignore repeatabled touches.'
+                  :
+                    'Задайте временной период, в течение которого будут игнорироваться повторные прикосновения.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Нажатие после остановки указателя'
+                  : settings.general.language === 'English' ?
+                    'Press after pointer stopped'
+                  :
+                    'Нажатие после остановки указателя'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Автоматическое нажатие при прекращении движения указателя.'
+                  : settings.general.language === 'English' ?
+                    'Auto press when pointer stop motion.'
+                  :
+                    'Автоматическое нажатие при прекращении движения указателя.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Залипание клавиш'
+                  : settings.general.language === 'English' ?
+                    'Keys sticking'
+                  :
+                    'Залипание клавиш'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'При нажатии клавиш-модификаторов, таких как Shift, Ctrl или Alt, клавиша остается нажатой. Благодаря этому можно использоваться горячие клавиши, нажимая лишь одну из них.'
+                  : settings.general.language === 'English' ?
+                    'When keys modifiers press, so as Shift, Ctrl or Alt, key left as press. This may used hotkeys, oneof press only.'
+                  :
+                    'При нажатии клавиш-модификаторов, таких как Shift, Ctrl или Alt, клавиша остается нажатой. Благодаря этому можно использоваться горячие клавиши, нажимая лишь одну из них.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Медленное нажатие клавиш'
+                  : settings.general.language === 'English' ?
+                    'Slow key press'
+                  :
+                    'Медленное нажатие клавиш'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Задайте продолжительность удерживания клавишш, при которой оно будет распознаваться как нажатие. Это позволит избежать случайных нажатий клавиш.'
+                  : settings.general.language === 'English' ?
+                    'Set continuous key hold, which it be recognize as press. It do withdraw random key press.'
+                  :
+                    'Задайте продолжительность удерживания клавишш, при которой оно будет распознаваться как нажатие. Это позволит избежать случайных нажатий клавиш.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Случайное нажатие клавиш'
+                  : settings.general.language === 'English' ?
+                    'Random keys touch'
+                  :
+                    'Случайное нажатие клавиш'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Задайте время ожидания, после которого будет распознаваться повторное нажатие клавиши. Это позволит избежать случайных нажатий той же самой клавиши более 1 раза.'
+                  : settings.general.language === 'English' ?
+                    'Set wait time, after which be recongnize repeatable key press. It do withdraw random press same key above one.'
+                  :
+                    'Задайте время ожидания, после которого будет распознаваться повторное нажатие клавиши. Это позволит избежать случайных нажатий той же самой клавиши более 1 раза.'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'improveListen'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Повышение слышимости'
+              : settings.general.language === 'English' ?
+                'Improve listen'
+              :
+                'Повышение слышимости'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Прямая расшифровка'
+                  : settings.general.language === 'English' ?
+                    'Direct decode'
+                  :
+                    'Прямая расшифровка'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Прямая расшифровка'
+                  : settings.general.language === 'English' ?
+                    'Direct decode'
+                  :
+                    'Прямая расшифровка'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Настройки субтитров'
+                  : settings.general.language === 'English' ?
+                    'Subtitle settings'
+                  :
+                    'Настройки субтитров'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Настройки субтитров'
+                  : settings.general.language === 'English' ?
+                    'Subtitle settings'
+                  :
+                    'Настройки субтитров'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'screenReading'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Чтение с экрана'
+              : settings.general.language === 'English' ?
+                'Screen reading'
+              :
+                'Чтение с экрана'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setVoiceAssistant()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Голосовой помощник'
+                  : settings.general.language === 'English' ?
+                    'Virtual Assistant'
+                  :
+                    'Голосовой помощник'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Голосовой помощник'
+                  : settings.general.language === 'English' ?
+                    'Virtual Assistant'
+                  :
+                    'Голосовой помощник'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Учебный курс'
+                  : settings.general.language === 'English' ?
+                    'Tutorial'
+                  :
+                    'Учебный курс'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Учебный курс'
+                  : settings.general.language === 'English' ?
+                    'Tutorial'
+                  :
+                    'Учебный курс'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Настройки'
+                  : settings.general.language === 'English' ?
+                    'Settings'
+                  :
+                    'Настройки'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Настройки'
+                  : settings.general.language === 'English' ?
+                    'Settings'
+                  :
+                    'Настройки'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </div>
 </template>
@@ -7401,6 +8183,8 @@ export default {
           this.activeTab = 'settings'
         } else if (this.activeTab === 'softwareInfo' || this.activeTab === 'legalInfo' || this.activeTab === 'state' || this.activeTab === 'accumulatorDetails') {
           this.activeTab = 'phoneInformation'
+        } else if (this.activeTab === 'dateAndTime' || this.activeTab === 'languageAndInput') {
+          this.activeTab = 'general'
         }
         this.$emit('undoEnded', isQuit)
       }
@@ -7456,6 +8240,9 @@ export default {
     }
   },
   methods: {
+    aboutSpecialCapabilities() {
+      alert('OsLand scv1.0.0')
+    },
     setNotificationsOptions() {
       
       let options = `${this.settings.notifications.options === 'last' ? 'all' : this.settings.notifications.options === 'all' ? 'count' : this.settings.notifications.options === 'count' ? 'last' : 'last' }`
@@ -8857,7 +9644,7 @@ export default {
         }
       });
     },
-    setSpecialCapabilities() {
+    setVoiceAssistant() {
       let isEnabled = !this.settings.specialCapabilities.voiceAssistant.enabled
       this.settings.specialCapabilities.voiceAssistant.enabled = isEnabled
 

@@ -73,6 +73,7 @@
     <PowerDialog v-if="isPowerDialog" @closePowerDialog="closePowerDialogHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <SleepMode v-if="isSleep" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <Speakers :source="activeSound" :startPlay="isStartPlay"  :soundCommand="activeSoundCommand" :isSpeakersDialog="isSpeakersDialog" :changeVolume="changeVolumeHandler" @resetSpeakers="resetSpeakersHandler" @transferSoundMode="transferSoundModeHandler" />
+    <VKeyboard v-if="virtualKeyboard" />
   </div>
   
 </template>
@@ -88,6 +89,7 @@ import Lock from '@/components/Lock.vue'
 import SleepMode from '@/components/SleepMode.vue'
 import Speakers from '@/components/Speakers.vue'
 import ContextMenu from '@/components/ContextMenu.vue'
+import VKeyboard from '@/components/VKeyboard.vue'
 
 import speak from "offline-tts"
 
@@ -194,7 +196,8 @@ export default {
       brightness: 100,
       location: 0,
       trySleep: [],
-      oneUndo: false
+      oneUndo: false,
+      virtualKeyboard: false
     }
   },
   mounted() {
@@ -444,6 +447,8 @@ export default {
     },
     isSearchHandler(isSearch) {
       this.isSearch = isSearch
+      this.virtualKeyboard = isSearch
+      
     },
     changeBrightnessHandler(brightnessPercent) {
       console.log('changeBrightnessHandler')
@@ -568,7 +573,8 @@ export default {
     Lock,
     SleepMode,
     Speakers,
-    ContextMenu
+    ContextMenu,
+    VKeyboard
   }
 }
 </script>
