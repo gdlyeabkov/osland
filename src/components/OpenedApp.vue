@@ -1,6 +1,6 @@
 <template>
   <div class="openedApp">
-    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}; zoom: ${settings.display.screenScale}; height: ${settings.display.navigation.type === 'gesture' ? '625' : '575'}px;`">
+    <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}; zoom: ${settings.display.screenScale}; height: ${settings.display.navigation.type === 'gesture' ? '625' : '575'}px; -webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};`">
       <div v-if="activeTab === 'settings'">
         <div class="settingsAppHeader">
           <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
@@ -3254,6 +3254,33 @@
               add
             </span>
           </div>
+          <div class="settingsAppBodyItem" @click="setNotDisableDisplay()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Не выключать экран'
+                  : settings.general.language === 'English' ?
+                    'Not disable display'
+                  :
+                    'Не выключать экран'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Во время зарядки экран будет всегда включен'
+                  : settings.general.language === 'English' ?
+                    'When charging display is power on'
+                  :
+                    'Во время зарядки экран будет всегда включен'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
           <div class="settingsAppBodyItem" @click="setTouchPlace()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
@@ -3308,26 +3335,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="setNotDisableMobileInternet()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Не отключать мобильный интернет'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Not disable mobile internet'
                   :
-                    'Оперативная память'
+                    'Не отключать мобильный интернет'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Не отключать передачу данных по мобильной сети даже при активном WI-FI-подключении (для быстрого переключения между сетями)'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Not disable data transfer by mobile network ever when WI-FI connection is active (for fast switch between networks)'
                   :
-                    'Оперативная память'
+                    'Не отключать передачу данных по мобильной сети даже при активном WI-FI-подключении (для быстрого переключения между сетями)'
                 }}
               </span>
             </div>
@@ -3335,26 +3362,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="setShowGridElements()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Отображение границ элементов'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Show grid elements'
                   :
-                    'Оперативная память'
+                    'Отображение границ элементов'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Отображение границ элементов'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Show grid elements'
                   :
-                    'Оперативная память'
+                    'Отображение границ элементов'
                 }}
               </span>
             </div>
@@ -3362,26 +3389,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="setShowSurfaceUpdate()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Показывать обновление поверхности'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Show surface update'
                   :
-                    'Оперативная память'
+                    'Показывать обновление поверхности'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Показывать обновление поверхности'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Show surface update'
                   :
-                    'Оперативная память'
+                    'Показывать обновление поверхности'
                 }}
               </span>
             </div>
@@ -3389,26 +3416,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="setFontElements()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Шрифт элементов'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Font elements'
                   :
-                    'Оперативная память'
+                    'Шрифт элементов'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Шрифт элементов'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Font elements'
                   :
-                    'Оперативная память'
+                    'Шрифт элементов'
                 }}
               </span>
             </div>
@@ -3416,26 +3443,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="setColorElements()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Цвет элементов'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Color elements'
                   :
-                    'Оперативная память'
+                    'Цвет элементов'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Цвет элементов'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Color elements'
                   :
-                    'Оперативная память'
+                    'Цвет элементов'
                 }}
               </span>
             </div>
@@ -3443,26 +3470,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="setRemoveActivitiesAfterExit()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Сбрасывать запущенные приложения после выхода пользователя'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Reset Activity after user exit'
                   :
-                    'Оперативная память'
+                    'Сбрасывать запущенные приложения после выхода пользователя'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Сбрасывать запущенные приложения после выхода пользователя'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Reset Activity after user exit'
                   :
-                    'Оперативная память'
+                    'Сбрасывать запущенные приложения после выхода пользователя'
                 }}
               </span>
             </div>
@@ -3470,53 +3497,26 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
+          <div class="settingsAppBodyItem" @click="setFlipInterface()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Отразить интерфейс'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Flip interface'
                   :
-                    'Оперативная память'
+                    'Отразить интерфейс'
                 }}
               </span>
               <span>
                 {{
                   settings.general.language === 'Русский' ?
-                    'Оперативная память'
+                    'Отразить интерфейс'
                   : settings.general.language === 'English' ?
-                    'RAM'
+                    'Flip interface'
                   :
-                    'Оперативная память'
-                }}
-              </span>
-            </div>
-            <span class="material-icons settingsAppWifiIcon">
-              add
-            </span>
-          </div>
-          <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
-            <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Оперативная память'
-                  : settings.general.language === 'English' ?
-                    'RAM'
-                  :
-                    'Оперативная память'
-                }}
-              </span>
-              <span>
-                {{
-                  settings.general.language === 'Русский' ?
-                    'Оперативная память'
-                  : settings.general.language === 'English' ?
-                    'RAM'
-                  :
-                    'Оперативная память'
+                    'Отразить интерфейс'
                 }}
               </span>
             </div>
@@ -6101,7 +6101,7 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="setRelax()">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -9480,6 +9480,49 @@
           </div>
         </div>
       </div>
+      <div v-else-if="activeTab === 'timers'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Таймеры приложений'
+              : settings.general.language === 'English' ?
+                'Applications timers'
+              :
+                'Таймеры приложений'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div v-for="app in apps" :key="app.name" class="settingsAppBodyItem" @click="setApplicationTimer(app)">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Вызовы'
+                  : settings.general.language === 'English' ?
+                    'Rings'
+                  :
+                    'Вызовы'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.connections.simsManager.rings ?
+                    'SIM_1'
+                  : !settings.connections.simsManager.rings ?
+                    'SIM_2'
+                  :
+                    'SIM_1'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
       
     </div>
   </div>
@@ -9687,6 +9730,504 @@ export default {
     }
   },
   methods: {
+    setShowSurfaceUpdate() {
+
+      let isEnabled = !this.settings.developerParameters.showSurfaceUpdate
+      this.settings.developerParameters.showSurfaceUpdate = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/showsurfaceupdate/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Отображение обновление поверхности обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    : this.settings.general.language === 'English' ?
+                      `\"Show surface update\" updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Отображение обновление поверхности обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setShowGridElements() {
+
+      let isEnabled = !this.settings.developerParameters.showGridElements
+      this.settings.developerParameters.showGridElements = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/showgridelements/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Отображение границ элементов обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Show grid elements updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Отображение границ элементов обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setFlipInterface() {
+
+      let isEnabled = !this.settings.developerParameters.flipInterface
+      this.settings.developerParameters.flipInterface = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/flipinterface/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Отразить интерфейс обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Flip interface updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Отразить интерфейс обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setRemoveActivitiesAfterExit() {
+
+      let isEnabled = !this.settings.developerParameters.removeActivitysAfterExit
+      this.settings.developerParameters.removeActivitysAfterExit = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/removeactivityafterexit/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Закрыть запущеные приложения после выхода пользователя обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Close runned activities updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Закрыть запущеные приложения после выхода пользователя обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setColorElements() {
+
+      let colorElements = this.settings.developerParameters.colorElements === 'rgb(200, 200, 200)' ? 'rgb(200, 0, 0)' :this.settings.developerParameters.colorElements === 'rgb(200, 0, 0)' ? 'rgb(0, 200, 0)' : this.settings.developerParameters.colorElements === 'rgb(0, 200, 0)' ? 'rgb(0, 0, 200)' : this.settings.developerParameters.colorElements === 'rgb(0, 0, 200)' ? 'rgb(200, 200, 200)' : 'rgb(200, 200, 200)'
+      this.settings.developerParameters.colorElements = colorElements
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/colorelements/set/?color=${colorElements}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Цвет элементов обновлен`
+                    : this.settings.general.language === 'English' ?
+                      `Color elements updated`
+                    :
+                      `Цвет элементов обновлен`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setFontElements() {
+
+      let fontElements = !this.settings.developerParamers.fontElements
+      this.settings.developerParamers.fontElements = fontElements
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/fontElements/set/?font=${fontElements}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Шрифт элементов обновлен`
+                    : this.settings.general.language === 'English' ?
+                      `Font updated`
+                    :
+                      `Шрифт элементов обновлен`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setRelax() {
+
+      let isEnabled = !this.settings.deviceUsabilityAndParentControl.relax
+      this.settings.deviceUsabilityAndParentControl.relax = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/deviceusabilityandparentcontrol/relax/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Режим отдыха обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Relax mode updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Режим отдыха обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setApplicationTimer(appInfo) {
+
+    },
+    setNotDisableMobileInternet() {
+      
+      let isEnabled = !this.settings.developerParameters.notDisableMobileInternet
+      this.settings.developerParameters.notDisableMobileInternet = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/notdisablemobileinternet/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Не отключать мобильный интернет обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Not disable mobile internet updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Не отключать мобильный интернет обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setNotDisableDisplay() {
+      
+      let isEnabled = !this.settings.developerParameters.notDisableDisplay
+      this.settings.developerParameters.notDisableDisplay = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/developerparameters/notdisabledisplay/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Не отключать дисплей обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Not disable display updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Не отключать дисплей обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
     setShowTouches() {
       
       let isShow = !this.settings.developerParameters.showTouches

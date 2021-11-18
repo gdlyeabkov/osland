@@ -1,6 +1,6 @@
 <template>
     <div v-if="settings.lockScreen.mode === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" :style="`background-image: url(${settings.wallpapers.lockScreen});`">
-        <span :class="`timeOnLock ${settings.lockScreen.watchStyle}WatchStyle`">
+        <span :class="`timeOnLock ${settings.lockScreen.watchStyle}WatchStyle`" :style="`${settings.developerParameters.enabled ? `font-family: ${settings.developerParameters.fontElements};` : ''}${ settings.developerParameters.flipElements ? 'transform: scaleX(-1);' : ''}`">
             {{ currentTime }}
         </span>
         <span class="unlockLabel">

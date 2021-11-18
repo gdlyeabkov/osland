@@ -61,7 +61,7 @@
       })" :key="appsRow" class="appRow">
         <div v-for="app in apps.filter((app, appIdx) => {
           return appIdx >= appsRow * countAppsPerRow && appIdx < countAppsPerRow * (appsRow + 1) && app.shortcut
-        })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mouseup="holdApp($event, 'up', app)" class="app" :style="`background-image: url('http://localhost:4000/api/apps/favicons/get/?appname=${app.name}.png'); border-radius: ${settings.topic === 'light' ? '5' : '25' }px;`">
+        })" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mouseup="holdApp($event, 'up', app)" :class="{ app: true, griddable: settings.developerParameters.showGridElements }" :style="`background-image: url('http://localhost:4000/api/apps/favicons/get/?appname=${app.name}.png'); border-radius: ${settings.topic === 'light' ? '5' : '25' }px;`">
         </div>
       </div>
 
@@ -193,7 +193,8 @@ export default {
         developerParameters: {
           enabled: false,
           touchPlace: false,
-          showTouches: false
+          showTouches: false,
+          showGridElements: false
         }
       },
       launchTime: '00.00.00, 00:00:00',
@@ -337,8 +338,13 @@ export default {
     },
     setDisplayTimeout() {
       this.trySleep.push(setTimeout(() => {
-          this.isSleep = true
-          this.isAppsList = false
+          if(!this.settings.developerParameters.notDisableDisplay) {
+            if(this.settings.developerParameters.removeActivityAfterExit) {
+              this.openedApps = []
+            }
+            this.isSleep = true
+            this.isAppsList = false
+          }
       }, this.settings.deviceUsabilityAndParentControl.displayTimeout * 1000))
     },
     changeVolumeHandler(volume) {
@@ -609,3 +615,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .griddable {
+    border: 3px solid rgb(0, 0, 0);
+  }
+</style> 

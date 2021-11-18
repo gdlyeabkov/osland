@@ -35,6 +35,10 @@ const AppSchema = new mongoose.Schema({
     shortcut: {
         type: Boolean,
         default: false
+    },
+    timer: {
+        type: Number,
+        default: 0
     }
 }, { collection : 'myapps' });
 
@@ -125,6 +129,10 @@ const SettingsSchema = new mongoose.Schema({
         displayTimeout: {
             type: Number,
             default: 60
+        },
+        relax: {
+            type: Boolean,
+            default: false
         }
     },
     deviceManagement: {
@@ -326,6 +334,34 @@ const SettingsSchema = new mongoose.Schema({
         showTouches: {
             type: Boolean,
             default: false
+        },
+        notDisableDisplay: {
+            type: Boolean,
+            default: false
+        },
+        showSurfaceUpdate: {
+            type: Boolean,
+            default: false
+        },
+        showGridElements: {
+            type: Boolean,
+            default: false
+        },
+        flipInterface: {
+            type: Boolean,
+            default: false
+        },
+        removeActivityAfterExit: {
+            type: Boolean,
+            default: false
+        },
+        colorElements: {
+            type: String,
+            default: 'rgb(200, 200, 200)'
+        },
+        fontElements: {
+            type: String,
+            default: 'Verdana'
         }
     }
 }, { collection : 'mysettings' });
@@ -580,7 +616,8 @@ app.get('/api/settings/reset', (req, res) => {
             }
         },
         deviceUsabilityAndParentControl: {
-            displayTimeout: 60
+            displayTimeout: 60,
+            relax: false
         },
         notifications: {
             enabled: true,
@@ -646,7 +683,15 @@ app.get('/api/settings/reset', (req, res) => {
         developerParameters: {
             touchPlace: false,
             enabled: false,
-            showTouches: false
+            showTouches: false,
+            notDisableDisplay: false,
+            notDisableMobileInternet: false,
+            showSurfaceUpdate: false,
+            showGridElements: false,
+            flipInterface: false,
+            removeActivityAfterExit: false,
+            colorElements: 'rgb(200, 200, 200)',
+            fontElements: 'Verdana'
         }
     }
     SettingsModel.update({  }, defaultSettings, (err, settings) => {
@@ -1407,6 +1452,150 @@ app.get('/api/settings/developerparameters/showtouches/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
     SettingsModel.update({  }, { '$set': { 'developerParameters.showTouches': req.query.show } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/notdisabledisplay/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.notDisableDisplay': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/notdisablemobileinternet/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.notDisableMobileInternet': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/deviceusabilityandparentcontrol/relax/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'deviceUsabilityAndParentControl.relax': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/showgridelements/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.showGridElements': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/showsurfaceupdate/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.showSurfaceUpdate': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/fontElements/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.fontElements': req.query.font } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/colorelements/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.colorElements': req.query.color } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/removeactivityafterexit/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.removeActivityAfterExit': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/flipinterface/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.flipInterface': req.query.enabled } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
