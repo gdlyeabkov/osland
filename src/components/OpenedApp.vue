@@ -1038,7 +1038,34 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" @click="setNavigationType(); setNavigationButtonsOrder()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'mainScreen'">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Главный экран'
+                  : settings.general.language === 'English' ?
+                    'Main screen'
+                  :
+                    'Главный экран'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Настройка макетов и фукций главного экрана'
+                  : settings.general.language === 'English' ?
+                    'Set layout and functions of main screen'
+                  :
+                    'Настройка макетов и фукций главного экрана'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              wifi
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="activeTab = 'navigationBar'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1527,7 +1554,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" >
+          <div class="settingsAppBodyItem" @click="activeTab = 'simsManager'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1554,7 +1581,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" >
+          <div class="settingsAppBodyItem" @click="activeTab='mobileHotspotAndModem'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1581,7 +1608,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" >
+          <div class="settingsAppBodyItem" @click="activeTab = 'otherSettings'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -8639,6 +8666,658 @@
           </div>
         </div>
       </div>
+      <div v-else-if="activeTab === 'navigationBar'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Навигационная панель'
+              : settings.general.language === 'English' ?
+                'Navigation bar'
+              :
+                'Навигационная панель'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setNavigationType()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Тип навигации'
+                  : settings.general.language === 'English' ?
+                    'Navigation type'
+                  :
+                    'Тип навигации'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.display.navigation.type === 'buttons' ?
+                      'Кнопки навигации'
+                    : settings.display.navigation.type === 'gesture' ?
+                      'Жесты в полноэкранном режиме'
+                    :
+                      'Кнопки навигации'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.display.navigation.type === 'buttons' ?
+                      'Navigation buttons'
+                    : settings.display.navigation.type === 'gesture' ?
+                      'Gestures in fullsreen'
+                    :
+                      'Navigation buttons'
+                    )
+                  :
+                    (
+                    settings.display.navigation.type === 'buttons' ?
+                      'Кнопки навигации'
+                    : settings.display.navigation.type === 'gesture' ?
+                      'Жесты в полноэкранном режиме'
+                    :
+                      'Кнопки навигации'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setNavigationButtonsOrder()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Порядок кнопок'
+                  : settings.general.language === 'English' ?
+                    'Buttons order'
+                  :
+                    'Порядок кнопок'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.display.navigation.buttonsOrder === 'left' ?
+                      'Слева направо'
+                    : settings.display.navigation.buttonsOrder === 'right' ?
+                      'Справо налево'
+                    :
+                      'Слева направо'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.display.navigation.buttonsOrder === 'left' ?
+                      'LTR'
+                    : settings.display.navigation.buttonsOrder === 'right' ?
+                      'RTL'
+                    :
+                      'LTR'
+                    )
+                  :
+                    (
+                    settings.display.navigation.buttonsOrder === 'left' ?
+                      'Слева направо'
+                    : settings.display.navigation.buttonsOrder === 'right' ?
+                      'Справо налево'
+                    :
+                      'Слева направо'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'mainScreen'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Главный экран'
+              : settings.general.language === 'English' ?
+                'Main screen'
+              :
+                'Главный экран'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setMainScreenLayout()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Макет главного экрана'
+                  : settings.general.language === 'English' ?
+                    'Main screen layout'
+                  :
+                    'Макет главного экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.display.mainScreen.layout ?
+                      'Главный экран и экран приложений'
+                    : !settings.display.mainScreen.layout ?
+                      'Только главный экран'
+                    :
+                      'Главный экран и экран приложений'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.display.mainScreen.layout ?
+                      'Main and apps screens '
+                    : !settings.display.mainScreen.layout ?
+                      'Main screen only'
+                    :
+                      'Main and apps screens '
+                    )
+                  :
+                    (
+                    settings.display.mainScreen.layout ?
+                      'Главный экран и экран приложений'
+                    : !settings.display.mainScreen.layout ?
+                      'Только главный экран'
+                    :
+                      'Главный экран и экран приложений'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setMainScreenGrid()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сетка главного экрана'
+                  : settings.general.language === 'English' ?
+                    'Main screen grid'
+                  :
+                    'Сетка главного экрана'
+                }}
+              </span>
+              <span>
+                {{
+                  `${settings.display.mainScreen.grid.rows}X${settings.display.mainScreen.grid.cols}`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setAppsScreenGrid()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Сетка экрана приложений'
+                  : settings.general.language === 'English' ?
+                    'Apps screen grid'
+                  :
+                    'Сетка экрана приложений'
+                }}
+              </span>
+              <span>
+                {{
+                  `${settings.display.appsScreen.grid.rows}X${settings.display.appsScreen.grid.cols}`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'otherSettings'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Дополнительные настройки'
+              : settings.general.language === 'English' ?
+                'Other settings'
+              :
+                'Дополнительные настройки'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setFindDevice()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Поиск устройств'
+                  : settings.general.language === 'English' ?
+                    'Find device'
+                  :
+                    'Поиск устройств'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.connections.otherSettings.find ?
+                      'Включено'
+                    : !settings.connections.otherSettings.find ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.connections.otherSettings.find ?
+                      'Enabled'
+                    : !settings.connections.otherSettings.find ?
+                      'Disabled'
+                    :
+                      'Enabled'
+                    )
+                  :
+                    (
+                    settings.connections.otherSettings.find ?
+                      'Включено'
+                    : !settings.connections.otherSettings.find ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setPrint()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Печать'
+                  : settings.general.language === 'English' ?
+                    'Print'
+                  :
+                    'Печать'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Печать'
+                  : settings.general.language === 'English' ?
+                    'Print'
+                  :
+                    'Печать'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setVPN()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                VPN
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.connections.otherSettings.vpn ?
+                      'Включено'
+                    : !settings.connections.otherSettings.vpn ?
+                      'Нет'
+                    :
+                      'Включено'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.connections.otherSettings.vpn ?
+                      'Enabled'
+                    : !settings.connections.otherSettings.vpn ?
+                      'Not'
+                    :
+                      'Enabled'
+                    )
+                  :
+                    (
+                    settings.connections.otherSettings.vpn ?
+                      'Включено'
+                    : !settings.connections.otherSettings.vpn ?
+                      'Нет'
+                    :
+                      'Включено'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setDNS()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Персональный DNS-сервер'
+                  : settings.general.language === 'English' ?
+                    'Personal DNS server'
+                  :
+                    'Персональный DNS-сервер'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.connections.otherSettings.dns ?
+                      'Включено'
+                    : !settings.connections.otherSettings.dns ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.connections.otherSettings.dns ?
+                      'Enabled'
+                    : !settings.connections.otherSettings.dns ?
+                      'Disabled'
+                    :
+                      'Enabled'
+                    )
+                  :
+                    (
+                    settings.connections.otherSettings.dns ?
+                      'Включено'
+                    : !settings.connections.otherSettings.dns ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'mobileHotspotAndModem'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Мобильная точка доступа и модем'
+              : settings.general.language === 'English' ?
+                'Mobile hotspot and modem'
+              :
+                'Мобильная точка доступа и модем'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setMobileHotspot()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Мобильная точка доступа'
+                  : settings.general.language === 'English' ?
+                    'Mobile hotspot'
+                  :
+                    'Мобильная точка доступа'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.connections.mobileHotspotAndModem.mobileHotspot ?
+                      'Включено'
+                    : !settings.connections.mobileHotspotAndModem.mobileHotspot ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.connections.mobileHotspotAndModem.mobileHotspot ?
+                      'Enabled'
+                    : !settings.connections.mobileHotspotAndModem.mobileHotspot ?
+                      'Disabled'
+                    :
+                      'Enabled'
+                    )
+                  :
+                    (
+                    settings.connections.mobileHotspotAndModem.mobileHotspot ?
+                      'Включено'
+                    : !settings.connections.mobileHotspotAndModem.mobileHotspot ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setBluetoothModem()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Bluetooth-модем'
+                  : settings.general.language === 'Русский' ?
+                    'Bluetooth modem'
+                  :
+                    'Bluetooth-модем'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                      'Предоставление доступа к интернет-подключению вашего телефона через Bluetooth'
+                    : settings.general.language === 'English' ?
+                      'Share to internet yourself phone driven Bluetooth'
+                    :
+                      'Предоставление доступа к интернет-подключению вашего телефона через Bluetooth'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setUSBModem()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'USB-модем'
+                  : settings.general.language === 'English' ?
+                    'USB modem'
+                  :
+                    'USB-модем'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.connections.mobileHotspotAndModem.usb ?
+                      'USB-устройства подключены'
+                    : !settings.connections.mobileHotspotAndModem.usb ?
+                      'USB-устройства не подключены'
+                    :
+                      'USB-устройства подключены'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.connections.mobileHotspotAndModem.usb ?
+                      'USB devices connnected'
+                    : !settings.connections.mobileHotspotAndModem.usb ?
+                      'USB devices not connnected'
+                    :
+                      'USB devices connnected'
+                    )
+                  :
+                    (
+                    settings.connections.mobileHotspotAndModem.usb ?
+                      'USB-устройства подключены'
+                    : !settings.connections.mobileHotspotAndModem.usb ?
+                      'USB-устройства не подключены'
+                    :
+                      'USB-устройства подключены'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'simsManager'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Диспетчер SIM-карт'
+              : settings.general.language === 'English' ?
+                'SIM manager'
+              :
+                'Диспетчер SIM-карт'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setSIMCalls()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Вызовы'
+                  : settings.general.language === 'English' ?
+                    'Rings'
+                  :
+                    'Вызовы'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.connections.simsManager.rings ?
+                    'SIM_1'
+                  : !settings.connections.simsManager.rings ?
+                    'SIM_2'
+                  :
+                    'SIM_1'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setSIMSMS()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  'SMS'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.connections.simsManager.sms ?
+                    'SIM_1'
+                  : !settings.connections.simsManager.sms ?
+                    'SIM_2'
+                  :
+                    'SIM_1'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem" @click="setMobileData()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Мобильные данные'
+                  : settings.general.language === 'English' ?
+                    'Mobile data'
+                  :
+                    'Мобильные данные'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                    settings.connections.simsManager.mobileData ?
+                      'Включено'
+                    : !settings.connections.simsManager.mobileData ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                    settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                      'Enabled'
+                    : !settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                      'Disabled'
+                    :
+                      'Enabled'
+                    )
+                  :
+                    (
+                    settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                      'Включено'
+                    : !settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                      'Выключено'
+                    :
+                      'Включено'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
       
     </div>
   </div>
@@ -8766,6 +9445,10 @@ export default {
           this.activeTab = 'specialCapabilities'
         } else if (this.activeTab === 'tts') {
           this.activeTab = 'languageAndInput'
+        } else if (this.activeTab === 'navigationBar' || this.activeTab === 'mainScreen') {
+          this.activeTab = 'display'
+        } else if (this.activeTab === 'otherSettings' || this.activeTab === 'mobileHotspotAndModem' || this.activeTab === 'simsManager') {
+          this.activeTab = 'connections'
         }
         this.$emit('undoEnded', isQuit)
       }
@@ -8821,6 +9504,730 @@ export default {
     }
   },
   methods: {
+    setMobileData() {
+
+      let isEnabled = !this.settings.connections.simsManager.mobileData
+      this.settings.connections.simsManager.mobileData = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/simsmanager/mobiledata/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Мобильные данные обновлены на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Mobile data updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Мобильные данные обновлены на ${isEnabled ? 'включены' : !isEnabled ? 'выключены' : 'включены'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setSIMSMS() {
+
+      let isEnabled = !this.settings.connections.simsManager.sms
+      this.settings.connections.simsManager.sms = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/simsmanager/sms/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `SIM для sms обновлена на ${isEnabled ? 'SIM_1' : !isEnabled ? 'SIM_2' : 'SIM_1'  }`
+                    : this.settings.general.language === 'English' ?
+                      `SMS SIM updated to ${isEnabled ? 'SIM_1' : !isEnabled ? 'SIM_2' : 'SIM_1'  }`
+                    :
+                      `SIM для sms обновлена на ${isEnabled ? 'SIM_1' : !isEnabled ? 'SIM_2' : 'SIM_1'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setSIMCalls() {
+
+      let isEnabled = !this.settings.connections.simsManager.rings
+      this.settings.connections.simsManager.rings = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/simsmanager/rings/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `SIM для вызовов обновлена на ${isEnabled ? 'SIM_1' : !isEnabled ? 'SIM_2' : 'SIM_1'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Rings SIM updated to ${isEnabled ? 'SIM_1' : !isEnabled ? 'SIM_2' : 'SIM_1'  }`
+                    :
+                      `SIM для вызовов обновлена на ${isEnabled ? 'SIM_1' : !isEnabled ? 'SIM_2' : 'SIM_1'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setMobileHotspot() {
+
+      let isEnabled = !this.settings.connections.mobileHotspotAndModem.mobileHotspot
+      this.settings.connections.mobileHotspotAndModem.mobileHotspot = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/mobilehotspotandmodem/mobilehotspot/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Мобильная точка доступа обновлен на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Mobile hotspot updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Мобильная точка доступа обновлен на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setBluetoothModem() {
+
+      let isEnabled = !this.settings.connections.mobileHotspotAndModem.bluetooth
+      this.settings.connections.mobileHotspotAndModem.bluetooth = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/mobilehotspotandmodem/bluetooth/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Bluetooth-модем обновлен на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Bluetooth modem updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Bluetooth-модем обновлен на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setUSBModem() {
+
+      let isEnabled = !this.settings.connections.mobileHotspotAndModem.usb
+      this.settings.connections.mobileHotspotAndModem.usb = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/mobilehotspotandmodem/usb/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `USB-модем обновлен на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                    : this.settings.general.language === 'English' ?
+                      `USB modem updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `USB-модем обновлен на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setFindDevice() {
+
+      let isEnabled = !this.settings.connections.otherSettings.find
+      this.settings.connections.otherSettings.find = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/othersettings/find/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Поиск устройств обновлен на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Find device updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Поиск устройств обновлен на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setPrint() {
+
+      let isEnabled = !this.settings.connections.otherSettings.print
+      this.settings.connections.otherSettings.print = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/othersettings/vpn/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Печать ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Print is ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Печать ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setVPN() {
+
+      let isEnabled = !this.settings.connections.otherSettings.vpn
+      this.settings.connections.otherSettings.vpn = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/othersettings/vpn/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен VPN на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Updated VPN to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Обновлен VPN на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setDNS() {
+
+      let isEnabled = !this.settings.connections.otherSettings.dns
+      this.settings.connections.otherSettings.dns = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/othersettings/dns/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен персональный DNS сервер на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Updated personal DNS server to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Обновлен персональный DNS сервер на ${isEnabled ? 'включен' : !isEnabled ? 'выключен' : 'включен'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setMainScreenLayout() {
+      let layout = !this.settings.display.mainScreen.layout
+      this.settings.display.mainScreen.layout = layout
+      console.log(`layout: ${layout}`)
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/display/mainscreen/layout/set/?layout=${layout}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлен макет главного экрана на ${layout ? 'Главный экран и экран приложений' : !layout ? 'Только главный экран' : 'Главный экран и экран приложений'  }`
+                    : this.settings.general.language === 'English' ?
+                      `Updated main screen layout to ${layout ? 'Main and apps screens' : !layout ? 'Main screen only' : 'Main and apps screens' }`
+                    :
+                      `Обновлен макет главного экрана на ${layout ? 'Главный экран и экран приложений' : !layout ? 'Только главный экран' : 'Главный экран и экран приложений' }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setMainScreenGrid() {
+      let grid = {
+        rows: 4,
+        cols: 4
+      }
+      grid.rows = this.settings.display.mainScreen.grid.rows === 4 ? 3 : this.settings.display.mainScreen.grid.rows === 3 ? 2 : this.settings.display.mainScreen.grid.rows === 2 ? 4 : 4
+      this.settings.display.mainScreen.grid.rows = grid.rows
+      grid.cols = this.settings.display.mainScreen.grid.cols === 4 ? 3 : this.settings.display.mainScreen.grid.cols === 3 ? 2 : this.settings.display.mainScreen.grid.cols === 2 ? 4 : 4
+      this.settings.display.mainScreen.grid.cols = grid.cols
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/display/mainscreen/grid/set/?grid=${grid.rows}X${grid.cols}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлена сетка главного экрана на ${grid.rows}X${grid.cols}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated main screen grid to ${grid.rows}X${grid.cols}`
+                    :
+                      `Обновлена сетка главного экрана на ${grid.rows}X${grid.cols}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setAppsScreenGrid() {
+      let grid = {
+        rows: 4,
+        cols: 4
+      }
+      grid.rows = this.settings.display.appsScreen.grid.rows === 4 ? 3 : this.settings.display.appsScreen.grid.rows === 3 ? 2 : this.settings.display.appsScreen.grid.rows === 2 ? 4 : 4
+      this.settings.display.appsScreen.grid.rows = grid.rows
+      grid.cols = this.settings.display.appsScreen.grid.cols === 4 ? 3 : this.settings.display.appsScreen.grid.cols === 3 ? 2 : this.settings.display.appsScreen.grid.cols === 2 ? 4 : 4
+      this.settings.display.appsScreen.grid.cols = grid.cols
+
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/display/appsscreen/grid/set/?grid=${grid.rows}X${grid.cols}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Обновлена сетка экрана приложений на ${grid.rows}X${grid.cols}`
+                    : this.settings.general.language === 'English' ?
+                      `Updated apps screen grid to ${grid.rows}X${grid.cols}`
+                    :
+                      `Обновлена сетка экрана приложений на ${grid.rows}X${grid.cols}`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
     setLockScreenNotificationsStyle() {
       let notificationsStyle = this.settings.lockScreen.notifications.style === 'icons' ? 'info' : this.settings.lockScreen.notifications.style === 'info' ? 'icons' : 'icons'
       this.settings.lockScreen.notifications.style = notificationsStyle

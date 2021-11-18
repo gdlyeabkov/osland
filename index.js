@@ -172,6 +172,34 @@ const SettingsSchema = new mongoose.Schema({
             type: Number,
             default: 1
         },
+        mainScreen: {
+            grid: {
+                rows: {
+                    type: Number,
+                    default: 4
+                },
+                cols: {
+                    type: Number,
+                    default: 4
+                }
+            },
+            layout: {
+                type: Boolean,
+                default: true
+            }
+        },
+        appsScreen: {
+            grid: {
+                rows: {
+                    type: Number,
+                    default: 4
+                },
+                cols: {
+                    type: Number,
+                    default: 4
+                }
+            }
+        }
     },
     updates: {
         lastCheck: {
@@ -224,6 +252,54 @@ const SettingsSchema = new mongoose.Schema({
         marketInfo: {
             type: Boolean,
             default: true
+        }
+    },
+    connections: {
+        otherSettings: {
+            find: {
+                type: Boolean,
+                default: true
+            },
+            print: {
+                type: Boolean,
+                default: true
+            },
+            vpn: {
+                type: Boolean,
+                default: false
+            },
+            dns: {
+                type: Boolean,
+                default: false
+            }
+        },
+        mobileHotspotAndModem: {
+            mobileHotspot: {
+                type: Boolean,
+                default: false
+            },
+            bluetooth: {
+                type: Boolean,
+                default: false
+            },
+            usb: {
+                type: Boolean,
+                default: false
+            }
+        },
+        simsManager: {
+            rings: {
+                type: Boolean,
+                default: true
+            },
+            sms: {
+                type: Boolean,
+                default: true
+            },
+            mobileData: {
+                type: Boolean,
+                default: false
+            }
         }
     }
 }, { collection : 'mysettings' });
@@ -497,6 +573,46 @@ app.get('/api/settings/reset', (req, res) => {
         privacy: {
             bugReports: true,
             marketInfo: true
+        },
+        display: {
+            fontSize: 0,
+            displayTimeout: 60,
+            navigation: {
+                type: 'buttons',
+                buttonsOrder: 'left'
+            },
+            screenScale: 1,    
+            mainScreen: {
+                grid: {
+                    rows: 4,
+                    cols: 4
+                },
+                layout: true
+            },
+            appsScreen: {
+                grid: {
+                    rows: 4,
+                    cols: 4
+                }
+            }
+        },
+        connections: {
+            otherSettings: {
+                find: true,
+                print: true,
+                vpn: false,
+                dns: false
+            },
+            mobileHotspotAndModem: {
+                mobileHotspot: false,
+                bluetooth: false,
+                usb: false
+            },
+            simsManager: {
+                rings: true,
+                sms: true,
+                mobileData: false
+            }
         }
     }
     SettingsModel.update({  }, defaultSettings, (err, settings) => {
@@ -946,6 +1062,221 @@ app.get('/api/settings/lockscreen/notifications/showonlyemergency/set', (req, re
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
     SettingsModel.update({  }, { '$set': { 'lockScreen.notifications.showOnlyEmergency': req.query.show } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/display/mainscreen/grid/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    let grid = req.query.grid.split('X')
+    let rows = Number(grid[0])
+    let cols = Number(grid[1])
+    SettingsModel.update({  }, { '$set': { 'display.mainScreen.grid': { rows: rows, cols: cols } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/display/appsscreen/grid/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    let grid = req.query.grid.split('X')
+    let rows = Number(grid[0])
+    let cols = Number(grid[1])
+    SettingsModel.update({  }, { '$set': { 'display.appsScreen.grid': { rows: rows, cols: cols } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/display/mainscreen/layout/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    console.log(`req.query.layout: ${req.query.layout}`)
+    SettingsModel.update({  }, { '$set': { 'display.mainScreen.layout': { layout: req.query.layout } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/othersettings/find/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { find: req.query.find } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/othersettings/print/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { print: req.query.print } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/othersettings/vpn/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { vpn: req.query.vpn } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/othersettings/dns/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { dns: req.query.dns } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/mobilehotspotandmodem/mobilehotspot/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem': { mobileHotspot: req.query.enabled } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/mobilehotspotandmodem/bluetooth/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem': { bluetooth: req.query.enabled } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/mobilehotspotandmodem/usb/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem': { usb: req.query.enabled } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/simsmanager/rings/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.simsManager': { rings: req.query.enabled } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/simsmanager/sms/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.simsManager': { sms: req.query.enabled } } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/simsmanager/mobiledata/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.simsManager': { mobileData: req.query.enabled } } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }

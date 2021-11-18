@@ -65,7 +65,7 @@
       </div>
 
     </div>
-    <AppsList v-if="isAppsList" :apps="apps" :countAppsRows="countAppsRows" :countAppsPerRow="countAppsPerRow" :orientation="orientation" :settings="settings" @openApp="openAppHandler" @holdApp="holdApp" @isSearch="isSearchHandler" @closeContextMenu="closeContextMenuHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
+    <AppsList v-if="isAppsList && settings.display.mainScreen.layout" :apps="apps" :countAppsRows="settings.display.appsScreen.grid.rows" :countAppsPerRow="settings.display.appsScreen.grid.cols" :orientation="orientation" :settings="settings" @openApp="openAppHandler" @holdApp="holdApp" @isSearch="isSearchHandler" @closeContextMenu="closeContextMenuHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <OpenedApps v-if="isOpenedApps" :openedAppItems="openedApps" @openApp="openAppHandler" @closeApp="closeAppHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <ContextMenu v-if="isContextMenu" :origin="originContextMenu" :appInfo="appInfoContextMenu" :isAppsList="isAppsList" @closeContextMenu="closeContextMenuHandler" :settings="settings" @changeAppShortcut="changeAppShortcutHandler" @deleteApp="deleteAppHandler" />
     <SystemBtns :settings="settings" @handleUndoBtn="handleUndoBtnHandler" @handleHomeBtn="handleHomeBtnHandler" @handeOpenedAppsBtn="handeOpenedAppsBtnHandler" @resetDisplayTimeout="clearDisplayTimeout" :style="`width: ${orientation ? '50%' : '100%'};`" />
@@ -287,6 +287,9 @@ export default {
     window.addEventListener('touchend', (event) => {
       console.log(`touchend: ${event}`)
     })
+
+    this.countAppsPerRow = this.settings.display.mainScreen.grid.cols
+    this.countAppsRows = this.settings.display.mainScreen.grid.rows
 
   },
   methods: {
