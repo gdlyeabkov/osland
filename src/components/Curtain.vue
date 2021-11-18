@@ -58,7 +58,7 @@
         </div>
         <div class="curtainBody">
             <div class="curtainBodyRow">
-                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isWifi, 'btn-light': !isWifi }" id="curtainBtn" @click="isWifi = !isWifi">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isWifi, 'btn-light': !isWifi }" id="curtainBtn" @click="isWifi = !isWifi; $emit('setWifi', isWifi)">
                     wifi
                 </span>
                 <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': currentSoundMode !== 0, 'btn-light': currentSoundMode === 0 }" id="curtainBtn" @click="currentSoundMode = currentSoundMode > 0.1 ?
@@ -76,7 +76,7 @@
                             'volume_off'
                     }}
                 </span>
-                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isBluetooth, 'btn-light': !isBluetooth }" id="curtainBtn" @click="isBluetooth = !isBluetooth">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isBluetooth, 'btn-light': !isBluetooth }" id="curtainBtn" @click="isBluetooth = !isBluetooth; $emit('setBluetooth', isBluetooth)">
                     bluetooth
                 </span>
                 <span @click="orientation = !orientation; $emit('changeOrientation', orientation)" class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
@@ -89,7 +89,7 @@
                 </span>
             </div>
             <div class="curtainBodyRow">
-                <span :class="{curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': flightMode, 'btn-light': !flightMode }" id="curtainBtn" @click="flightMode = !flightMode">
+                <span :class="{curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': flightMode, 'btn-light': !flightMode }" id="curtainBtn" @click="flightMode = !flightMode; $emit('setAirplaneMode', flightMode)">
                     flight
                 </span>
                 <span :class="{curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isFlash, 'btn-light': !isFlash }" id="curtainBtn" @click="isFlash = !isFlash">
@@ -193,7 +193,10 @@ export default {
         'currentTime',
         'batteryLevel',
         'soundMode',
-        'settings'
+        'settings',
+        'wifiSetter',
+        'bluetoothSetter',
+        'airplaneModeSetter'
     ],
     emits: [
         'openApp',
@@ -214,6 +217,18 @@ export default {
             console.log('changeLocation')
             this.setGeolocation()
         },
+        async wifiSetter(isEnabled) {
+            console.log(`setWifi: ${isEnabled}`)
+            this.isWifi = isEnabled
+        },
+        async bluetoothSetter(isEnabled) {
+            console.log(`setBluetooth: ${isEnabled}`)
+            this.isBluetooth = isEnabled
+        },
+        async airplaneModeSetter(isEnabled) {
+            console.log(`setAirplaneMode: ${isEnabled}`)
+            this.flightMode = isEnabled
+        }
     },
     mounted() {
         // wifi.init();

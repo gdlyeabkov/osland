@@ -300,6 +300,32 @@ const SettingsSchema = new mongoose.Schema({
                 type: Boolean,
                 default: false
             }
+        },
+        wifi: {
+            type: Boolean,
+            default: false
+        },
+        bluetooth: {
+            type: Boolean,
+            default: false
+        },
+        airplaneMode: {
+            type: Boolean,
+            default: false
+        }
+    },
+    developerParameters: {
+        touchPlace: {
+            type: Boolean,
+            default: false
+        },
+        enabled: {
+            type: Boolean,
+            default: false
+        },
+        showTouches: {
+            type: Boolean,
+            default: false
         }
     }
 }, { collection : 'mysettings' });
@@ -612,7 +638,15 @@ app.get('/api/settings/reset', (req, res) => {
                 rings: true,
                 sms: true,
                 mobileData: false
-            }
+            },
+            wifi: false,
+            bluetooth: false,
+            airplaneMode: false
+        },
+        developerParameters: {
+            touchPlace: false,
+            enabled: false,
+            showTouches: false
         }
     }
     SettingsModel.update({  }, defaultSettings, (err, settings) => {
@@ -1116,7 +1150,7 @@ app.get('/api/settings/display/mainscreen/layout/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
     console.log(`req.query.layout: ${req.query.layout}`)
-    SettingsModel.update({  }, { '$set': { 'display.mainScreen.layout': { layout: req.query.layout } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'display.mainScreen.layout': req.query.layout } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1132,7 +1166,7 @@ app.get('/api/settings/connections/othersettings/find/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { find: req.query.find } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings.find': req.query.find } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1148,7 +1182,7 @@ app.get('/api/settings/connections/othersettings/print/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { print: req.query.print } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings.print': req.query.print } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1164,7 +1198,7 @@ app.get('/api/settings/connections/othersettings/vpn/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { vpn: req.query.vpn } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings.vpn': req.query.vpn } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1180,7 +1214,7 @@ app.get('/api/settings/connections/othersettings/dns/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.otherSettings': { dns: req.query.dns } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.otherSettings.dns': req.query.dns } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1196,7 +1230,7 @@ app.get('/api/settings/connections/mobilehotspotandmodem/mobilehotspot/set', (re
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem': { mobileHotspot: req.query.enabled } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem.mobileHotspot': req.query.enabled } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1212,7 +1246,7 @@ app.get('/api/settings/connections/mobilehotspotandmodem/bluetooth/set', (req, r
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem': { bluetooth: req.query.enabled } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem.bluetooth': req.query.enabled } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1228,7 +1262,7 @@ app.get('/api/settings/connections/mobilehotspotandmodem/usb/set', (req, res) =>
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem': { usb: req.query.enabled } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.mobileHotspotAndModem.usb': req.query.enabled } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1244,7 +1278,7 @@ app.get('/api/settings/connections/simsmanager/rings/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.simsManager': { rings: req.query.enabled } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.simsManager.rings': req.query.enabled } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1260,7 +1294,7 @@ app.get('/api/settings/connections/simsmanager/sms/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.simsManager': { sms: req.query.enabled } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.simsManager.sms': req.query.enabled } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }
@@ -1276,7 +1310,103 @@ app.get('/api/settings/connections/simsmanager/mobiledata/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    SettingsModel.update({  }, { '$set': { 'connections.simsManager': { mobileData: req.query.enabled } } }, (err, settings) => {
+    SettingsModel.update({  }, { '$set': { 'connections.simsManager.mobileData': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/wifi/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.wifi': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/airplaneMode/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.airplaneMode': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/bluetooth/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'connections.bluetooth': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/touchplace/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.touchPlace': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/enabled/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.enabled': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/developerparameters/showtouches/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({  }, { '$set': { 'developerParameters.showTouches': req.query.show } }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })
         }

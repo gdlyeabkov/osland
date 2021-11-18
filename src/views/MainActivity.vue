@@ -1,8 +1,9 @@
 <template>
   <div :style="`width: ${orientation ? '50%' : '100%'};`">
+    <DeveloperMode v-if="settings.developerParameters.enabled" :settings="settings" />
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover; background-image: url(${settings.wallpapers.mainScreen});`"></div>
-    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" @transferSoundMode="transferSoundModeHandler" />
-    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" :batteryDischarging="batteryDischarging" :isUndo="oneUndo" :apps="apps" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" @undoEnded="undoEndedHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
+    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" :wifiSetter="wifiSetter" :bluetoothSetter="bluetoothSetter" :airplaneModeSetter="airplaneModeSetter" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" @transferSoundMode="transferSoundModeHandler" @setWifi="setWifiHandler" @setBluetooth="setBluetoothHandler" @setAirplaneMode="setAirplaneModeHandler" />
+    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" :batteryDischarging="batteryDischarging" :isUndo="oneUndo" :apps="apps" :wifiSetter="wifiSetter" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" @undoEnded="undoEndedHandler" @setWifi="setWifiHandler" @setBluetooth="setBluetoothHandler" @setAirplaneMode="setAirplaneModeHandler" @setSoundVolume="setSoundVolumeHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" @mouseup="holdApp($event, 'up', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" class="app">
@@ -90,6 +91,7 @@ import SleepMode from '@/components/SleepMode.vue'
 import Speakers from '@/components/Speakers.vue'
 import ContextMenu from '@/components/ContextMenu.vue'
 import VKeyboard from '@/components/VKeyboard.vue'
+import DeveloperMode from '@/components/DeveloperMode.vue'
 
 import speak from "offline-tts"
 
@@ -187,6 +189,11 @@ export default {
         updates: {
           lastCheck: new Date().toLocaleString(),
           lastUpdate: new Date().toLocaleString()
+        },
+        developerParameters: {
+          enabled: false,
+          touchPlace: false,
+          showTouches: false
         }
       },
       launchTime: '00.00.00, 00:00:00',
@@ -194,7 +201,10 @@ export default {
       location: 0,
       trySleep: [],
       oneUndo: false,
-      virtualKeyboard: false
+      virtualKeyboard: false,
+      wifiSetter: false,
+      bluetoothSetter: false,
+      airplaneModeSetter: false,
     }
   },
   mounted() {
@@ -293,6 +303,22 @@ export default {
 
   },
   methods: {
+    setSoundVolumeHandler(volume) {
+      this.currentSoundMode = volume
+      console.log(`setSoundVolumeHandler: ${volume}`)
+    },
+    setAirplaneModeHandler(isEnabled) {
+      console.log(`setAirplaneModeHandler: ${isEnabled}`)
+      this.airplaneModeSetter = isEnabled
+    },
+    setBluetoothHandler(isEnabled) {
+      console.log(`setBluetoothHandler: ${isEnabled}`)
+      this.bluetoothSetter = isEnabled
+    },
+    setWifiHandler(isEnabled) {
+      console.log(`setWifiHandler: ${isEnabled}`)
+      this.wifiSetter = isEnabled
+    },
     undoEndedHandler(isQuit) {
       this.oneUndo = false
       if(isQuit) {
@@ -578,7 +604,8 @@ export default {
     SleepMode,
     Speakers,
     ContextMenu,
-    VKeyboard
+    VKeyboard,
+    DeveloperMode
   }
 }
 </script>
