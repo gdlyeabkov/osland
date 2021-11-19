@@ -32,6 +32,7 @@ mongoose.connect(url, connectionParams)
 const AppSchema = new mongoose.Schema({
     name: String,
     processId: Number,
+    size: Number,
     shortcut: {
         type: Boolean,
         default: false
@@ -39,6 +40,21 @@ const AppSchema = new mongoose.Schema({
     timer: {
         type: Number,
         default: 0
+    },
+    version: {
+        type: String,
+        default: '1.0.0'
+    },
+    permissions: {
+        type: [mongoose.Schema.Types.Map],
+        default: [
+            {
+                permission: 'camera'
+            },
+            {
+                permission: 'mic'
+            }
+        ]
     }
 }, { collection : 'myapps' });
 
@@ -320,6 +336,14 @@ const SettingsSchema = new mongoose.Schema({
         airplaneMode: {
             type: Boolean,
             default: false
+        },
+        dataUsability: {
+            trafficEconomy: {
+                type: Boolean,
+                default: false
+            },
+            wifiData: [mongoose.Schema.Types.Map],
+            mobileData: [mongoose.Schema.Types.Map]
         }
     },
     developerParameters: {
@@ -428,7 +452,7 @@ app.get('/api/apps/create', (req, res)=>{
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
    
-    new AppModel({ name: req.query.appname, processId: Math.floor(Math.random() * 5000) }).save(function (err) {
+    new AppModel({ name: req.query.appname, size: Math.floor(Math.random() * 5000), processId: Math.floor(Math.random() * 5000) }).save(function (err) {
         if(err){
             return res.json({ 'status': 'Error' })
         } else {
@@ -678,7 +702,10 @@ app.get('/api/settings/reset', (req, res) => {
             },
             wifi: false,
             bluetooth: false,
-            airplaneMode: false
+            airplaneMode: false,
+            dataUsability: {
+                trafficEconomy: false
+            }
         },
         developerParameters: {
             touchPlace: false,
@@ -1601,6 +1628,129 @@ app.get('/api/settings/developerparameters/flipinterface/set', (req, res) => {
         }
         return res.json({ status: 'OK' })
     })
+
+})
+
+app.get('/api/apps/timers/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    AppModel.updateOne({ name: req.query.appname }, { '$set': { 'timer': Number(req.query.timer) } }, (err, app) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/datausability/trafficeconomy/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({ }, { '$set': { 'dataUsability.trafficEconomy': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/connections/datausability/wifidata/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({ },{ $push: 
+        {
+            'dataUsability.wifiData': [
+                {
+                    size: Number(req.query.size)
+                }
+            ]
+            
+        }
+    }, (err, settings) => {
+        if(err){
+            return res.json({ "status": "Error" })
+        } else {
+            return res.json({ status: 'OK' })
+        }
+    })
+})
+
+app.get('/api/settings/connections/datausability/mobiledata/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({ },{ $push: 
+        {
+            'dataUsability.mobileData': [
+                {
+                    size: Number(req.query.size)
+                }
+            ]
+            
+        }
+    }, (err, settings) => {
+        if(err){
+            return res.json({ "status": "Error" })
+        } else {
+            return res.json({ status: 'OK' })
+        }
+    })
+})
+
+app.get('/api/apps/permissions/add', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    AppModel.update({  },
+        { $push: 
+            {
+                'permissions': [
+                    {
+                        permission: req.query.permission
+                    }
+                ]
+                
+            }
+    }, (err, app) => {
+        if(err){
+            return res.json({ "status": "Error" })
+        } else {
+            return res.json({ "status": "OK" })
+        }
+    })
+
+})
+
+app.get('/api/apps/permissions/remove', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    mongoose.connection.collection("myapps").updateOne(
+        { name: req.query.appname },
+        { $pull: { 'permissions': { permission: req.query.permission } } }
+    )
 
 })
 

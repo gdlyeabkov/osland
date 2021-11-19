@@ -1,5 +1,5 @@
 <template>
-    <div class="powerDialog" @click="closePowerDialog($event)" id="powerDialogId">
+    <div class="powerDialog" @click="closePowerDialog($event)" id="powerDialogId" :style="`-webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};`">
         <span @click="powerOn()" class="btn btn-danger material-icons powerDialogBtn">
             power_settings_new
         </span>
@@ -19,6 +19,11 @@ export default {
         'closepowerDialog',
         'resetDisplayTimeout'
     ],
+    props: {
+        'settings': {
+            
+        }
+    },
     methods: {
         powerOn() {
             // window.close()

@@ -1,6 +1,6 @@
 <template>
-    <div v-if="settings.lockScreen.mode === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" :style="`background-image: url(${settings.wallpapers.lockScreen});`">
-        <span :class="`timeOnLock ${settings.lockScreen.watchStyle}WatchStyle`" :style="`${settings.developerParameters.enabled ? `font-family: ${settings.developerParameters.fontElements};` : ''}${ settings.developerParameters.flipElements ? 'transform: scaleX(-1);' : ''}`">
+    <div v-if="settings.lockScreen.mode === 'moveSlide'" class="lock" @mousedown="handleUnlockGesture($event, 'down')" @mousemove="handleUnlockGesture($event, 'move')" @mouseup="handleUnlockGesture($event, 'up')" :style="`background-image: url(${settings.wallpapers.lockScreen}); -webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};`">
+        <span :class="`timeOnLock ${settings.lockScreen.watchStyle}WatchStyle`" :style="`${settings.developerParameters.enabled ? `font-family: ${settings.developerParameters.fontElements};` : ''}${ settings.developerParameters.flipInterface ? 'transform: scaleX(-1);' : ''}`">
             {{ currentTime }}
         </span>
         <span class="unlockLabel">
@@ -14,7 +14,7 @@
             }}
         </span>
     </div>
-    <div v-else-if="settings.lockScreen.mode === 'graphicKey'" class="lock graphicKeyWrap" :style="`background-image: url(${settings.wallpapers.lockScreen});`">
+    <div v-else-if="settings.lockScreen.mode === 'graphicKey'" class="lock graphicKeyWrap" :style="`background-image: url(${settings.wallpapers.lockScreen});  -webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};`">
         <canvas @mousedown="drawGraphicKey($event, 'down')" @mousemove="drawGraphicKey($event, 'move')" @mouseup="drawGraphicKey($event, 'up')" width="500px" height="500px" ref="graphicKey"></canvas>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div :style="`width: ${orientation ? '50%' : '100%'}; background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};`" class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
+    <div :style="`width: ${orientation ? '50%' : '100%'}; background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'}; -webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};`" class="curtain" ref="curtain" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')">
         <div class="curtainHeader" @click="handleCurtain = false">
             <div class="curtainItem">
                 <span class="curtainItemIcon">
@@ -207,7 +207,8 @@ export default {
         'changeVolume',
         'location',
         'resetDisplayTimeout',
-        'transferSoundMode'
+        'transferSoundMode',
+        'surfaceUpdate',
     ],
     watch: {
         soundMode(newSoundMode) {
@@ -391,6 +392,7 @@ export default {
                 top: 0px;
                 left: 0px;
                 -webkit-filter: brightness(${brightnessPercent / 100});
+                -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
             `
             this.$emit('changeBrightness', brightnessPercent)
         },
@@ -407,6 +409,7 @@ export default {
                 position: fixed;
                 top: 0px;
                 left: 0px;
+                -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
             `
             this.$emit('openSearch')
         },
@@ -423,6 +426,7 @@ export default {
                 position: fixed;
                 top: 0px;
                 left: 0px;
+                -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
             `
             this.$emit('openPowerDialog')
         },
@@ -439,6 +443,7 @@ export default {
                 position: fixed;
                 top: 0px;
                 left: 0px;
+                -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
             `
             this.handleCurtain = false
             this.$emit('openApp', appInfo)
@@ -469,6 +474,7 @@ export default {
                         position: fixed;
                         top: 0px;
                         left: 0px;
+                        -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
                     `
                 } else {
                     this.handleCurtain = true
@@ -484,8 +490,10 @@ export default {
                         position: fixed;
                         top: 0px;
                         left: 0px;
+                        -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
                     `
                 }
+                this.$emit('surfaceUpdate')
             } else if (gesture === 'move') {
                 if (this.handleCurtain) {
                     let opacityAnimation = window.screen.availHeight / 100 * this.$refs.curtain.getBoundingClientRect().bottom / 4500
@@ -502,7 +510,9 @@ export default {
                         position: fixed;
                         top: 0px;
                         left: 0px;
+                        -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
                     `
+                    this.$emit('surfaceUpdate')
                 }
             } else if (gesture === 'up') {
                 // && event.target.id !== 'curtainBtn'
@@ -522,6 +532,7 @@ export default {
                         position: fixed;
                         top: 0px;
                         left: 0px;
+                        -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
                     `
                 } else {
                     this.$refs.curtain.style = `
@@ -536,8 +547,10 @@ export default {
                         position: fixed;
                         top: 0px;
                         left: 0px;
+                        -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
                     `
                 }
+                this.$emit('surfaceUpdate')
             }
         }
     }

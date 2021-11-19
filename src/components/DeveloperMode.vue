@@ -100,6 +100,7 @@ export default {
                 this.startYCoord = event.y
                 this.horizontalLine = document.createElement('div')
                 this.horizontalLine.style = `
+                    pointer-events: none;
                     width: 100%;
                     height: 1px;
                     background-color: rgb(0, 0, 255);
@@ -110,6 +111,7 @@ export default {
                 document.body.appendChild(this.horizontalLine)
                 this.verticalLine = document.createElement('div')
                 this.verticalLine.style = `
+                    pointer-events: none;
                     width: 1px;
                     height: 100%;
                     background-color: rgb(0, 0, 255);
@@ -126,7 +128,7 @@ export default {
                     left: 0px;
                     top: 0px;
                     z-index: 0;
-                    pointer-events: visiblePainted;
+                    pointer-events: none;
                 `
                 document.body.appendChild(this.canvas)
                 this.canvasContext = this.canvas.getContext('2d')
@@ -137,6 +139,7 @@ export default {
                 this.isTouch = true
                 this.touchesShower = document.createElement('div')
                 this.touchesShower.style = `
+                    pointer-events: none;
                     width: ${this.touchesShowerWidth}px;
                     height: ${this.touchesShowerWidth}px;
                     background-color: ${this.touchesShowerGround};
@@ -182,6 +185,7 @@ export default {
             } else if (this.settings.developerParameters.showTouches) { 
                 if(this.isTouch) {
                     this.touchesShower.style = `
+                        pointer-events: none;
                         width: ${this.touchesShowerWidth}px;
                         height: ${this.touchesShowerWidth}px;
                         background-color: ${this.touchesShowerGround};
@@ -226,6 +230,7 @@ export default {
         left: 0px;
         width: 100%;
         height: 100%;
+        pointer-events: none;
     }
 
     .touchPlaceInfo {

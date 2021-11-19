@@ -16,7 +16,7 @@
           close
         </span>
       </div>
-      <div class="appsList" :style="`${orientation ? 'width: 100%; overflow-x: scroll;' : ''}`">
+      <div class="appsList" :style="`${orientation ? 'width: 100%; overflow-x: scroll;' : ''} -webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};`">
         <!-- <div class="appColumn">
           <div class="appRow">
             <div @click="openApp()" class="app">
@@ -173,7 +173,7 @@
               }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - countAppsPerRow) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - countAppsRows) + (appsColumn !== 0 ? (((appsColumn) * (countAppsPerRow * countAppsRows - countAppsRows)) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords)).length});`">
             <div v-for="app in apps.filter((app, appIdx) => {
                 return (appIdx >= appsRow * countAppsPerRow && appIdx < (appsRow + 1) * countAppsPerRow)
-              }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - countAppsPerRow) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - countAppsRows) + (appsColumn !== 0 ? (((appsColumn) * (countAppsPerRow * countAppsRows - countAppsRows)) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords))" :key="app._id" @click="openApp({ name: app.name, processId: app.processId })" @mousedown="holdApp($event, 'down', app)" @mousemove="holdApp($event, 'move', app)" @mouseup="holdApp($event, 'up', app)" class="app">
+              }).filter((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - countAppsPerRow) + (appsColumn !== 0 ? (((appsColumn) * 16)) : 0)] !== undefined).map((needApp, needAppIdx) => apps[(needAppIdx + countAppsPerRow * (appsRow + 1) - countAppsRows) + (appsColumn !== 0 ? (((appsColumn) * (countAppsPerRow * countAppsRows - countAppsRows)) + countAppsPerRow) : 0)]).filter(app => app.name.includes(keywords))" :key="app._id" @click="openApp(app)" @mousedown="holdApp($event, 'down', app)" @mousemove="holdApp($event, 'move', app)" @mouseup="holdApp($event, 'up', app)" class="app">
             </div>
             <div class="notFoundAppsContainer" v-if="apps.every((app, appIdx) => {
               return !app.name.includes(keywords)
@@ -271,8 +271,9 @@ export default {
       console.log(`event: ${event}`)
       this.$refs.desktop.scrollLeft = 15
     },
-    openApp(){
-      this.$emit('openApp', { processId: Math.floor(Math.random() * 5000), })
+    openApp(appInfo) {
+      // this.$emit('openApp', { processId: Math.floor(Math.random() * 5000), })
+      this.$emit('openApp', appInfo)
     }
   },
   components: {

@@ -1591,7 +1591,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" >
+          <div class="settingsAppBodyItem" @click="activeTab = 'mobileNetworks'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -1618,7 +1618,7 @@
               wifi
             </span>
           </div>
-          <div class="settingsAppBodyItem" >
+          <div class="settingsAppBodyItem" @click="activeTab = 'dataUsability'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -5890,7 +5890,7 @@
               add
             </span>
           </div>
-          <div v-for="app in apps" :key="app.name" class="settingsAppBodyItem" @click="toggleDeveloperMode()">
+          <div v-for="app in apps" :key="app.name" class="settingsAppBodyItem" @click="activeTab = 'appInfo'; activeApp = app">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -5899,13 +5899,12 @@
               </span>
               <span>
                 {{
-                  '75,00 Мб'
+                  `${computeSize(app.size)} ${computeMeasure(app.size, 0)}`
                 }}
               </span>
             </div>
-            <span class="material-icons settingsAppWifiIcon">
-              add
-            </span>
+            <div class="app" :style="`background-image: url('http://localhost:4000/api/apps/favicons/get/?appname=${app.name}.png'); border-radius: ${settings.topic === 'light' ? '5' : '25' }px;`">
+            </div>
           </div>
         </div>
       </div>
@@ -6047,7 +6046,7 @@
           </h4>
         </div>
         <div class="settingsAppBody">
-          <div class="settingsAppBodyItem" @click="getDefaultApps()">
+          <div class="settingsAppBodyItem" @click="activeTab = 'timers'">
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
@@ -7221,7 +7220,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span class="settingsAppBodyItemLabel">
                 {{
                   settings.general.language === 'Русский' ?
                     'Данные в роуминге'
@@ -9498,22 +9497,137 @@
             <div class="settingsAppBodyItemContent">
               <span class="settingsAppBodyItemLabel">
                 {{
-                  settings.general.language === 'Русский' ?
-                    'Вызовы'
-                  : settings.general.language === 'English' ?
-                    'Rings'
-                  :
-                    'Вызовы'
+                  app.name
                 }}
               </span>
               <span>
                 {{
-                  settings.connections.simsManager.rings ?
-                    'SIM_1'
-                  : !settings.connections.simsManager.rings ?
-                    'SIM_2'
+                  app.timer === 0 ?
+                    (
+                    settings.general.language === 'Русский' ?
+                      'Выключено'
+                    : settings.general.language === 'English' ?
+                      'Disabled'
+                    :
+                      'Выключено'
+                    )
                   :
-                    'SIM_1'
+                    (
+                      settings.general.language === 'Русский' ?
+                        `${app.timer} секунд`
+                      : settings.general.language === 'English' ?
+                        `${app.timer} seconds`
+                      :
+                        `${app.timer} секунд`
+                    )
+                }}
+              </span>
+            </div>
+            <div class="app" :style="`background-image: url('http://localhost:4000/api/apps/favicons/get/?appname=${app.name}.png'); border-radius: ${settings.topic === 'light' ? '5' : '25' }px;`">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'dataUsability'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Использование данных'
+              : settings.general.language === 'English' ?
+                'Data usability'
+              :
+                'Использование данных'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem" @click="setTrafficEconomy()">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Экономика траффика'
+                  : settings.general.language === 'English' ?
+                    'Traffic economy'
+                  :
+                    'Экономика траффика'
+                }}
+              </span>
+              <span>
+                {{
+                  !settings.connections.dataUsability.trafficEconomy ?
+                    (
+                      settings.general.language === 'Русский' ?
+                        'Выключено'
+                      : settings.general.language === 'English' ?
+                        'Disabled'
+                      :
+                        'Выключено'
+                    )
+                  :
+                    (
+                      settings.general.language === 'Русский' ?
+                        `Включено`
+                      : settings.general.language === 'English' ?
+                        `Enabled`
+                      :
+                        `Включено`
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использование мобильных данных'
+                  : settings.general.language === 'English' ?
+                    'Mobile data usability'
+                  :
+                    'Использование мобильных данных'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использовано 0б (1 - 30 ноя.)'
+                  : settings.general.language === 'English' ?
+                    '0b used (1 - 30 ноv.)'
+                  :
+                    'Использовано 0б (1 - 30 ноя.)'
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Данные WI-FI'
+                  : settings.general.language === 'English' ?
+                    'WI-FI data'
+                  :
+                    'Данные WI-FI'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Использовано 0б (1 - 30 ноя.)'
+                  : settings.general.language === 'English' ?
+                    '0b used (1 - 30 ноv.)'
+                  :
+                    'Использовано 0б (1 - 30 ноя.)'
                 }}
               </span>
             </div>
@@ -9523,7 +9637,219 @@
           </div>
         </div>
       </div>
-      
+      <div v-else-if="activeTab === 'appInfo'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Информация о приложении'
+              : settings.general.language === 'English' ?
+                'Application info'
+              :
+                'Информация о приложении'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Версия'
+                  : settings.general.language === 'English' ?
+                    'Version'
+                  :
+                    'Версия'
+                }}
+              </span>
+              <span>
+                {{
+                  activeApp.version
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Разрешения'
+                  : settings.general.language === 'English' ?
+                    'Permissions'
+                  :
+                    'Разрешения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                      activeApp.permissions.map(permission => permissionsLabels.russian[permission.permission]).map((permission, permissionIdx) => permissionIdx === 0 ? `${permission.split('')[0].toUpperCase()}${permission.split('').filter((permission, permissionIdx) => permissionIdx !== 0).join('')}` : permission).join(' и ')
+                    )
+                  : settings.general.language === 'English' ?
+                    activeApp.permissions.map(permission => permission.permission).join(' and ')
+                  :
+                    activeApp.permissions.map(permission => permissionsLabels.russian[permission.permission]).join(' и ')
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Память'
+                  : settings.general.language === 'English' ?
+                    'Memory'
+                  :
+                    'Память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} использовано (Память устройства)`
+                  : settings.general.language === 'English' ?
+                    `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} used (Memory stick)`
+                  :
+                    `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} использовано (Память устройства)`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="activeTab === 'permissions'">
+        <div class="settingsAppHeader">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+            {{
+              settings.general.language === 'Русский' ?
+                'Разрешения'
+              : settings.general.language === 'English' ?
+                'Permissions'
+              :
+                'Разрешения'
+            }}
+          </h4>
+        </div>
+        <div class="settingsAppBody">
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Камера'
+                  : settings.general.language === 'English' ?
+                    'Camera'
+                  :
+                    'Камера'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                      activeApp.permissions.map(permission => permission.permission).includes('camera') ?
+                        'Разрешено'
+                      :
+                        'Заблокировано'
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                      activeApp.permissions.map(permission => permission.permission).includes('camera') ?
+                        'Agreed'
+                      :
+                        'Disagreed'
+                    )
+                  :
+                    (
+                      activeApp.permissions.map(permission => permission.permission).includes('camera') ?
+                        'Разрешено'
+                      :
+                        'Заблокировано'
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Разрешения'
+                  : settings.general.language === 'English' ?
+                    'Permissions'
+                  :
+                    'Разрешения'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    (
+                      activeApp.permissions.map(permission => permissionsLabels.russian[permission.permission]).map((permission, permissionIdx) => permissionIdx === 0 ? `${permission.split('')[0].toUpperCase()}${permission.split('').filter((permission, permissionIdx) => permissionIdx !== 0).join('')}` : permission).join(' и ')
+                    )
+                  : settings.general.language === 'English' ?
+                    (
+                      activeApp.permissions.map(permission => permissionsLabels.english[permission.permission]).map((permission, permissionIdx) => permissionIdx === 0 ? `${permission.split('')[0].toUpperCase()}${permission.split('').filter((permission, permissionIdx) => permissionIdx !== 0).join('')}` : permission).join(' and ')
+                    )
+                  :
+                    (
+                      activeApp.permissions.map(permission => permissionsLabels.russian[permission.permission]).map((permission, permissionIdx) => permissionIdx === 0 ? `${permission.split('')[0].toUpperCase()}${permission.split('').filter((permission, permissionIdx) => permissionIdx !== 0).join('')}` : permission).join(' и ')
+                    )
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+          <div class="settingsAppBodyItem">
+            <div class="settingsAppBodyItemContent">
+              <span class="settingsAppBodyItemLabel">
+                {{
+                  settings.general.language === 'Русский' ?
+                    'Память'
+                  : settings.general.language === 'English' ?
+                    'Memory'
+                  :
+                    'Память'
+                }}
+              </span>
+              <span>
+                {{
+                  settings.general.language === 'Русский' ?
+                    `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} использовано (Память устройства)`
+                  : settings.general.language === 'English' ?
+                    `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} used (Memory stick)`
+                  :
+                    `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} использовано (Память устройства)`
+                }}
+              </span>
+            </div>
+            <span class="material-icons settingsAppWifiIcon">
+              add
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -9586,7 +9912,18 @@ export default {
       gestures: [],
       originX: 100,
       originY: 150,
-      handleGesture: false
+      handleGesture: false,
+      activeApp: null,
+      permissionsLabels: {
+        russian: {
+          camera: 'камера',
+          mic: 'микрофон',
+        },
+        english: {
+          camera: 'camera',
+          mic: 'mic',
+        }
+      }
     }
   },
   props: {
@@ -9664,8 +10001,14 @@ export default {
           this.activeTab = 'languageAndInput'
         } else if (this.activeTab === 'navigationBar' || this.activeTab === 'mainScreen') {
           this.activeTab = 'display'
-        } else if (this.activeTab === 'wi-fi' || this.activeTab === 'otherSettings' || this.activeTab === 'mobileHotspotAndModem' || this.activeTab === 'simsManager') {
+        } else if (this.activeTab === 'wi-fi' || this.activeTab === 'otherSettings' || this.activeTab === 'mobileHotspotAndModem' || this.activeTab === 'simsManager' || this.activeTab === 'mobileNetworks' || this.activeTab === 'dataUsability') {
           this.activeTab = 'connections'
+        } else if (this.activeTab === 'timers') {
+          this.activeTab = 'deviceUsabilityAndParentControl'
+        } else if (this.activeTab === 'appInfo') {
+          this.activeTab === 'applications'
+        } else if (this.activeTab === 'permissions') {
+          this.activeTab = 'appInfo'
         }
         this.$emit('undoEnded', isQuit)
       }
@@ -9730,6 +10073,84 @@ export default {
     }
   },
   methods: {
+    computeSize (size)  {
+      if(Math.ceil(size / 1024) > 1){
+        return this.computeSize(size / 1024)
+      } else if(Math.ceil(size / 1024) <= 1){
+        return size.toFixed(2);
+      }
+    },
+    computeMeasure(size, cursorOfMeasure){
+      let cursor = cursorOfMeasure
+      cursor++
+      if(Math.ceil(size / 1024) > 1){
+        return this.computeMeasure(size / 1024, cursor)
+      } else if(Math.ceil(size / 1024) <= 1){
+          if(cursor === 1){
+            return "б"
+          } else if(cursor === 2){
+            return "Кб"
+          } else if(cursor === 3){
+            return "Мб"
+          } else if(cursor === 4){
+            return "Гб"
+          }  
+      }
+    },
+    setTrafficEconomy() {
+      
+      let isEnabled = !this.settings.connections.dataUsability.trafficEconomy
+      this.settings.connections.dataUsability.trafficEconomy = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/connections/datausability/trafficeconomy/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setBluetooth', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Экономия трафика обновлена на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                    : this.settings.general.language === 'English' ?
+                      `\"Traffic economy\" updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Экономия трафика обновлена на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
     setShowSurfaceUpdate() {
 
       let isEnabled = !this.settings.developerParameters.showSurfaceUpdate
@@ -10116,6 +10537,58 @@ export default {
 
     },
     setApplicationTimer(appInfo) {
+
+      
+      let timer = appInfo.timer === 0 ? 10 : appInfo.timer === 10 ? 30 : appInfo.timer === 30 ? 60 : appInfo.timer === 60 ? 0 : 0
+      appInfo.timer = timer
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/apps/timers/set/?appname=${appInfo.name}&timer=${timer}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Таймер приложения обновлен на ${timer} сек.`
+                    : this.settings.general.language === 'English' ?
+                      `Application timer updated to ${timer} s.`
+                    :
+                      `Таймер приложения обновлен на ${timer} сек.`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
 
     },
     setNotDisableMobileInternet() {
