@@ -3,7 +3,7 @@
     <div class="settingsApp" v-if="appInfo.name === 'Settings'" ref="openedAppRef" @mousemove="$emit('resetDisplayTimeout')" @scroll="$emit('resetDisplayTimeout')" :style="`background-color: ${settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'}; zoom: ${settings.display.screenScale}; height: ${settings.display.navigation.type === 'gesture' ? '625' : '575'}px; -webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};`">
       <div v-if="activeTab === 'settings'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Настройки'
@@ -17,7 +17,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="activeTab = 'connections'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Подключения'
@@ -27,7 +27,7 @@
                     'Подключения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Wi-fi, Bluetooth, Авиарежим, Использование данных'
@@ -44,7 +44,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'soundsAndVibration'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Звуки и вибрация'
@@ -54,7 +54,7 @@
                     'Звуки и вибрация'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим звука, Мелодия звонка, Громкость'
@@ -71,7 +71,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'notifications'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уведомления'
@@ -81,7 +81,7 @@
                     'Уведомления'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уведомления приложения, строка состояния, режим "Не беспокоить"'
@@ -98,7 +98,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'display'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дисплей'
@@ -108,7 +108,7 @@
                     'Дисплей'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Яркость, Главный экран'
@@ -125,7 +125,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'wallpapers'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Обои'
@@ -135,7 +135,7 @@
                     'Обои'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Обои главного экрана, Обои на экране блокировки'
@@ -152,7 +152,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setTopic()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Темы'
@@ -162,7 +162,7 @@
                     'Темы'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Темы, Обои, Значки'
@@ -179,7 +179,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'lockScreen'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Экран блокировки'
@@ -189,7 +189,7 @@
                     'Экран блокировки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тип блокировки экрана, Стиль часов'
@@ -206,7 +206,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'biometryAndSecurity'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Биометрия и безопасность'
@@ -216,7 +216,7 @@
                     'Биометрия и безопасность'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Распознавание лица, Отпечатки пальцев, Найти моё мобильное устройство'
@@ -233,7 +233,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'privacy'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Конфиденциальность'
@@ -243,7 +243,7 @@
                     'Конфиденциальность'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Диспетчер разрешений'
@@ -260,7 +260,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'location'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Локация'
@@ -270,7 +270,7 @@
                     'Локация'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройки местоположения, запросы на определение местоположения'
@@ -287,7 +287,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'accountsAndArchive'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Учетные записи и архивация'
@@ -297,7 +297,7 @@
                     'Учетные записи и архивация'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 ...
               </span>
             </div>
@@ -307,7 +307,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'auxiliaryFunctions'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дополнительные функции'
@@ -317,7 +317,7 @@
                     'Дополнительные функции'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Движения и жесты'
@@ -334,7 +334,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'deviceUsabilityAndParentControl'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование устройства и родительский контроль'
@@ -344,7 +344,7 @@
                     'Использование устройства и родительский контроль'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Время работы экрана, Таймеры приложений, режим отдыха перед сном'
@@ -361,7 +361,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'deviceManagement'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Обслуживание устройства'
@@ -371,7 +371,7 @@
                     'Обслуживание устройства'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Аккумулятор, хранилище, ОЗУ, безопасность'
@@ -388,7 +388,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'applications'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Приложения'
@@ -398,7 +398,7 @@
                     'Приложения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Приложения по умолчанию, Диспетчер разрешений'
@@ -415,7 +415,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'general'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Общие настройки'
@@ -425,7 +425,7 @@
                     'Общие настройки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Язык и ввод, Дата и время, Сброс'
@@ -442,7 +442,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'specialCapabilities'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Специальные возможности'
@@ -452,7 +452,7 @@
                     'Специальные возможности'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Голосовой помощник, вспомогательное меню'
@@ -469,7 +469,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'softwareUpdates'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Обновление ПО'
@@ -479,7 +479,7 @@
                     'Обновление ПО'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Загрузка обновлений, Последнее обновление'
@@ -496,7 +496,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getManual()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Руководство пользователя'
@@ -506,7 +506,7 @@
                     'Руководство пользователя'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Руководство пользователя'
@@ -523,7 +523,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'phoneInformation'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сведения о телефоне'
@@ -533,7 +533,7 @@
                     'Сведения о телефоне'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние, Юридическая информация, Имя телефона'
@@ -550,7 +550,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'developerParameters'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Параметры разработчика'
@@ -560,7 +560,7 @@
                     'Параметры разработчика'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Параметры разработчика'
@@ -579,7 +579,7 @@
       </div>
       <div v-else-if="activeTab === 'lockScreen'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Экран блокировки'
@@ -593,7 +593,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setLockScreenMode()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тип блокировки экрана'
@@ -603,7 +603,7 @@
                     'Тип блокировки экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `${settings.lockScreen.mode === 'moveSlide' ? 'Провести по экрану' : settings.lockScreen.mode === 'graphicKey' ? 'Графический ключ' : 'Провести по экрану'}`
@@ -623,7 +623,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setWatchStyle()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Стиль часов'
@@ -633,7 +633,7 @@
                     'Стиль часов'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выберите тип и цвет часов на экране блокировки'
@@ -650,7 +650,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'lockScreenNotifications'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уведомления'
@@ -660,7 +660,7 @@
                     'Уведомления'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -692,7 +692,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getLockScreenInfo()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'О блокировке экрана'
@@ -702,7 +702,7 @@
                     'О блокировке экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'О блокировке экрана'
@@ -722,7 +722,7 @@
       </div>
       <div v-else-if="activeTab === 'wallpapers'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Обои'
@@ -736,7 +736,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setWallpapersLockScreen()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Экран блокировки'
@@ -746,7 +746,7 @@
                     'Экран блокировки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Экран блокировки'
@@ -763,7 +763,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setWallpapersMainScreen()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Главный экран'
@@ -773,7 +773,7 @@
                     'Главный экран'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Главный экран'
@@ -807,7 +807,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="activeTab = 'languageAndInput'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Язык и ввод'
@@ -817,7 +817,7 @@
                     'Язык и ввод'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Язык и ввод'
@@ -834,7 +834,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'dateAndTime'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дата и время'
@@ -844,7 +844,7 @@
                     'Дата и время'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дата и время'
@@ -861,7 +861,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="giveFeedback()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Свяжитесь с нами'
@@ -871,7 +871,7 @@
                     'Свяжитесь с нами'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Свяжитесь с нами'
@@ -888,7 +888,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="resetSettings()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сброс'
@@ -898,7 +898,7 @@
                     'Сброс'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сброс'
@@ -918,7 +918,7 @@
       </div>
       <div v-else-if="activeTab === 'display'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Дисплей'
@@ -932,7 +932,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Яркость'
@@ -955,7 +955,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setFontSize()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Размер и стиль шрифта'
@@ -965,7 +965,7 @@
                     'Размер и стиль шрифта'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Размер и стиль шрифта'
@@ -982,7 +982,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setScreenScale()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Масштабирование экрана'
@@ -992,7 +992,7 @@
                     'Масштабирование экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Масштабирование экрана'
@@ -1009,7 +1009,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setDisplayTimeout()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тайм-аут экрана'
@@ -1019,7 +1019,7 @@
                     'Тайм-аут экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 Период бездействия -
                 {{
                   `${settings.deviceUsabilityAndParentControl.displayTimeout} `
@@ -1040,7 +1040,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'mainScreen'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Главный экран'
@@ -1050,7 +1050,7 @@
                     'Главный экран'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройка макетов и фукций главного экрана'
@@ -1067,7 +1067,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'navigationBar'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Навигационная панель'
@@ -1077,7 +1077,7 @@
                     'Навигационная панель'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Управляйте с помощью кнопок \"Домой\", \"Назад\" и \"Последние\" или используйте жесты, чтобы освободить экран'
@@ -1094,7 +1094,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setTopic()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим затемнения'
@@ -1104,7 +1104,7 @@
                     'Режим затемнения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим затемнения'
@@ -1124,7 +1124,7 @@
       </div>
       <div v-else-if="activeTab === 'notifications'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Уведомления'
@@ -1138,7 +1138,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setNotifications()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показывать уведомления'
@@ -1148,7 +1148,7 @@
                     'Показывать уведомления'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показывать уведомления'
@@ -1165,7 +1165,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'statusRow'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Строка состояния'
@@ -1175,7 +1175,7 @@
                     'Строка состояния'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Строка состояния'
@@ -1194,7 +1194,7 @@
       </div>
       <div v-else-if="activeTab === 'accountsAndArchive'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Учетные записи и архивация'
@@ -1208,7 +1208,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="activeTab = 'accounts'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Учетные записи'
@@ -1218,7 +1218,7 @@
                     'Учетные записи'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Учетные записи'
@@ -1235,7 +1235,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Архивация'
@@ -1245,7 +1245,7 @@
                     'Архивация'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Архивация'
@@ -1264,7 +1264,7 @@
       </div>
       <div v-else-if="activeTab === 'softwareUpdates'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Обновление ПО'
@@ -1278,7 +1278,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getUpdates()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Загрузка и установка'
@@ -1288,7 +1288,7 @@
                     'Загрузка и установка'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `Дата последней проверки: ${settings.updates.lastCheck.split(' ')[0].split('-')[2]}.${settings.updates.lastCheck.split(' ')[0].split('-')[1]}.${settings.updates.lastCheck.split(' ')[0].split('-')[0]}\nЗа загрузку по мобильным сетям может взиматься дополнительная плата. По возможности используйте Wi-fi.`
@@ -1305,7 +1305,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автозагрузка по Wi-fi'
@@ -1315,7 +1315,7 @@
                     'Автозагрузка по Wi-fi'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автоматическая загрузка обновлений ПО при подключении к сети Wi-fi'
@@ -1332,7 +1332,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Последнее обновление'
@@ -1342,7 +1342,7 @@
                     'Последнее обновление'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `Последнее обновление установлено ${settings.updates.lastUpdate.split(' ')[0].split('-')[2]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[1]}.${settings.updates.lastUpdate.split(' ')[0].split('-')[0]} в ${settings.updates.lastUpdate.split(' ')[1].split(':')[0]}:${settings.updates.lastUpdate.split(' ')[1].split(':')[1]}`
@@ -1364,7 +1364,7 @@
       </div>
       <div v-else-if="activeTab === 'soundsAndVibration'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Звуки и вибрация'
@@ -1378,7 +1378,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setSoundMode()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим звука'
@@ -1388,7 +1388,7 @@
                     'Режим звука'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим звука'
@@ -1405,7 +1405,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setSoundVolume()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Громкость'
@@ -1415,7 +1415,7 @@
                     'Громкость'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Громкость'
@@ -1434,7 +1434,7 @@
       </div>
       <div v-else-if="activeTab === 'connections'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Подключения'
@@ -1448,7 +1448,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="activeTab = 'wi-fi'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'WI-FI'
@@ -1458,7 +1458,7 @@
                     'WI-FI'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'ssid'
@@ -1475,7 +1475,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Вызовы по WI-FI'
@@ -1485,7 +1485,7 @@
                     'Вызовы по WI-FI'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Вызовы по WI-FI'
@@ -1502,12 +1502,12 @@
           </div>
           <div class="settingsAppBodyItem" @click="setBluetooth()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Bluetooth'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -1545,7 +1545,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setAirplaneMode()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Авиарежим'
@@ -1555,7 +1555,7 @@
                     'Авиарежим'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -1593,7 +1593,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'mobileNetworks'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Мобильные сети'
@@ -1603,7 +1603,7 @@
                     'Мобильные сети'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Мобильные сети'
@@ -1620,7 +1620,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'dataUsability'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование данных'
@@ -1630,7 +1630,7 @@
                     'Использование данных'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование данных'
@@ -1647,7 +1647,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'simsManager'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Диспетчер SIM-карт'
@@ -1657,7 +1657,7 @@
                     'Диспетчер SIM-карт'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Диспетчер SIM-карт'
@@ -1674,7 +1674,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab='mobileHotspotAndModem'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Мобильная точка доступа и модем'
@@ -1684,7 +1684,7 @@
                     'Мобильная точка доступа и модем'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Мобильная точка доступа и модем'
@@ -1701,7 +1701,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'otherSettings'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Другие настройки'
@@ -1711,7 +1711,7 @@
                     'Другие настройки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Другие настройки'
@@ -1730,7 +1730,7 @@
       </div>
       <div v-else-if="activeTab === 'phoneInformation'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Сведения о телефоне'
@@ -1744,7 +1744,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="activeTab = 'state'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние'
@@ -1754,7 +1754,7 @@
                     'Состояние'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Просмотр состояния SIM-карты, IMEI-устройства и другой информации'
@@ -1771,7 +1771,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'legalInfo'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Юридическая информация'
@@ -1781,7 +1781,7 @@
                     'Юридическая информация'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Юридическая информация'
@@ -1798,7 +1798,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'softwareInfo'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сведения о ПО'
@@ -1808,7 +1808,7 @@
                     'Сведения о ПО'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Просмотр текущей версии OsLand, полосы частот, ядра, номера сборки и т. д.'
@@ -1825,7 +1825,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'accumulatorDetails'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сведения об аккумуляторе'
@@ -1835,7 +1835,7 @@
                     'Сведения об аккумуляторе'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Просмотр состояния аккумулятора, оставшегося уровня заряда и другой информации'
@@ -1854,7 +1854,7 @@
       </div>
       <div v-else-if="activeTab === 'accounts'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Учетные записи'
@@ -1868,12 +1868,12 @@
         <div class="settingsAppBody">
           <div v-for="account in settings.accountsAndArchive.accounts" :key="account.login" class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   account.login
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   account.service
                 }}
@@ -1885,7 +1885,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="addAcount()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Добавить учетную запись'
@@ -1895,7 +1895,7 @@
                     'Добавить учетную запись'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Добавить учетную запись'
@@ -1910,9 +1910,9 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem" >
+          <div class="settingsAppBodyItem" @click="setAutoSync()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автосинхронизация данных'
@@ -1922,7 +1922,7 @@
                     'Автосинхронизация данных'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автосинхронизация данных'
@@ -1941,7 +1941,7 @@
       </div>
       <div v-else-if="activeTab === 'dateAndTime'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Дата и время'
@@ -1955,7 +1955,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автоопределение времени'
@@ -1965,7 +1965,7 @@
                     'Автоопределение времени'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование даты и времени сети'
@@ -1987,7 +1987,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     '24-часовой формат'
@@ -1997,7 +1997,7 @@
                     '24-часовой формат'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2014,7 +2014,7 @@
       </div>
       <div v-else-if="activeTab === 'state'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Состояние'
@@ -2028,7 +2028,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="activeTab = 'simState'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние SIM-карты'
@@ -2038,7 +2038,7 @@
                     'Состояние SIM-карты'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2053,7 +2053,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'imeiDetails'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сведения об IMEI'
@@ -2063,7 +2063,7 @@
                     'Сведения об IMEI'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2078,7 +2078,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'IP-адресс'
@@ -2088,7 +2088,7 @@
                     'IP-адресс'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   '192.168.0.101'
                 }}
@@ -2100,7 +2100,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'MAC-адресс Wi-fi'
@@ -2110,7 +2110,7 @@
                     'MAC-адресс Wi-fi'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   '48:79:4D:04:A0:9F'
                 }}
@@ -2122,7 +2122,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Адресс Bluetooth'
@@ -2132,7 +2132,7 @@
                     'Адресс Bluetooth'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2147,7 +2147,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Серийный номер'
@@ -2157,7 +2157,7 @@
                     'Серийный номер'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'R9WMB0EV1AJ'
                 }}
@@ -2169,7 +2169,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Время работы'
@@ -2179,7 +2179,7 @@
                     'Время работы'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   getDeviceInfo
                 }}
@@ -2196,7 +2196,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние телефона'
@@ -2206,7 +2206,7 @@
                     'Состояние телефона'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Официально'
                 }}
@@ -2218,7 +2218,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'FCC-сертификаты'
@@ -2228,7 +2228,7 @@
                     'FCC-сертификаты'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'FCC ID: ZCASMA207F'
                 }}
@@ -2240,7 +2240,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Номинальные значения'
@@ -2250,7 +2250,7 @@
                     'Номинальные значения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'DC 9 V; 1.67 A'
                 }}
@@ -2264,7 +2264,7 @@
       </div>
       <div v-else-if="activeTab === 'legalInfo'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Юридическая информация'
@@ -2278,7 +2278,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Лицензии открытого ПО'
@@ -2288,7 +2288,7 @@
                     'Лицензии открытого ПО'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2303,7 +2303,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Правовая информация'
@@ -2313,7 +2313,7 @@
                     'Правовая информация'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2328,7 +2328,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Лицензии системных обновлений'
@@ -2338,7 +2338,7 @@
                     'Лицензии системных обновлений'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2353,7 +2353,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Лицензии'
@@ -2363,7 +2363,7 @@
                     'Лицензии'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2378,7 +2378,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Юридические сведения'
@@ -2388,7 +2388,7 @@
                     'Юридические сведения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2403,7 +2403,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Политика конфиденциальности'
@@ -2413,7 +2413,7 @@
                     'Политика конфиденциальности'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2428,7 +2428,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сведения о безопасности'
@@ -2438,7 +2438,7 @@
                     'Сведения о безопасности'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   getDeviceInfo
                 }}
@@ -2455,7 +2455,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Версии юрид. документов'
@@ -2465,7 +2465,7 @@
                     'Версии юрид. документов'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2482,7 +2482,7 @@
       </div>
       <div v-else-if="activeTab === 'softwareInfo'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Сведения о ПО'
@@ -2496,7 +2496,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Лицензии открытого ПО'
@@ -2506,7 +2506,7 @@
                     'Лицензии открытого ПО'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.dateAndTime.fullHoursFormat ?
                     '13:00'
@@ -2521,7 +2521,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Версия OUI'
@@ -2531,7 +2531,7 @@
                     'Версия OUI'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'v1.0.0'
                 }}
@@ -2543,7 +2543,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Версия OsLand'
@@ -2553,7 +2553,7 @@
                     'Версия OsLand'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'v1.0.0'
                 }}
@@ -2565,7 +2565,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Версия ядра'
@@ -2575,7 +2575,7 @@
                     'Версия ядра'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'v1.0.0'
                 }}
@@ -2587,7 +2587,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Номер сборки'
@@ -2597,7 +2597,7 @@
                     'Номер сборки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'v1.0.0'
                 }}
@@ -2609,7 +2609,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние SE для OsLand'
@@ -2619,7 +2619,7 @@
                     'Состояние SE для OsLand'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Неизвестно'
                 }}
@@ -2631,7 +2631,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Версия ПО (регион/оператор)'
@@ -2641,7 +2641,7 @@
                     'Версия ПО (регион/оператор)'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'v1.0.0'
                 }}
@@ -2658,7 +2658,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Версия ПО безопасности'
@@ -2668,7 +2668,7 @@
                     'Версия ПО безопасности'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'v1.0.0'
                 }}
@@ -2680,7 +2680,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уровень безопасности OsLand'
@@ -2690,7 +2690,7 @@
                     'Уровень безопасности OsLand'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Неизвестно'
                 }}
@@ -2704,7 +2704,7 @@
       </div>
       <div v-else-if="activeTab === 'accumulatorDetails'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Сведения об аккумуляторе'
@@ -2718,7 +2718,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние аккумулятора'
@@ -2728,7 +2728,7 @@
                     'Состояние аккумулятора'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   batteryCharging ?
                     'Заряжается'
@@ -2743,7 +2743,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уровень заряда батареи'
@@ -2753,7 +2753,7 @@
                     'Уровень заряда батареи'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   `${batteryLevel * 100}%`
                 }}
@@ -2765,7 +2765,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Емкость аккумулятора'
@@ -2775,7 +2775,7 @@
                     'Емкость аккумулятора'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     '4000 мАч (стандартно)'
@@ -2794,7 +2794,7 @@
       </div>
       <div v-else-if="activeTab === 'simState'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Состояние SIM-карты'
@@ -2808,7 +2808,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сеть'
@@ -2818,7 +2818,7 @@
                     'Сеть'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Мегафон'
                 }}
@@ -2830,7 +2830,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние мобильной сети'
@@ -2840,7 +2840,7 @@
                     'Состояние мобильной сети'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Неизвестно'
                 }}
@@ -2852,7 +2852,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Состояние услуги'
@@ -2862,7 +2862,7 @@
                     'Состояние услуги'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Работает'
@@ -2879,7 +2879,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Статус регистрации в IMS'
@@ -2889,7 +2889,7 @@
                     'Статус регистрации в IMS'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Registered'
@@ -2906,7 +2906,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уровень сигнала'
@@ -2916,7 +2916,7 @@
                     'Уровень сигнала'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     '4000 мАч (стандартно)'
@@ -2933,7 +2933,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тип сети моб. голосовой связи'
@@ -2943,7 +2943,7 @@
                     'Тип сети моб. голосовой связи'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'LTE'
                 }}
@@ -2955,7 +2955,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тип сети мобильных данных'
@@ -2965,7 +2965,7 @@
                     'Тип сети мобильных данных'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'LTE'
                 }}
@@ -2977,7 +2977,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Роуминг'
@@ -2987,7 +2987,7 @@
                     'Роуминг'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Не в роуминге'
                 }}
@@ -3001,7 +3001,7 @@
       </div>
       <div v-else-if="activeTab === 'imeiDetails'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Сведения об IMEI'
@@ -3015,7 +3015,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'IMEI (гнездо 1)'
@@ -3025,7 +3025,7 @@
                     'IMEI (гнездо 1)'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   batteryCharging ?
                     'Заряжается'
@@ -3040,7 +3040,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'IMEI SV (гнездо 1)'
@@ -3050,7 +3050,7 @@
                     'IMEI SV (гнездо 1)'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   `${batteryLevel * 100}%`
                 }}
@@ -3062,7 +3062,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'IMEI (гнездо 2)'
@@ -3072,7 +3072,7 @@
                     'IMEI (гнездо 2)'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     '4000 мАч (стандартно)'
@@ -3089,7 +3089,7 @@
           </div>
           <div class="settingsAppBodyItem" >
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'IMEI SV (гнездо 2)'
@@ -3099,7 +3099,7 @@
                     'IMEI SV (гнездо 2)'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     '4000 мАч (стандартно)'
@@ -3118,7 +3118,7 @@
       </div>
       <div v-else-if="activeTab === 'statusRow'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Строка состояния'
@@ -3132,7 +3132,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setNotificationsOptions()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отображать значки уведомлений'
@@ -3142,7 +3142,7 @@
                     'Отображать значки уведомлений'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -3186,7 +3186,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показать процент зарядки'
@@ -3196,7 +3196,7 @@
                     'Показать процент зарядки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показать процент зарядки'
@@ -3215,7 +3215,7 @@
       </div>
       <div v-else-if="activeTab === 'developerParameters'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Параметры разработчика'
@@ -3229,7 +3229,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setDeveloperMode()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим разработчика'
@@ -3239,7 +3239,7 @@
                     'Режим разработчика'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим разработчика'
@@ -3256,7 +3256,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setNotDisableDisplay()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Не выключать экран'
@@ -3266,7 +3266,7 @@
                     'Не выключать экран'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Во время зарядки экран будет всегда включен'
@@ -3283,7 +3283,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setTouchPlace()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Место касания'
@@ -3293,7 +3293,7 @@
                     'Место касания'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показывать данные касаний и жестов'
@@ -3310,7 +3310,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowTouches()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показывать нажатия'
@@ -3320,7 +3320,7 @@
                     'Показывать нажатия'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Визуальный отклик при нажатии'
@@ -3337,7 +3337,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setNotDisableMobileInternet()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Не отключать мобильный интернет'
@@ -3347,7 +3347,7 @@
                     'Не отключать мобильный интернет'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Не отключать передачу данных по мобильной сети даже при активном WI-FI-подключении (для быстрого переключения между сетями)'
@@ -3364,7 +3364,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowGridElements()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отображение границ элементов'
@@ -3374,7 +3374,7 @@
                     'Отображение границ элементов'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отображение границ элементов'
@@ -3391,7 +3391,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowSurfaceUpdate()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показывать обновление поверхности'
@@ -3401,7 +3401,7 @@
                     'Показывать обновление поверхности'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Показывать обновление поверхности'
@@ -3418,7 +3418,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setFontElements()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Шрифт элементов'
@@ -3428,7 +3428,7 @@
                     'Шрифт элементов'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Шрифт элементов'
@@ -3445,7 +3445,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setColorElements()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Цвет элементов'
@@ -3455,7 +3455,7 @@
                     'Цвет элементов'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Цвет элементов'
@@ -3472,7 +3472,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setRemoveActivitiesAfterExit()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сбрасывать запущенные приложения после выхода пользователя'
@@ -3482,7 +3482,7 @@
                     'Сбрасывать запущенные приложения после выхода пользователя'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сбрасывать запущенные приложения после выхода пользователя'
@@ -3499,7 +3499,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setFlipInterface()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отразить интерфейс'
@@ -3509,7 +3509,7 @@
                     'Отразить интерфейс'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отразить интерфейс'
@@ -3526,7 +3526,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3536,7 +3536,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3553,7 +3553,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3563,7 +3563,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3580,7 +3580,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3590,7 +3590,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3607,7 +3607,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3617,7 +3617,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3634,7 +3634,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3644,7 +3644,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3661,7 +3661,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3671,7 +3671,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3688,7 +3688,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3698,7 +3698,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3715,7 +3715,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3725,7 +3725,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3742,7 +3742,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3752,7 +3752,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3769,7 +3769,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3779,7 +3779,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3796,7 +3796,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3806,7 +3806,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3823,7 +3823,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3833,7 +3833,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3850,7 +3850,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3860,7 +3860,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3877,7 +3877,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3887,7 +3887,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3904,7 +3904,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3914,7 +3914,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3931,7 +3931,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3941,7 +3941,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3958,7 +3958,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3968,7 +3968,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3985,7 +3985,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -3995,7 +3995,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4012,7 +4012,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4022,7 +4022,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4039,7 +4039,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4049,7 +4049,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4066,7 +4066,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4076,7 +4076,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4093,7 +4093,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4103,7 +4103,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4120,7 +4120,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4130,7 +4130,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4147,7 +4147,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4157,7 +4157,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4174,7 +4174,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4184,7 +4184,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4201,7 +4201,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4211,7 +4211,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4228,7 +4228,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4238,7 +4238,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4255,7 +4255,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4265,7 +4265,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4282,7 +4282,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4292,7 +4292,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4309,7 +4309,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4319,7 +4319,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4336,7 +4336,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4346,7 +4346,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4363,7 +4363,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4373,7 +4373,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4390,7 +4390,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4400,7 +4400,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4417,7 +4417,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4427,7 +4427,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4444,7 +4444,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4454,7 +4454,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4471,7 +4471,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4481,7 +4481,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4498,7 +4498,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4508,7 +4508,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4525,7 +4525,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4535,7 +4535,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4552,7 +4552,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4562,7 +4562,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4579,7 +4579,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4589,7 +4589,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4606,7 +4606,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4616,7 +4616,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4633,7 +4633,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4643,7 +4643,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4660,7 +4660,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4670,7 +4670,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4687,7 +4687,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4697,7 +4697,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4714,7 +4714,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4724,7 +4724,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4741,7 +4741,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4751,7 +4751,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4768,7 +4768,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4778,7 +4778,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4795,7 +4795,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4805,7 +4805,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4822,7 +4822,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4832,7 +4832,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4849,7 +4849,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4859,7 +4859,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4876,7 +4876,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4886,7 +4886,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4903,7 +4903,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4913,7 +4913,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4930,7 +4930,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4940,7 +4940,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4957,7 +4957,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4967,7 +4967,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4984,7 +4984,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -4994,7 +4994,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5011,7 +5011,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5021,7 +5021,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5038,7 +5038,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5048,7 +5048,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5065,7 +5065,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5075,7 +5075,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5092,7 +5092,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5102,7 +5102,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5119,7 +5119,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5129,7 +5129,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5146,7 +5146,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5156,7 +5156,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5173,7 +5173,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5183,7 +5183,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5200,7 +5200,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5210,7 +5210,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5227,7 +5227,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5237,7 +5237,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5254,7 +5254,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5264,7 +5264,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5281,7 +5281,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5291,7 +5291,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5308,7 +5308,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5318,7 +5318,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5335,7 +5335,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5345,7 +5345,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5362,7 +5362,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5372,7 +5372,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5389,7 +5389,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5399,7 +5399,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5416,7 +5416,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5426,7 +5426,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5443,7 +5443,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5453,7 +5453,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5470,7 +5470,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5480,7 +5480,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5497,7 +5497,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5507,7 +5507,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5524,7 +5524,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5534,7 +5534,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5551,7 +5551,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5561,7 +5561,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5578,7 +5578,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5588,7 +5588,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5605,7 +5605,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowBatteryPercents()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5615,7 +5615,7 @@
                     'Оперативная память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Оперативная память'
@@ -5634,7 +5634,7 @@
       </div>
       <div v-else-if="activeTab === 'specialCapabilities'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Специальные возможности'
@@ -5648,7 +5648,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `Используются ${'2'} функции`
@@ -5658,7 +5658,7 @@
                     `Используются ${'2'} функции`
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `Используются ${'2'} функции`
@@ -5675,7 +5675,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'screenReading'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Чтение с экрана'
@@ -5685,7 +5685,7 @@
                     'Чтение с экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Озвучивание голосовых подсказок и использование специальных элементов управления, позволяющих выполнять навигацию не глядя на экран.'
@@ -5702,7 +5702,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Средства улучшения видимости'
@@ -5712,7 +5712,7 @@
                     'Средства улучшения видимости'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройте размер, контрастность и цвет в соответствии с вашими потребностями'
@@ -5729,7 +5729,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'improveListen'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Повышение слышимости'
@@ -5739,7 +5739,7 @@
                     'Повышение слышимости'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройте громкость звука, чтобы слышать озвучиваемую информацию, или используйте альтернативные средста, например текст.'
@@ -5756,7 +5756,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'coordinationViolationAndInteractive'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Нарушение координации и взаимодействие'
@@ -5766,7 +5766,7 @@
                     'Нарушение координации и взаимодействие'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Повысьте качество сенсорного ввода и других видов управления или замените их'
@@ -5783,7 +5783,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'auxiliaryParameters'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дополнительные параметры'
@@ -5793,7 +5793,7 @@
                     'Дополнительные параметры'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Управляйте прямым доступом и другими расширенными функциями.'
@@ -5810,7 +5810,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="toggleDeveloperMode()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Установленные службы'
@@ -5820,7 +5820,7 @@
                     'Установленные службы'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `${'1'} служба`
@@ -5837,7 +5837,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="aboutSpecialCapabilities()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'О специальных возможностях'
@@ -5847,7 +5847,7 @@
                     'О специальных возможностях'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Свяжитесь с нами'
@@ -5866,7 +5866,7 @@
       </div>
       <div v-else-if="activeTab === 'applications'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Приложения'
@@ -5880,7 +5880,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   `Все ${apps.length}`
                 }}
@@ -5892,12 +5892,12 @@
           </div>
           <div v-for="app in apps" :key="app.name" class="settingsAppBodyItem" @click="activeTab = 'appInfo'; activeApp = app">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   app.name
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   `${computeSize(app.size)} ${computeMeasure(app.size, 0)}`
                 }}
@@ -5910,7 +5910,7 @@
       </div>
       <div v-else-if="activeTab === 'deviceManagement'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Обслуживание устройства'
@@ -5924,7 +5924,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getHardware()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Батарея'
@@ -5934,7 +5934,7 @@
                     'Батарея'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `${batteryDischarging === Infinity ? 'Заряжается' : `${batteryDischarging * 60 * 60 - 1} час`} ${batteryDischarging === Infinity ? '' : `${batteryDischarging * 60 - 1} мин.`}`
@@ -5951,7 +5951,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Память'
@@ -5961,7 +5961,7 @@
                     'Память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     '30,9 Гб /32 Гб'
@@ -5978,7 +5978,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'ОЗУ'
@@ -5988,7 +5988,7 @@
                     'ОЗУ'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     '1,9 Гб /3 Гб'
@@ -6005,7 +6005,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Безопасность'
@@ -6015,7 +6015,7 @@
                     'Безопасность'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -6034,7 +6034,7 @@
       </div>
       <div v-else-if="activeTab === 'deviceUsabilityAndParentControl'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Использование устройства и родительский контроль'
@@ -6048,7 +6048,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="activeTab = 'timers'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Таймеры приложений'
@@ -6058,7 +6058,7 @@
                     'Таймеры приложений'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Установите ограничение на использование каждого приложения в течение дня'
@@ -6075,7 +6075,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим концентрации'
@@ -6085,7 +6085,7 @@
                     'Режим концентрации'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Не отвлекайтесь на телефон и займитесь важными делами'
@@ -6102,7 +6102,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setRelax()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отдых'
@@ -6112,7 +6112,7 @@
                     'Отдых'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Чтобы раслабиться перед сном, переведите экран в режим \"Градации серого\" или заблокируйте уведомления'
@@ -6129,7 +6129,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Родительский контроль'
@@ -6139,7 +6139,7 @@
                     'Родительский контроль'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Добавьте ограничения на просмотр содержимого и другие условия, чтобы помочь детям более сбалансировано пользоваться устройством.'
@@ -6158,7 +6158,7 @@
       </div>
       <div v-else-if="activeTab === 'auxiliaryFunctions'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Дополнительные функции'
@@ -6172,7 +6172,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setGestures()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Всплывающие уведомления'
@@ -6182,7 +6182,7 @@
                     'Всплывающие уведомления'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Получение уведомлений значками, которые при нажатии отображаются в виде всплывающих окон'
@@ -6199,7 +6199,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'screenshots'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Снимки экрана'
@@ -6209,7 +6209,7 @@
                     'Снимки экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Управляйте отображением панели инструментов для снимков, а также настраивайте будут ли удалены снимки после как вы ими поделитесь'
@@ -6226,7 +6226,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Упрощение анимаций'
@@ -6236,7 +6236,7 @@
                     'Упрощение анимаций'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уменьшение интенсивности анимаций на экране, например при открытии и закрытии приложений'
@@ -6253,7 +6253,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'motionAndGestures'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Движения и жесты'
@@ -6263,7 +6263,7 @@
                     'Движения и жесты'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Управление функциями связанными с движениями и жестами'
@@ -6280,7 +6280,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setEmergencyMessages()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Экстренные сообщения'
@@ -6290,7 +6290,7 @@
                     'Экстренные сообщения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -6309,7 +6309,7 @@
       </div>
       <div v-else-if="activeTab === 'location'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Местоположение'
@@ -6323,24 +6323,66 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setLocation()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Выключено'
+                    (
+                      !settings.location.enabled ?
+                        'Выключено'
+                      : settings.location.enabled ? 
+                        'Включено'
+                      :
+                        'Выключено'
+                    )
                   : settings.general.language === 'English' ?
-                    'Disabled'
+                    (
+                      !settings.location.enabled ?
+                        'Disabled'
+                      : settings.location.enabled ? 
+                        'Enabled'
+                      :
+                        'Disabled'
+                    )
                   :
-                    'Выключено'
+                    (
+                      !settings.location.enabled ?
+                        'Выключено'
+                      : settings.location.enabled ? 
+                        'Включено'
+                      :
+                        'Выключено'
+                    )
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
-                    'Выключено'
+                    (
+                      !settings.location.enabled ?
+                        'Выключено'
+                      : settings.location.enabled ? 
+                        'Включено'
+                      :
+                        'Выключено'
+                    )
                   : settings.general.language === 'English' ?
-                    'Disabled'
+                    (
+                      !settings.location.enabled ?
+                        'Disabled'
+                      : settings.location.enabled ? 
+                        'Enabled'
+                      :
+                        'Disabled'
+                    )
                   :
-                    'Выключено'
+                    (
+                      !settings.location.enabled ?
+                        'Выключено'
+                      : settings.location.enabled ? 
+                        'Включено'
+                      :
+                        'Выключено'
+                    )
                 }}
               </span>
             </div>
@@ -6350,7 +6392,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Разрешения приложения'
@@ -6360,7 +6402,7 @@
                     'Разрешения приложения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Разрешения приложения'
@@ -6377,7 +6419,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Улучшение точности'
@@ -6387,7 +6429,7 @@
                     'Улучшение точности'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование WI-FI и Bluetooth, для более точного определения местоположения'
@@ -6406,7 +6448,7 @@
       </div>
       <div v-else-if="activeTab === 'privacy'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Конфиденциальность'
@@ -6420,7 +6462,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setPrivacy()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дипетчер разрешений'
@@ -6430,7 +6472,7 @@
                     'Дипетчер разрешений'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дипетчер разрешений'
@@ -6447,7 +6489,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setBugReports()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отчеты об ошибках'
@@ -6457,7 +6499,7 @@
                     'Отчеты об ошибках'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отчеты об ошибках'
@@ -6474,7 +6516,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setMarketInfo()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Маркетинговая информация'
@@ -6484,7 +6526,7 @@
                     'Маркетинговая информация'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Маркетинговая информация'
@@ -6501,7 +6543,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Реклама'
@@ -6511,7 +6553,7 @@
                     'Реклама'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Рекламный идентификатор и персонализация'
@@ -6528,7 +6570,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование и диагностика'
@@ -6538,7 +6580,7 @@
                     'Использование и диагностика'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Разрешить отправлять данные чтобы улучшить OsLand'
@@ -6557,7 +6599,7 @@
       </div>
       <div v-else-if="activeTab === 'biometryAndSecurity'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Биометрия и безопасность'
@@ -6571,7 +6613,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Распознавание лица'
@@ -6581,7 +6623,7 @@
                     'Распознавание лица'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Зарегестрируйте лицо'
@@ -6598,7 +6640,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отпечатки пальцев'
@@ -6608,7 +6650,7 @@
                     'Отпечатки пальцев'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Добавление отпечатков пальцев'
@@ -6625,7 +6667,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="findDevice()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Поиск устройства'
@@ -6635,7 +6677,7 @@
                     'Поиск устройства'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Включено без функции \"Удаленная разблокировка\"'
@@ -6652,7 +6694,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Шифрование и расшифровка SD-карты'
@@ -6662,7 +6704,7 @@
                     'Шифрование и расшифровка SD-карты'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Нет SD-карты'
@@ -6679,7 +6721,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Другие параметры безопасности'
@@ -6689,7 +6731,7 @@
                     'Другие параметры безопасности'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Разрешить отправлять данные чтобы улучшить OsLand'
@@ -6708,7 +6750,7 @@
       </div>
       <div v-else-if="activeTab === 'wi-fi'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'WI-FI'
@@ -6722,7 +6764,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setWifi">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -6753,7 +6795,7 @@
                     )
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -6791,12 +6833,12 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Имя_текущей_сети'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Не подключено'
                 }}
@@ -6808,12 +6850,12 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                     'Имя_доступной_сети'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                     'Имя_доступной_сети'
                 }}
@@ -6825,7 +6867,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Добавить сеть'
@@ -6835,7 +6877,7 @@
                     'Добавить сеть'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Добавить сеть'
@@ -6854,7 +6896,7 @@
       </div>
       <div v-else-if="activeTab === 'connectToNetwork'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               'Динамическое_имя_сети'
             }}
@@ -6863,7 +6905,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Введите пароль'
@@ -6873,7 +6915,7 @@
                     'Введите пароль'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Введите пароль'
@@ -6890,7 +6932,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Подключаться автоматически'
@@ -6900,7 +6942,7 @@
                     'Подключаться автоматически'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Подключаться автоматически'
@@ -6917,7 +6959,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дополнительно'
@@ -6927,7 +6969,7 @@
                     'Дополнительно'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дополнительно'
@@ -6944,7 +6986,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Подключиться'
@@ -6954,7 +6996,7 @@
                     'Подключиться'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Подключиться'
@@ -6973,7 +7015,7 @@
       </div>
       <div v-else-if="activeTab === 'addNetwork'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Добавить сеть'
@@ -6987,12 +7029,12 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Название сети'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Безопасность'
@@ -7009,7 +7051,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Подключаться автоматически'
@@ -7019,7 +7061,7 @@
                     'Подключаться автоматически'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Подключаться автоматически'
@@ -7036,7 +7078,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дополнительно'
@@ -7046,7 +7088,7 @@
                     'Дополнительно'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Дополнительно'
@@ -7063,7 +7105,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сохранить'
@@ -7073,7 +7115,7 @@
                     'Сохранить'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сохранить'
@@ -7092,7 +7134,7 @@
       </div>
       <div v-else-if="activeTab === 'networkAuxiliary'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Добавить сеть'
@@ -7106,12 +7148,12 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Параметры IP'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Параметры IP'
                 }}
@@ -7123,7 +7165,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Прокси'
@@ -7133,7 +7175,7 @@
                     'Прокси'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Прокси'
@@ -7150,7 +7192,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сеть с лимитным подключением'
@@ -7160,7 +7202,7 @@
                     'Сеть с лимитным подключением'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автоматическое определение'
@@ -7177,7 +7219,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Скрытая сеть'
@@ -7187,7 +7229,7 @@
                     'Скрытая сеть'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Добавление скрытой сети'
@@ -7206,7 +7248,7 @@
       </div>
       <div v-else-if="activeTab === 'mobileNetworks'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Мобильные сети'
@@ -7220,7 +7262,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Данные в роуминге'
@@ -7230,7 +7272,7 @@
                     'Данные в роуминге'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'За использование мобильных данных в роуминге может взиматься дополнительная плата'
@@ -7247,7 +7289,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Вызовы VoLTE SIM 1'
@@ -7257,7 +7299,7 @@
                     'Вызовы VoLTE SIM 1'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование сетей LTE для совершения вызовов, когда это возможно'
@@ -7274,7 +7316,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим сети SIM 1'
@@ -7284,7 +7326,7 @@
                     'Режим сети SIM 1'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'LTE/3G/2G (авто подключение)'
@@ -7301,7 +7343,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Режим сети SIM 2'
@@ -7311,7 +7353,7 @@
                     'Режим сети SIM 2'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'LTE/3G/2G (авто подключение)'
@@ -7328,7 +7370,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Передача данных во время вызова'
@@ -7338,7 +7380,7 @@
                     'Передача данных во время вызова'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Не прерывайте обмен данными во время вызовов, временно используя SIM карту, с помощью которой совершается вызов, для передачи мобильных данных. За это может взиматься дополнительная плата'
@@ -7355,7 +7397,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Точки доступа'
@@ -7365,7 +7407,7 @@
                     'Точки доступа'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Точки доступа'
@@ -7382,7 +7424,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Операторы сети'
@@ -7392,7 +7434,7 @@
                     'Операторы сети'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Операторы сети'
@@ -7411,7 +7453,7 @@
       </div>
       <div v-else-if="activeTab === 'accessPoints'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Точки доступа'
@@ -7425,12 +7467,12 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'Megafon'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'За использование мобильных данных в роуминге может взиматься дополнительная плата'
@@ -7449,7 +7491,7 @@
       </div>
       <div v-else-if="activeTab === 'networksProviders'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Операторы сети'
@@ -7463,7 +7505,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выбирать автоматически'
@@ -7473,7 +7515,7 @@
                     'Выбирать автоматически'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автоматический выбор наилучшей сети для подключения телефона'
@@ -7490,7 +7532,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выбрать вручную'
@@ -7500,7 +7542,7 @@
                     'Выбрать вручную'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Поиск всех доступных сетей'
@@ -7519,7 +7561,7 @@
       </div>
       <div v-else-if="activeTab === 'languageAndInput'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Язык и ввод'
@@ -7533,7 +7575,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setLanguage()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Язык'
@@ -7543,7 +7585,7 @@
                     'Язык'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Русский (Россия)'
@@ -7560,7 +7602,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Экранная клавиатура'
@@ -7570,7 +7612,7 @@
                     'Экранная клавиатура'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Голосовой ввод и клавиатура'
@@ -7587,7 +7629,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Физическая клавиатура'
@@ -7597,7 +7639,7 @@
                     'Физическая клавиатура'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Не подключено'
@@ -7614,7 +7656,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Служба автозаполнения'
@@ -7624,7 +7666,7 @@
                     'Служба автозаполнения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Служба автозаполнения'
@@ -7641,7 +7683,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="activeTab = 'tts'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Преобразование текста в речь'
@@ -7651,7 +7693,7 @@
                     'Преобразование текста в речь'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Преобразование текста в речь'
@@ -7668,7 +7710,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setPointerSpeed()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Скорость указателя'
@@ -7678,7 +7720,7 @@
                     'Скорость указателя'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `${settings.general.languageAndInput.pointerSpeed === '1' ? 'Обычная' : settings.general.languageAndInput.pointerSpeed === '1.5' ? 'Быстрая' : settings.general.languageAndInput.pointerSpeed === '0.5' ? 'Медленная' : 'Обычная' }`
@@ -7695,7 +7737,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setMainMouseBtn()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Основная кнопка мыши'
@@ -7705,7 +7747,7 @@
                     'Основная кнопка мыши'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `${settings.general.languageAndInput.isLeftMainMouseButton ? 'Левая' : !settings.general.languageAndInput.isLeftMainMouseButton ? 'Правая' : 'Левая'}`
@@ -7724,7 +7766,7 @@
       </div>
       <div v-else-if="activeTab === 'auxiliaryParameters'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Дополнительные параметры'
@@ -7738,7 +7780,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Питание и увеличение громкости'
@@ -7748,7 +7790,7 @@
                     'Питание и увеличение громкости'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -7765,7 +7807,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Клавишы громкости'
@@ -7775,7 +7817,7 @@
                     'Клавишы громкости'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -7792,7 +7834,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уведомления с помощью вспышки'
@@ -7802,7 +7844,7 @@
                     'Уведомления с помощью вспышки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Уведомления с помощью вспышки'
@@ -7819,7 +7861,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Напоминание об уведомлениях'
@@ -7829,7 +7871,7 @@
                     'Напоминание об уведомлениях'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Получение периодических напоминаний об уведомлениях'
@@ -7846,7 +7888,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Время на совершение действия'
@@ -7856,7 +7898,7 @@
                     'Время на совершение действия'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'По умолчанию'
@@ -7875,7 +7917,7 @@
       </div>
       <div v-else-if="activeTab === 'coordinationViolationAndInteractive'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Нарушение координации и взаимодействие'
@@ -7889,7 +7931,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Вспомогательное меню'
@@ -7899,7 +7941,7 @@
                     'Вспомогательное меню'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отображение меню удобных кнопок, которым можно заменить аппаратные клавишы, жесты и другие распространенные способы взаимодействия'
@@ -7916,7 +7958,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Ответ и завершение звонков'
@@ -7926,7 +7968,7 @@
                     'Ответ и завершение звонков'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Ответ и завершение звонков'
@@ -7943,7 +7985,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Контроль взаимодействия'
@@ -7953,7 +7995,7 @@
                     'Контроль взаимодействия'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Блокировка сенсорного ввода для кнопок \"Назад\", \"Домой\" и \"Последние\", а также клавиатуры и выбранной области экрана'
@@ -7970,7 +8012,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Задержка касания и удерживания'
@@ -7980,7 +8022,7 @@
                     'Задержка касания и удерживания'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Короткая (0.5 c)'
@@ -7997,7 +8039,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Продолжительность прикосновения'
@@ -8007,7 +8049,7 @@
                     'Продолжительность прикосновения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Задайте продолжительность взаимодействия, при которой оно будет распознаваться как касание.'
@@ -8024,7 +8066,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Игнорирование повторяющихся прикосновений'
@@ -8034,7 +8076,7 @@
                     'Игнорирование повторяющихся прикосновений'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Задайте временной период, в течение которого будут игнорироваться повторные прикосновения.'
@@ -8051,7 +8093,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Нажатие после остановки указателя'
@@ -8061,7 +8103,7 @@
                     'Нажатие после остановки указателя'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автоматическое нажатие при прекращении движения указателя.'
@@ -8078,7 +8120,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Залипание клавиш'
@@ -8088,7 +8130,7 @@
                     'Залипание клавиш'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'При нажатии клавиш-модификаторов, таких как Shift, Ctrl или Alt, клавиша остается нажатой. Благодаря этому можно использоваться горячие клавиши, нажимая лишь одну из них.'
@@ -8105,7 +8147,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Медленное нажатие клавиш'
@@ -8115,7 +8157,7 @@
                     'Медленное нажатие клавиш'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Задайте продолжительность удерживания клавишш, при которой оно будет распознаваться как нажатие. Это позволит избежать случайных нажатий клавиш.'
@@ -8132,7 +8174,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Случайное нажатие клавиш'
@@ -8142,7 +8184,7 @@
                     'Случайное нажатие клавиш'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Задайте время ожидания, после которого будет распознаваться повторное нажатие клавиши. Это позволит избежать случайных нажатий той же самой клавиши более 1 раза.'
@@ -8161,7 +8203,7 @@
       </div>
       <div v-else-if="activeTab === 'improveListen'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Повышение слышимости'
@@ -8175,7 +8217,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Прямая расшифровка'
@@ -8185,7 +8227,7 @@
                     'Прямая расшифровка'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Прямая расшифровка'
@@ -8202,7 +8244,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройки субтитров'
@@ -8212,7 +8254,7 @@
                     'Настройки субтитров'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройки субтитров'
@@ -8231,7 +8273,7 @@
       </div>
       <div v-else-if="activeTab === 'screenReading'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Чтение с экрана'
@@ -8245,7 +8287,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setVoiceAssistant()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Голосовой помощник'
@@ -8255,7 +8297,7 @@
                     'Голосовой помощник'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Голосовой помощник'
@@ -8272,7 +8314,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Учебный курс'
@@ -8282,7 +8324,7 @@
                     'Учебный курс'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Учебный курс'
@@ -8299,7 +8341,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="getDefaultApps()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройки'
@@ -8309,7 +8351,7 @@
                     'Настройки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Настройки'
@@ -8328,7 +8370,7 @@
       </div>
       <div v-else-if="activeTab === 'tts'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Преобразование текста в речь'
@@ -8342,7 +8384,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setVoiceAssistant()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Предпочитаемый модуль'
@@ -8352,7 +8394,7 @@
                     'Предпочитаемый модуль'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'OTTS'
                 }}
@@ -8364,7 +8406,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setVoiceAssistant()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Язык'
@@ -8374,7 +8416,7 @@
                     'Язык'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использовать системный язык'
@@ -8391,7 +8433,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setTTSSpeed()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Скорость речи'
@@ -8401,7 +8443,7 @@
                     'Скорость речи'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Низкая'
@@ -8418,7 +8460,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setTTSPitch()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тон'
@@ -8428,7 +8470,7 @@
                     'Тон'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тон'
@@ -8447,7 +8489,7 @@
       </div>
       <div v-else-if="activeTab === 'motionAndGestures'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Движение и жесты'
@@ -8461,7 +8503,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setSimpleDisableSound()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Простое отключение звука'
@@ -8471,7 +8513,7 @@
                     'Простое отключение звука'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -8488,7 +8530,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setDirectCall()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Прямой вызов'
@@ -8498,7 +8540,7 @@
                     'Прямой вызов'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -8515,7 +8557,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setGesturesImprints()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Жесты датчика отпечатков'
@@ -8525,7 +8567,7 @@
                     'Жесты датчика отпечатков'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Открытие и закрытие панели уведомлений при помощи датчика отпечатка пальца.'
@@ -8542,7 +8584,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setFastCall()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Быстрый вызов'
@@ -8552,7 +8594,7 @@
                     'Быстрый вызов'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Включено'
@@ -8571,7 +8613,7 @@
       </div>
       <div v-else-if="activeTab === 'screenshots'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Движение и жесты'
@@ -8585,7 +8627,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Панель инструментов для снимков'
@@ -8595,7 +8637,7 @@
                     'Панель инструментов для снимков'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -8612,7 +8654,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Удаление снимков после отправки'
@@ -8622,7 +8664,7 @@
                     'Удаление снимков после отправки'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Автоматическое удаление снимков экрана после их отправки с помощью специальной панели инструментов'
@@ -8639,7 +8681,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setScreenshotsFormat()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Формат снимка экрана'
@@ -8649,7 +8691,7 @@
                     'Формат снимка экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.auxiliaryFunctions.screenshots.format
                 }}
@@ -8663,7 +8705,7 @@
       </div>
       <div v-else-if="activeTab === 'lockScreenNotifications'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Уведомления'
@@ -8677,7 +8719,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setLockScreenNotifications()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -8687,7 +8729,7 @@
                     'Выключено'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Выключено'
@@ -8704,7 +8746,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setLockScreenNotificationsStyle()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Стиль просмотра'
@@ -8714,7 +8756,7 @@
                     'Стиль просмотра'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -8752,7 +8794,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setHideInfo()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Скрыть содержимое'
@@ -8762,7 +8804,7 @@
                     'Скрыть содержимое'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Скрытие содержимого уведомлений на панели уведомлений'
@@ -8779,7 +8821,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setShowOnlyEmergency()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Отображаемые оповещения'
@@ -8789,7 +8831,7 @@
                     'Отображаемые оповещения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -8829,7 +8871,7 @@
       </div>
       <div v-else-if="activeTab === 'navigationBar'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Навигационная панель'
@@ -8843,7 +8885,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setNavigationType()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Тип навигации'
@@ -8853,7 +8895,7 @@
                     'Тип навигации'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -8891,7 +8933,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setNavigationButtonsOrder()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Порядок кнопок'
@@ -8901,7 +8943,7 @@
                     'Порядок кнопок'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -8941,7 +8983,7 @@
       </div>
       <div v-else-if="activeTab === 'mainScreen'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Главный экран'
@@ -8955,7 +8997,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setMainScreenLayout()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Макет главного экрана'
@@ -8965,7 +9007,7 @@
                     'Макет главного экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9003,7 +9045,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setMainScreenGrid()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сетка главного экрана'
@@ -9013,7 +9055,7 @@
                     'Сетка главного экрана'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   `${settings.display.mainScreen.grid.rows}X${settings.display.mainScreen.grid.cols}`
                 }}
@@ -9025,7 +9067,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setAppsScreenGrid()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Сетка экрана приложений'
@@ -9035,7 +9077,7 @@
                     'Сетка экрана приложений'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   `${settings.display.appsScreen.grid.rows}X${settings.display.appsScreen.grid.cols}`
                 }}
@@ -9049,7 +9091,7 @@
       </div>
       <div v-else-if="activeTab === 'otherSettings'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Дополнительные настройки'
@@ -9063,7 +9105,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setFindDevice()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Поиск устройств'
@@ -9073,7 +9115,7 @@
                     'Поиск устройств'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9111,7 +9153,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setPrint()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Печать'
@@ -9121,7 +9163,7 @@
                     'Печать'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Печать'
@@ -9138,10 +9180,10 @@
           </div>
           <div class="settingsAppBodyItem" @click="setVPN()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 VPN
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9179,7 +9221,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setDNS()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Персональный DNS-сервер'
@@ -9189,7 +9231,7 @@
                     'Персональный DNS-сервер'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9229,7 +9271,7 @@
       </div>
       <div v-else-if="activeTab === 'mobileHotspotAndModem'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Мобильная точка доступа и модем'
@@ -9243,7 +9285,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setMobileHotspot()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Мобильная точка доступа'
@@ -9253,7 +9295,7 @@
                     'Мобильная точка доступа'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9291,7 +9333,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setBluetoothModem()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Bluetooth-модем'
@@ -9301,7 +9343,7 @@
                     'Bluetooth-модем'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                       'Предоставление доступа к интернет-подключению вашего телефона через Bluetooth'
@@ -9318,7 +9360,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setUSBModem()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'USB-модем'
@@ -9328,7 +9370,7 @@
                     'USB-модем'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9368,7 +9410,7 @@
       </div>
       <div v-else-if="activeTab === 'simsManager'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Диспетчер SIM-карт'
@@ -9382,7 +9424,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setSIMCalls()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Вызовы'
@@ -9392,7 +9434,7 @@
                     'Вызовы'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.connections.simsManager.rings ?
                     'SIM_1'
@@ -9409,12 +9451,12 @@
           </div>
           <div class="settingsAppBodyItem" @click="setSIMSMS()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   'SMS'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.connections.simsManager.sms ?
                     'SIM_1'
@@ -9431,7 +9473,7 @@
           </div>
           <div class="settingsAppBodyItem" @click="setMobileData()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Мобильные данные'
@@ -9441,7 +9483,7 @@
                     'Мобильные данные'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9454,18 +9496,18 @@
                     )
                   : settings.general.language === 'English' ?
                     (
-                    settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                    settings.connections.simsManager.mobileData ?
                       'Enabled'
-                    : !settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                    : !settings.connections.simsManager.mobileData ?
                       'Disabled'
                     :
                       'Enabled'
                     )
                   :
                     (
-                    settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                    settings.connections.simsManager.mobileData ?
                       'Включено'
-                    : !settings.connections.mobileHotspotAndModem.simsManager.mobileData ?
+                    : !settings.connections.simsManager.mobileData ?
                       'Выключено'
                     :
                       'Включено'
@@ -9481,7 +9523,7 @@
       </div>
       <div v-else-if="activeTab === 'timers'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Таймеры приложений'
@@ -9495,12 +9537,12 @@
         <div class="settingsAppBody">
           <div v-for="app in apps" :key="app.name" class="settingsAppBodyItem" @click="setApplicationTimer(app)">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   app.name
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   app.timer === 0 ?
                     (
@@ -9530,7 +9572,7 @@
       </div>
       <div v-else-if="activeTab === 'dataUsability'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Использование данных'
@@ -9544,7 +9586,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem" @click="setTrafficEconomy()">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Экономика траффика'
@@ -9554,7 +9596,7 @@
                     'Экономика траффика'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   !settings.connections.dataUsability.trafficEconomy ?
                     (
@@ -9583,7 +9625,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использование мобильных данных'
@@ -9593,7 +9635,7 @@
                     'Использование мобильных данных'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использовано 0б (1 - 30 ноя.)'
@@ -9610,7 +9652,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Данные WI-FI'
@@ -9620,7 +9662,7 @@
                     'Данные WI-FI'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Использовано 0б (1 - 30 ноя.)'
@@ -9639,7 +9681,7 @@
       </div>
       <div v-else-if="activeTab === 'appInfo'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Информация о приложении'
@@ -9653,7 +9695,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Версия'
@@ -9663,7 +9705,7 @@
                     'Версия'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   activeApp.version
                 }}
@@ -9673,9 +9715,9 @@
               add
             </span>
           </div>
-          <div class="settingsAppBodyItem">
+          <div class="settingsAppBodyItem" @click="activeTab = 'permissions'">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Разрешения'
@@ -9685,7 +9727,7 @@
                     'Разрешения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9704,7 +9746,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Память'
@@ -9714,7 +9756,7 @@
                     'Память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} использовано (Память устройства)`
@@ -9733,7 +9775,7 @@
       </div>
       <div v-else-if="activeTab === 'permissions'">
         <div class="settingsAppHeader">
-          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px);`">
+          <h4 :style="`font-size: calc(1em + ${settings.display.fontSize}px); color: ${settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'}`">
             {{
               settings.general.language === 'Русский' ?
                 'Разрешения'
@@ -9747,7 +9789,7 @@
         <div class="settingsAppBody">
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Камера'
@@ -9757,7 +9799,7 @@
                     'Камера'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9789,7 +9831,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Разрешения'
@@ -9799,7 +9841,7 @@
                     'Разрешения'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     (
@@ -9822,7 +9864,7 @@
           </div>
           <div class="settingsAppBodyItem">
             <div class="settingsAppBodyItemContent">
-              <span class="settingsAppBodyItemLabel">
+              <span class="settingsAppBodyItemLabel" :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     'Память'
@@ -9832,7 +9874,7 @@
                     'Память'
                 }}
               </span>
-              <span>
+              <span :style="`color: ${this.settings.topic === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};`">
                 {{
                   settings.general.language === 'Русский' ?
                     `${computeSize(activeApp.size)} ${computeMeasure(activeApp.size, 0)} использовано (Память устройства)`
@@ -9971,6 +10013,15 @@ export default {
     'airplaneModeSetter': {
 
     },
+    'locationSetter': {
+
+    },
+    'brightnessSetter': {
+
+    },
+    'mobileDataSetter': {
+
+    }
   },
   emits: [
     'resetDisplayTimeout',
@@ -9978,6 +10029,10 @@ export default {
     'setWifi',
     'setBluetooth',
     'setAirplaneMode',
+    'setLocation',
+    'setAutoSync',
+    'refreshDisplayTimeout',
+    'setMobileData'
   ],
   watch: {
     async isUndo(newUndo) {
@@ -9985,6 +10040,11 @@ export default {
         let isQuit = false
         if (this.activeTab === 'settings') {
           isQuit = true
+        } else if (this.activeTab === 'appInfo') {
+          console.log('пытаюсь выйти из настроек 1 приложения')
+          this.activeTab === 'settings'
+        } else if (this.activeTab === 'permissions') {
+          this.activeTab = 'appInfo'
         } else if (this.activeTab === 'connections' || this.activeTab === 'soundsAndVibration' || this.activeTab === 'notifications' || this.activeTab === 'display' || this.activeTab === 'wallpapers' || this.activeTab === 'topics' || this.activeTab === 'lockScreen' || this.activeTab === 'biometryAndSecurity' || this.activeTab === 'privacy' || this.activeTab === 'location' || this.activeTab === 'accountsAndArchive' || this.activeTab === 'auxiliaryFunctions' || this.activeTab === 'deviceUsabilityAndParentControl' || this.activeTab === 'deviceManagement' || this.activeTab === 'applications' || this.activeTab === 'general' || this.activeTab === 'specialCapabilities' || this.activeTab === 'softwareUpdates' || this.activeTab === 'userManual' || this.activeTab === 'phoneInformation' || this.activeTab === 'developerParameters') {
           this.activeTab = 'settings'
         } else if (this.activeTab === 'softwareInfo' || this.activeTab === 'legalInfo' || this.activeTab === 'state' || this.activeTab === 'accumulatorDetails') {
@@ -10005,11 +10065,8 @@ export default {
           this.activeTab = 'connections'
         } else if (this.activeTab === 'timers') {
           this.activeTab = 'deviceUsabilityAndParentControl'
-        } else if (this.activeTab === 'appInfo') {
-          this.activeTab === 'applications'
-        } else if (this.activeTab === 'permissions') {
-          this.activeTab = 'appInfo'
         }
+        console.log(`activeTab: ${this.activeTab}`)
         this.$emit('undoEnded', isQuit)
       }
     },
@@ -10022,6 +10079,26 @@ export default {
     airplaneModeSetter(isEnabled) {
       this.settings.connections.airplaneMode = isEnabled
     },
+    locationSetter(isEnabled) {
+      this.settings.location.enabled = isEnabled
+    },
+    brightnessSetter(brightnessPercent) {
+      this.$refs.brightnessControlFiller.style = `
+        background-color: rgb(100, 150, 255);
+        width: ${brightnessPercent}%;
+      `
+      this.$refs.openedAppRef.style = `
+        width: ${this.orientation ? '50%' : '100%'};
+        background-color: ${this.settings.topic === 'dark' ? 'rgb(0, 0, 0)' : 'rgb(150, 150, 150)'};
+        width: 100%;
+        height: 565px;
+        overflow-y: scroll;
+        -webkit-filter: brightness(${brightnessPercent / 100});
+      `
+    },
+    mobileDataSetter(isEnabled) {
+      this.settings.connections.simsManager.mobileData = isEnabled
+    }
   },
   mounted() {
     
@@ -10073,6 +10150,115 @@ export default {
     }
   },
   methods: {
+    setAutoSync() {
+
+      let isEnabled = !this.settings.accountsAndArchive.autoSync
+      this.settings.accountsAndArchive.autoSync = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/accountsAndArchive/autoSync/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setAutoSync', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Автосинхронизация обновлена на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                    : this.settings.general.language === 'English' ?
+                      `\"Auto sync\" updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Автосинхронизация обновлена на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+
+    },
+    setLocation() {
+      
+      let isEnabled = !this.settings.location.enabled
+      this.settings.location.enabled = isEnabled
+      
+      // this.settings.lockScreen.mode = lockScreenMode
+      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+      fetch(`http://localhost:4000/api/settings/location/enabled/set/?enabled=${isEnabled}`, {
+        mode: 'cors',
+        method: 'GET'
+      }).then(response => response.body).then(rb  => {
+        const reader = rb.getReader()
+        return new ReadableStream({
+          start(controller) {
+            function push() {
+              reader.read().then( ({done, value}) => {
+                if (done) {
+                  console.log('done', done);
+                  controller.close();
+                  return;
+                }
+                controller.enqueue(value);
+                console.log(done, value);
+                push();
+              })
+            }
+            push();
+          }
+        });
+      }).then(stream => {
+        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+      })
+      .then(result => {
+        if(JSON.parse(result).status === 'OK') {
+          this.$emit('setLocation', isEnabled)
+          if(this.settings.notifications.enabled) {
+            Notification.requestPermission().then((permission) => {
+              if (permission === "granted") {
+                
+                notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                      `Локация обновлена на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                    : this.settings.general.language === 'English' ?
+                      `\"Location\" updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                    :
+                      `Локация обновлена на ${isEnabled ? 'включена' : !isEnabled ? 'выключена' : 'включена'  }`
+                  }`)
+
+              }
+            })
+          }
+
+        }
+      });
+    },
     computeSize (size)  {
       if(Math.ceil(size / 1024) > 1){
         return this.computeSize(size / 1024)
@@ -10153,277 +10339,366 @@ export default {
     },
     setShowSurfaceUpdate() {
 
-      let isEnabled = !this.settings.developerParameters.showSurfaceUpdate
-      this.settings.developerParameters.showSurfaceUpdate = isEnabled
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/showsurfaceupdate/set/?enabled=${isEnabled}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let isEnabled = !this.settings.developerParameters.showSurfaceUpdate
+        this.settings.developerParameters.showSurfaceUpdate = isEnabled
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/showsurfaceupdate/set/?enabled=${isEnabled}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Отображение обновление поверхности обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `\"Show surface update\" updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                      :
+                        `Отображение обновление поверхности обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Отображение обновление поверхности обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `\"Show surface update\" updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
-                    :
-                      `Отображение обновление поверхности обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setShowGridElements() {
 
-      let isEnabled = !this.settings.developerParameters.showGridElements
-      this.settings.developerParameters.showGridElements = isEnabled
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/showgridelements/set/?enabled=${isEnabled}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let isEnabled = !this.settings.developerParameters.showGridElements
+        this.settings.developerParameters.showGridElements = isEnabled
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/showgridelements/set/?enabled=${isEnabled}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Отображение границ элементов обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `Show grid elements updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                      :
+                        `Отображение границ элементов обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Отображение границ элементов обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `Show grid elements updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
-                    :
-                      `Отображение границ элементов обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setFlipInterface() {
 
-      let isEnabled = !this.settings.developerParameters.flipInterface
-      this.settings.developerParameters.flipInterface = isEnabled
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/flipinterface/set/?enabled=${isEnabled}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let isEnabled = !this.settings.developerParameters.flipInterface
+        this.settings.developerParameters.flipInterface = isEnabled
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/flipinterface/set/?enabled=${isEnabled}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Отразить интерфейс обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `Flip interface updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                      :
+                        `Отразить интерфейс обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Отразить интерфейс обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `Flip interface updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
-                    :
-                      `Отразить интерфейс обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
-
+      }
+      
     },
     setRemoveActivitiesAfterExit() {
+      if(this.settings.developerParameters.enabled) {
+        let isEnabled = !this.settings.developerParameters.removeActivitysAfterExit
+        this.settings.developerParameters.removeActivitysAfterExit = isEnabled
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/removeactivityafterexit/set/?enabled=${isEnabled}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Закрыть запущеные приложения после выхода пользователя обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `Close runned activities updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                      :
+                        `Закрыть запущеные приложения после выхода пользователя обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    }`)
 
-      let isEnabled = !this.settings.developerParameters.removeActivitysAfterExit
-      this.settings.developerParameters.removeActivitysAfterExit = isEnabled
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/removeactivityafterexit/set/?enabled=${isEnabled}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Закрыть запущеные приложения после выхода пользователя обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `Close runned activities updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
-                    :
-                      `Закрыть запущеные приложения после выхода пользователя обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setColorElements() {
 
-      let colorElements = this.settings.developerParameters.colorElements === 'rgb(200, 200, 200)' ? 'rgb(200, 0, 0)' :this.settings.developerParameters.colorElements === 'rgb(200, 0, 0)' ? 'rgb(0, 200, 0)' : this.settings.developerParameters.colorElements === 'rgb(0, 200, 0)' ? 'rgb(0, 0, 200)' : this.settings.developerParameters.colorElements === 'rgb(0, 0, 200)' ? 'rgb(200, 200, 200)' : 'rgb(200, 200, 200)'
-      this.settings.developerParameters.colorElements = colorElements
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/colorelements/set/?color=${colorElements}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let colorElements = this.settings.developerParameters.colorElements === 'rgb(200, 200, 200)' ? 'rgb(200, 0, 0)' :this.settings.developerParameters.colorElements === 'rgb(200, 0, 0)' ? 'rgb(0, 200, 0)' : this.settings.developerParameters.colorElements === 'rgb(0, 200, 0)' ? 'rgb(0, 0, 200)' : this.settings.developerParameters.colorElements === 'rgb(0, 0, 200)' ? 'rgb(200, 200, 200)' : 'rgb(200, 200, 200)'
+        this.settings.developerParameters.colorElements = colorElements
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/colorelements/set/?color=${colorElements}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Цвет элементов обновлен`
+                      : this.settings.general.language === 'English' ?
+                        `Color elements updated`
+                      :
+                        `Цвет элементов обновлен`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Цвет элементов обновлен`
-                    : this.settings.general.language === 'English' ?
-                      `Color elements updated`
-                    :
-                      `Цвет элементов обновлен`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setFontElements() {
@@ -10592,167 +10867,220 @@ export default {
 
     },
     setNotDisableMobileInternet() {
-      
-      let isEnabled = !this.settings.developerParameters.notDisableMobileInternet
-      this.settings.developerParameters.notDisableMobileInternet = isEnabled
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/notdisablemobileinternet/set/?enabled=${isEnabled}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let isEnabled = !this.settings.developerParameters.notDisableMobileInternet
+        this.settings.developerParameters.notDisableMobileInternet = isEnabled
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/notdisablemobileinternet/set/?enabled=${isEnabled}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Не отключать мобильный интернет обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `Not disable mobile internet updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                      :
+                        `Не отключать мобильный интернет обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Не отключать мобильный интернет обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `Not disable mobile internet updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
-                    :
-                      `Не отключать мобильный интернет обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setNotDisableDisplay() {
       
-      let isEnabled = !this.settings.developerParameters.notDisableDisplay
-      this.settings.developerParameters.notDisableDisplay = isEnabled
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/notdisabledisplay/set/?enabled=${isEnabled}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let isEnabled = !this.settings.developerParameters.notDisableDisplay
+        this.settings.developerParameters.notDisableDisplay = isEnabled
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/notdisabledisplay/set/?enabled=${isEnabled}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Не отключать дисплей обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `Not disable display updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                      :
+                        `Не отключать дисплей обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Не отключать дисплей обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `Not disable display updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
-                    :
-                      `Не отключать дисплей обновлен на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setShowTouches() {
       
-      let isShow = !this.settings.developerParameters.showTouches
-      this.settings.developerParameters.showTouches = isShow
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/showtouches/set/?show=${isShow}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let isShow = !this.settings.developerParameters.showTouches
+        this.settings.developerParameters.showTouches = isShow
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/showtouches/set/?show=${isShow}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Показывать нажатия обновлено на ${isShow ? 'включено' : !isShow ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `Show touches updated to ${isShow ? 'enabled' : !isShow ? 'disabled' : 'enabled'  }`
+                      :
+                        `Показывать нажатия обновлено на ${isShow ? 'включено' : !isShow ? 'выключено' : 'включено'  }`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Показывать нажатия обновлено на ${isShow ? 'включено' : !isShow ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `Show touches updated to ${isShow ? 'enabled' : !isShow ? 'disabled' : 'enabled'  }`
-                    :
-                      `Показывать нажатия обновлено на ${isShow ? 'включено' : !isShow ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setDeveloperMode() {
@@ -10812,57 +11140,75 @@ export default {
     },
     setTouchPlace() {
       
-      let isEnabled = !this.settings.developerParameters.touchPlace
-      this.settings.developerParameters.touchPlace = isEnabled
-      
-      // this.settings.lockScreen.mode = lockScreenMode
-      // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
-      fetch(`http://localhost:4000/api/settings/developerparameters/touchplace/set/?enabled=${isEnabled}`, {
-        mode: 'cors',
-        method: 'GET'
-      }).then(response => response.body).then(rb  => {
-        const reader = rb.getReader()
-        return new ReadableStream({
-          start(controller) {
-            function push() {
-              reader.read().then( ({done, value}) => {
-                if (done) {
-                  console.log('done', done);
-                  controller.close();
-                  return;
+      if(this.settings.developerParameters.enabled) {
+        let isEnabled = !this.settings.developerParameters.touchPlace
+        this.settings.developerParameters.touchPlace = isEnabled
+        
+        // this.settings.lockScreen.mode = lockScreenMode
+        // localStorage.setItem('osland_settings', JSON.stringify(this.settings))
+        fetch(`http://localhost:4000/api/settings/developerparameters/touchplace/set/?enabled=${isEnabled}`, {
+          mode: 'cors',
+          method: 'GET'
+        }).then(response => response.body).then(rb  => {
+          const reader = rb.getReader()
+          return new ReadableStream({
+            start(controller) {
+              function push() {
+                reader.read().then( ({done, value}) => {
+                  if (done) {
+                    console.log('done', done);
+                    controller.close();
+                    return;
+                  }
+                  controller.enqueue(value);
+                  console.log(done, value);
+                  push();
+                })
+              }
+              push();
+            }
+          });
+        }).then(stream => {
+          return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
+        })
+        .then(result => {
+          if(JSON.parse(result).status === 'OK') {
+            this.$emit('setBluetooth', isEnabled)
+            if(this.settings.notifications.enabled) {
+              Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                  
+                  notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                        `Место касания обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                      : this.settings.general.language === 'English' ?
+                        `Touch place updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
+                      :
+                        `Место касания обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
+                    }`)
+
                 }
-                controller.enqueue(value);
-                console.log(done, value);
-                push();
               })
             }
-            push();
+
           }
         });
-      }).then(stream => {
-        return new Response(stream, { headers: { "Content-Type": "text/html" } }).text();
-      })
-      .then(result => {
-        if(JSON.parse(result).status === 'OK') {
-          this.$emit('setBluetooth', isEnabled)
-          if(this.settings.notifications.enabled) {
-            Notification.requestPermission().then((permission) => {
-              if (permission === "granted") {
-                
-                notification = new Notification(`${this.settings.general.language === 'Русский' ?
-                      `Место касания обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                    : this.settings.general.language === 'English' ?
-                      `Touch place updated to ${isEnabled ? 'enabled' : !isEnabled ? 'disabled' : 'enabled'  }`
-                    :
-                      `Место касания обновлено на ${isEnabled ? 'включено' : !isEnabled ? 'выключено' : 'включено'  }`
-                  }`)
+      } else {
+        if(this.settings.notifications.enabled) {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              
+              notification = new Notification(`${this.settings.general.language === 'Русский' ?
+                    `Режим разработчик не включен`
+                  : this.settings.general.language === 'English' ?
+                    `Developer mode is disabled`
+                  :
+                    `Режим разработчик не включен`
+                }`)
 
-              }
-            })
-          }
-
+            }
+          })
         }
-      });
+      }
 
     },
     setSoundVolume() {
@@ -11090,7 +11436,7 @@ export default {
       })
       .then(result => {
         if(JSON.parse(result).status === 'OK') {
-          
+          this.$emit('setMobileData', isEnabled)
           if(this.settings.notifications.enabled) {
             Notification.requestPermission().then((permission) => {
               if (permission === "granted") {
@@ -13261,8 +13607,8 @@ export default {
     changeBrightness(event) {
       let brightnessPercent = Math.floor(event.x / 8)
       this.$refs.brightnessControlFiller.style = `
-          background-color: rgb(100, 150, 255);
-          width: ${brightnessPercent}%;
+        background-color: rgb(100, 150, 255);
+        width: ${brightnessPercent}%;
       `
       this.$refs.openedAppRef.style = `
         height: 100%;
@@ -13542,9 +13888,6 @@ export default {
       });
 
     },
-    setLocation() {
-      this.$emit('setLocation')
-    },
     setConnetions() {
       alert('Задать сетевые подключения')
     },
@@ -13711,7 +14054,7 @@ export default {
       })
       .then(result => {
         if(JSON.parse(result).status === 'OK') {
-          
+          this.$emit('refreshDisplayTimeout', displayTimeout)
           if(this.settings.notifications.enabled) {
             Notification.requestPermission().then((permission) => {
               if (permission === "granted") {
@@ -13884,7 +14227,7 @@ export default {
       })
       .then(result => {
         if(JSON.parse(result).status === 'OK') {
-          
+          this.$emit('setTopic', topic)
           if(this.settings.notifications.enabled) {
             Notification.requestPermission().then((permission) => {
               if (permission === "granted") {

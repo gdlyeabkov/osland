@@ -236,7 +236,11 @@ const SettingsSchema = new mongoose.Schema({
         }
     },
     accountsAndArchive: {
-        accounts: [mongoose.Schema.Types.Map]
+        accounts: [mongoose.Schema.Types.Map],
+        autoSync: {
+            type: Boolean,
+            default: false
+        }
     },
     auxiliaryFunctions: {
         emergencyMessages: {
@@ -386,6 +390,12 @@ const SettingsSchema = new mongoose.Schema({
         fontElements: {
             type: String,
             default: 'Verdana'
+        }
+    },
+    location: {
+        enabled: {
+            type: Boolean,
+            default: false
         }
     }
 }, { collection : 'mysettings' });
@@ -587,7 +597,6 @@ app.get('/api/settings/topic/set', (req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     
-    console.log(`req.query.topic: ${req.query.topic}`)
     SettingsModel.update({  }, { topic: req.query.topic }, (err, settings) => {
         if(err){
             return res.json({ status: 'Error' })        
@@ -719,6 +728,13 @@ app.get('/api/settings/reset', (req, res) => {
             removeActivityAfterExit: false,
             colorElements: 'rgb(200, 200, 200)',
             fontElements: 'Verdana'
+        },
+        location: {
+            enabled: false
+        },
+        accountAndArchive: {
+            accounts: [],
+            autoSync: false
         }
     }
     SettingsModel.update({  }, defaultSettings, (err, settings) => {
@@ -1751,6 +1767,38 @@ app.get('/api/apps/permissions/remove', (req, res) => {
         { name: req.query.appname },
         { $pull: { 'permissions': { permission: req.query.permission } } }
     )
+
+})
+
+app.get('/api/settings/location/enabled/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({ }, { '$set': { 'location.enabled': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
+
+})
+
+app.get('/api/settings/accountsandarchive/autosync/set', (req, res) => {
+    
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, X-Access-Token, X-Socket-ID, Content-Type");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    
+    SettingsModel.update({ }, { '$set': { 'accountsAndArchive.autoSync': req.query.enabled } }, (err, settings) => {
+        if(err){
+            return res.json({ status: 'Error' })
+        }
+        return res.json({ status: 'OK' })
+    })
 
 })
 

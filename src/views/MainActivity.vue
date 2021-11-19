@@ -2,8 +2,8 @@
   <div :style="`width: ${orientation ? '50%' : '100%'};`">
     <DeveloperMode v-if="settings.developerParameters.enabled" :settings="settings" />
     <div v-if="isUnlock" class="wallpapers" ref="wallpapers" @dblclick="isAppsList = true" @mousedown="handleGesture($event, 'down')" @mousemove="handleGesture($event, 'move')" @mouseup="handleGesture($event, 'up')" :style="`width: ${orientation ? '50%' : '100%'}; background-size: cover; background-image: url(${settings.wallpapers.mainScreen}); -webkit-filter: ${settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'}; ${ settings.developerParameters.flipInterface ? 'transform: scaleX(-1);' : ''}`"></div>
-    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" :wifiSetter="wifiSetter" :bluetoothSetter="bluetoothSetter" :airplaneModeSetter="airplaneModeSetter" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" @transferSoundMode="transferSoundModeHandler" @setWifi="setWifiHandler" @setBluetooth="setBluetoothHandler" @setAirplaneMode="setAirplaneModeHandler" @surfaceUpdate="surfaceUpdate()" />
-    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" :batteryDischarging="batteryDischarging" :isUndo="oneUndo" :apps="apps" :wifiSetter="wifiSetter" :bluetoothSetter="bluetoothSetter" :airplaneModeSetter="airplaneModeSetter" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @resetDisplayTimeout="clearDisplayTimeout" @undoEnded="undoEndedHandler" @setWifi="setWifiHandler" @setBluetooth="setBluetoothHandler" @setAirplaneMode="setAirplaneModeHandler" @setSoundVolume="setSoundVolumeHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
+    <Curtain :currentTime="currentTime" :batteryLevel="batteryLevel" :soundMode="currentSoundMode" :settings="settings" :location="location" :wifiSetter="wifiSetter" :bluetoothSetter="bluetoothSetter" :airplaneModeSetter="airplaneModeSetter" :locationSetter="locationSetter" :topicSetter="topicSetter" :autoSyncSetter="autoSyncSetter" :brightnessSetter="brightnessSetter" :mobileDataSetter="mobileDataSetter" @openSearch="openSearchHandler" @openApp="openAppHandler" @openPowerDialog="openPowerDialogHandler" @changeBrightness="changeBrightnessHandler" @changeOrientation="changeOrientationHandler" @filterBlueColor="filterBlueColorHandler" @closeContextMenu="closeContextMenuHandler" @changeVolume="changeVolumeHandler" @resetDisplayTimeout="clearDisplayTimeout" @transferSoundMode="transferSoundModeHandler" @setWifi="setWifiHandler" @setBluetooth="setBluetoothHandler" @setAirplaneMode="setAirplaneModeHandler" @setLocation="setLocationHandler" @setAutoSync="setAutoSyncHandler" @setMobileData="setMobileDataHandler" @surfaceUpdate="surfaceUpdate()" />
+    <OpenedApp v-if="appIsOpen" :appInfo="appInfo" :launchTime="launchTime" :soundMode="currentSoundMode" :brightness="brightness" :orientation="orientation" :batteryLevel="batteryLevel" :batteryCharging="batteryCharging" :batteryDischarging="batteryDischarging" :isUndo="oneUndo" :apps="apps" :wifiSetter="wifiSetter" :bluetoothSetter="bluetoothSetter" :airplaneModeSetter="airplaneModeSetter" :locationSetter="locationSetter" :autoSyncSetter="autoSyncSetter" :brightnessSetter="brightnessSetter" :mobileDataSetter="mobileDataSetter" @transferSoundMode="transferSoundModeHandler"  @changeBrightness="changeBrightnessHandler" @setLocation="setLocationHandler" @setTopic="setTopicHandler" @resetDisplayTimeout="clearDisplayTimeout" @undoEnded="undoEndedHandler" @setWifi="setWifiHandler" @setBluetooth="setBluetoothHandler" @setAirplaneMode="setAirplaneModeHandler" @setAutoSync="setAutoSyncHandler" @setSoundVolume="setSoundVolumeHandler" @refreshDisplayTimeout="refreshDisplayTimeoutHandler" @setMobileData="setMobileDataHandler" :style="`width: ${orientation ? '50%' : '100%'};`" />
     <div v-if="!isAppsList">
       <!-- <div class="appRow">
         <div @click="openApp({ processId: Math.floor(Math.random() * 5000) })" @mousedown="holdApp($event, 'down', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" @mouseup="holdApp($event, 'up', { processId: Math.floor(Math.random() * 5000), name: 'abc' })" class="app">
@@ -206,6 +206,11 @@ export default {
       wifiSetter: false,
       bluetoothSetter: false,
       airplaneModeSetter: false,
+      locationSetter: false,
+      topicSetter: 'dark',
+      autoSyncSetter: false,
+      brightnessSetter: 100,
+      mobileDataSetter: false,
       surfaceUpdateInteval: 100
     }
   },
@@ -224,10 +229,7 @@ export default {
 
     window.addEventListener('keydown', (event) => {
       
-      console.log('нажали клавишу заново отмечаем время')
-      // if(this.displayTimeout !== null) {
-        this.clearDisplayTimeout()
-      // }
+      this.clearDisplayTimeout()
       
       let tempActiveKey = event.key
       this.activeKey = event.key
@@ -307,6 +309,10 @@ export default {
 
   },
   methods: {
+    refreshDisplayTimeoutHandler(timeout) {
+      this.settings.deviceUsabilityAndParentControl.displayTimeout = timeout
+      this.setDisplayTimeout()
+    },
     surfaceUpdate() {
       if(this.settings.developerParameters.showSurfaceUpdate) {
         this.$refs.wallpapers.style = `
@@ -368,6 +374,23 @@ export default {
       this.currentSoundMode = volume
       console.log(`setSoundVolumeHandler: ${volume}`)
     },
+    setMobileDataHandler(isEnabled) {
+      console.log(`setMobileDataHandler: ${isEnabled}`)
+      this.mobileDataSetter = isEnabled
+    },
+    setAutoSyncHandler(isEnabled) {
+      console.log(`setAutoSyncHandler: ${isEnabled}`)
+      this.autoSyncSetter = isEnabled
+    },
+    setTopicHandler(topic) {
+      console.log(`setTopicHandler: ${topic}`)
+      this.topicSetter = topic
+      this.settings.topic = topic
+    },
+    setLocationHandler(isEnabled) {
+      console.log(`setLocationHandler: ${isEnabled}`)
+      this.locationSetter = isEnabled
+    },
     setAirplaneModeHandler(isEnabled) {
       console.log(`setAirplaneModeHandler: ${isEnabled}`)
       this.airplaneModeSetter = isEnabled
@@ -391,10 +414,6 @@ export default {
         clearTimeout(trySleep)
       })
       this.setDisplayTimeout()
-    },
-    setLocationHandler() {
-      console.log('setLocationHandler')
-      this.location = Math.floor(Math.random() * 5000)
     },
     setDisplayTimeout() {
       this.trySleep.push(setTimeout(() => {
@@ -546,6 +565,7 @@ export default {
         -webkit-filter: brightness(${brightnessPercent / 100})${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? ' grayscale(1)' : ''};
       `
       this.brightness = brightnessPercent
+      this.brightnessSetter = brightnessPercent
       console.log(`this.brightness: ${this.brightness}`)
     },
     openSearchHandler() {

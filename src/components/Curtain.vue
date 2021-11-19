@@ -108,7 +108,7 @@
                             'battery_saver'
                     }}
                 </span>
-                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': mobileData, 'btn-light': !mobileData }" id="curtainBtn" @click="mobileData = !mobileData">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': mobileData, 'btn-light': !mobileData }" id="curtainBtn" @click="mobileData = !mobileData; $emit('setMobileData', mobileData)">
                     swap_vert
                 </span>
             </div>
@@ -119,7 +119,7 @@
                 <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
                     tap_and_play
                 </span>
-                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': geolocationId !== null && geolocationId !== undefined, 'btn-light': geolocationId === null || geolocationId === undefined }" id="curtainBtn" @click="setGeolocation()">
+                <span :class="{ curtainBodyItem: true, 'material-icons': true, btn: true, 'btn-primary': isLocation, 'btn-light': !isLocation }" id="curtainBtn" @click="setGeolocation(); isLocation = !isLocation; $emit('setLocation', isLocation)">
                     location_on
                 </span>
                 <span class="curtainBodyItem material-icons btn btn-primary" id="curtainBtn">
@@ -187,17 +187,51 @@ export default {
             isDontDisturb: false,
             isVideoMode: true,
             settingsProcessId: 0,
+            isLocation: false
         }
     },
-    props: [
-        'currentTime',
-        'batteryLevel',
-        'soundMode',
-        'settings',
-        'wifiSetter',
-        'bluetoothSetter',
-        'airplaneModeSetter'
-    ],
+    props: {
+        'currentTime': {
+
+        },
+        'batteryLevel': {
+
+        },
+        'soundMode': {
+
+        },
+        'settings': {
+            default: {
+                connections: {
+                    wifi: false
+                }
+            }
+        },
+        'wifiSetter': {
+
+        },
+        'bluetoothSetter': {
+
+        },
+        'airplaneModeSetter': {
+
+        },
+        'locationSetter': {
+
+        },
+        'topicSetter': {
+
+        },
+        'autoSyncSetter': {
+
+        },
+        'brightnessSetter': {
+
+        },
+        'mobileDataSetter': {
+
+        }
+    },
     emits: [
         'openApp',
         'closeContextMenu',
@@ -229,6 +263,50 @@ export default {
         async airplaneModeSetter(isEnabled) {
             console.log(`setAirplaneMode: ${isEnabled}`)
             this.flightMode = isEnabled
+        },
+        async locationSetter(isEnabled) {
+            console.log(`setLocation: ${isEnabled}`)
+            this.isLocation = isEnabled
+        },
+        async topicSetter(topic) {
+            console.log(`setTopic: ${topic}`)
+            // this.settings.topic = topic
+        },
+        async autoSyncSetter(isEnabled) {
+            console.log(`setAutoSync: ${isEnabled}`)
+            this.isSync = isEnabled
+        },
+        async brightnessSetter(brightnessPercent) {
+            console.log(`setBrightness: ${brightnessPercent}`)
+            this.$refs.brightnessControlFiller.style = `
+                background-color: rgb(100, 150, 255);
+                width: ${brightnessPercent}%;
+            `
+            this.$refs.curtain.style = `
+                height: 50px;
+                z-index: 10;
+                width: ${this.orientation ? '50%' : '100%'};
+                background-color: ${this.settings.topic === 'dark' ? 'rgba(0, 0, 0, 0.4)' : 'rgba(150, 150, 150, 0.4)'};
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+                padding: 0px 15px;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                -webkit-filter: ${this.settings.deviceUsabilityAndParentControl.relax && Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) >= 22 || Number(new Date().toLocaleString().split(' ')[1].split(':')[0]) <= 7 ? 'grayscale(1)' : 'none'};
+            `
+        },
+        async mobileDataSetter(isEnabled) {
+            console.log(`setMobileData: ${isEnabled}`)
+            this.mobileData = isEnabled
+        },
+        async settings(val) {
+            console.log(`curtain val: ${val}`)
+            this.isWifi = val.connections.wifi
+            this.isBluetooth = val.connections.bluetooth
+            this.flightMode = val.connections.airplaneMode
+            this.mobileData = val.connections.simsManager.mobileData
         }
     },
     mounted() {
@@ -374,7 +452,8 @@ export default {
             }
         },
         changeBrightness(event) {
-            let brightnessPercent = event.x / 14
+            // let brightnessPercent = event.x / 14
+            let brightnessPercent = Math.floor(event.x / 8)
             this.$refs.brightnessControlFiller.style = `
                 background-color: rgb(100, 150, 255);
                 width: ${brightnessPercent}%;
